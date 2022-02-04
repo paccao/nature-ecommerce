@@ -1,37 +1,3 @@
-:root {
-	/* Minimal Yet Warm */
-	--jellybean-red: #e85a4f;
-	--minimal-pink: #e98074;
-	--dark-vanilla: #d8c3a5;
-	--eggshell-white: #eae7dc;
-	--taupe-grey: #8e8d8a;
-	/* Swedish Pallette
-https://flatuicolors.com/palette/se  */
-
-	--narenji-orange: #ffc048;
-	--vibrant-yellow: #ffd32a;
-	--yriel-yellow: #ffdd59;
-	--minty-green: #0be881;
-	--green-teal: #05c46b;
-	--jade-dust: #00d8d6;
-	--fresh-turqouise: #34e7e4;
-	--megaman: #4bcffa;
-	--spiro-disco-ball: #0fbcf9;
-	--dark-periwinkle: #575fcf;
-	--free-speech-blue: #3c40c6;
-
-	--hint-of-elusive-blue: #d2dae2;
-	--london-square: #808e9b;
-	--good-night: #485460;
-	--black-pearl: #1e272e;
-
-	--box-shadow-down-right-sharp: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-	--box-shadow-down-darker-sharp: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-	--box-shadow-light-blurred: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-	--box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
-		rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-}
-
 html body {
 	padding: 0;
 	margin: 0;
