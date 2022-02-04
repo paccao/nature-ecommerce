@@ -17,5 +17,6 @@
 		"jsx": "react-jsx",
 		"rootDir": "./"
 	},
-	"include": ["./frontend/src", "./backend/src"]
+	"include": ["./src"],
+	"exclude": ["node_modules"]
 }
