@@ -1,12 +1,14 @@
 import express, { Express } from 'express'
 import routes from './routes/products'
 
+import { config } from 'dotenv'
+import 'dotenv/config'
+config()
+
 const app: Express = express()
 
 app.use(express.json())
-
-app.use(express.static('dist'))
-
+app.use(express.static('public'))
 app.use('/', routes)
 
 // Error handling
