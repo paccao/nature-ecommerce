@@ -5,6 +5,8 @@ const app: Express = express()
 
 app.use(express.json())
 
+app.use(express.static('dist'))
+
 app.use('/', routes)
 
 // Error handling

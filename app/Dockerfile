@@ -2,7 +2,7 @@ FROM node:latest
 
 WORKDIR /app/client
 
-COPY ./client/build ./build
+COPY ./dist ./client
 
 WORKDIR /app/server
 

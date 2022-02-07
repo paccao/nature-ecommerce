@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { Product } from '../../../frontend/src/models/Product'
+import { Product } from '../../../client/src/models/Product'
 
 const getProducts = async (req: Request, res: Response) => {
 	//? query database
