@@ -1,8 +1,17 @@
 export interface Product {
-	userId: number
 	id: string
-	title: string
-	body: string
+	name: string
 	price: number
-	amountInStock: number
+	description: string
 }
+
+export interface User {
+	id: string
+	name: string
+	adress: string
+	username: string
+	password: string
+	role: RoleTypes
+}
+
+export type RoleTypes = 'user' | 'admin'

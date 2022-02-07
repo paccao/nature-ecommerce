@@ -1,10 +1,6 @@
 import express, { Express } from 'express'
 import routes from './routes/products'
 
-import { config } from 'dotenv'
-import 'dotenv/config'
-config()
-
 const app: Express = express()
 
 app.use(express.json())

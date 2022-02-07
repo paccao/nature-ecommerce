@@ -23,4 +23,8 @@ const getProduct = async (req: Request, res: Response) => {
 	})
 }
 
+const createProduct = async (req: Request, res: Response) => {
+	const productToCreate: Product = req.body
+}
+
 export default { getProducts, getProduct }
