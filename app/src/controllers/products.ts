@@ -1,5 +1,6 @@
-import { Request, Response, NextFunction } from 'express'
-import { Product } from '../../../client/src/models/Product'
+import { Request, Response } from 'express'
+import { Product, User } from '../../../client/src/models/Product'
+import {isProduct} from '../helpers/productsHelpers'
 
 const getProducts = async (req: Request, res: Response) => {
 	//? query database
@@ -24,7 +25,12 @@ const getProduct = async (req: Request, res: Response) => {
 }
 
 const createProduct = async (req: Request, res: Response) => {
-	const productToCreate: Product = req.body
+	const _request = req.body
+	if (!isProduct(_request)) // ! Bad request
 }
 
-export default { getProducts, getProduct }
+const createUser = async (req: Request, res: Response) => {
+	const userToCreate: User = req.body
+}
+
+export default { getProducts, getProduct, createProduct, createUser }
