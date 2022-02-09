@@ -8,3 +8,20 @@ export function isProduct(object: unknown): object is Product {
 		Object.prototype.hasOwnProperty.call(object, 'description')
 	)
 }
+// function isProduct(object: any) {
+// 	if (
+// 		object.name === typeof 'string' &&
+// 		object.price === typeof 123 &&
+// 		object.description === typeof 'string'
+// 	) {
+// 		return true
+// 	} else {
+// 		return false
+// 	}
+// }
+// const TESTobj = {
+// 	name: 'joel',
+// 	price: 123,
+// 	description: 'test',
+// }
+// console.log(isProduct(TESTobj))
