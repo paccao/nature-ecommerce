@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 import HomePage from './pages/HomePage'
+import ProductPage from './pages/ProductPage'
+import ErrorPage404 from './pages/ErrorPage404'
 import { lightTheme } from './themes/appTheme'
 import { Routes, Route } from 'react-router-dom'
 
@@ -13,7 +15,8 @@ function App() {
 				<main>
 					<Routes>
 						<Route path="/" element={<HomePage />} />
-						<Route path="*" element={<div>404 page</div>} />
+						<Route path="/product/:id" element={<ProductPage />} />
+						<Route path="*" element={<ErrorPage404 />} />
 					</Routes>
 				</main>
 			</PageWrapper>
