@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import { Product, User } from '../../../client/src/models/Product'
-import {isProduct} from '../helpers/productsHelpers'
+import { isProduct } from '../helpers/productsHelpers'
+import { nanoid } from 'nanoid'
+import { dbConnection } from '../server'
 
 const getProducts = async (req: Request, res: Response) => {
 	//? query database
@@ -26,7 +28,16 @@ const getProduct = async (req: Request, res: Response) => {
 
 const createProduct = async (req: Request, res: Response) => {
 	const _request = req.body
-	if (!isProduct(_request)) // ! Bad request
+	if (!isProduct(_request)) return // ! Bad request
+	const product = { id: nanoid(), ..._request }
+	const query = ``
+	try {
+		const { rows } = await dbConnection.query(query)
+
+		return res.status(201).json({ success: true, inserted: rows[0] })
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 const createUser = async (req: Request, res: Response) => {

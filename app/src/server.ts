@@ -1,6 +1,9 @@
 import express, { Express } from 'express'
 import routes from './routes/products'
 
+import db from './database'
+export const dbConnection = db()
+
 const app: Express = express()
 
 app.use(express.json())
