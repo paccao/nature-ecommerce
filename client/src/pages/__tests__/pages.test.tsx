@@ -1,7 +1,11 @@
+/**
+ * @jest-environment jsdom
+ */
 import { render, screen } from '@testing-library/react'
 import Products from '../Products'
 import Details from '../Details'
 import Error404 from '../Error404'
+import wrapper from '../../helpers/reactQueryMockWrapper'
 
 describe('Products page component', () => {
 	it('renders without crashing', () => {

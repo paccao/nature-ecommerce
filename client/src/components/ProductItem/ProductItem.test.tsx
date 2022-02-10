@@ -1,11 +1,14 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { render } from '@testing-library/react'
-import { ReactNode } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import { useCustomHook } from '../../hooks/reactQueryHooks'
 import { Product } from '../../models/Product'
 import ProductItem from './ProductItem'
 import { renderHook } from '@testing-library/react-hooks'
-
+import { ReactNode } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
 const queryClient = new QueryClient()
 
 type Props = {
