@@ -1,6 +1,4 @@
 import { useQuery } from 'react-query'
-import { Drawer, LinearProgress, Grid, Badge } from '@mui/material'
-import { AddShoppingCart } from '@material-ui/icons'
 import { PageWrapper } from '../styles/PageWrapper.styles'
 import { Product } from '../models/Product'
 import { fetchProducts } from '../helpers/products'
