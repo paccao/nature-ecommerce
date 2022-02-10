@@ -5,14 +5,16 @@ import { nanoid } from 'nanoid'
 import { dbConnection } from '../server'
 
 const getProducts = async (req: Request, res: Response) => {
-	//? query database
-	// const result
-	//? save queried products
-	// const products: [Product] = result.data
-	return res.status(200).json({
-		success: true,
-		// message: products,
-	})
+	const query = 'SELECT * FROM products'
+
+	dbConnection
+		.query(query)
+		.then((result) => {
+			return res.status(200).json({ success: true, result })
+		})
+		.catch((error) => {
+			return res.status(400).json({ success: false, error })
+		})
 }
 
 const getProduct = async (req: Request, res: Response) => {
