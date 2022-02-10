@@ -4,6 +4,7 @@ export type Product = {
 	price: number
 	description: string
 	stock_available: number
+	img_url: string
 }
 
 export type User = {
