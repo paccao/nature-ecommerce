@@ -1,20 +1,19 @@
-import { Request, Response } from 'express'
+import { query, Request, Response } from 'express'
 import { Product, User } from '../../../client/src/models/Product'
 import { isProduct } from '../helpers/productsHelpers'
 import { nanoid } from 'nanoid'
-import { dbConnection } from '../server'
+import { dbConnection as conn } from '../server'
 
 const getProducts = async (req: Request, res: Response) => {
-	const query = 'SELECT * FROM products'
+	const queryString = 'SELECT * FROM products;'
 
-	dbConnection
-		.query(query)
-		.then((result) => {
-			return res.status(200).json({ success: true, result })
-		})
-		.catch((error) => {
-			return res.status(400).json({ success: false, error })
-		})
+	try {
+		const { rows } = await conn.query(queryString)
+		return res.status(200).json({ success: true, result: rows })
+	} catch (error) {
+		console.log('getProducts error: ', error)
+		return res.status(400).json({ success: false })
+	}
 }
 
 const getProduct = async (req: Request, res: Response) => {
@@ -34,7 +33,7 @@ const createProduct = async (req: Request, res: Response) => {
 	const product = { id: nanoid(), ..._request }
 	const query = ``
 	try {
-		const { rows } = await dbConnection.query(query)
+		const { rows } = await conn.query(query)
 
 		return res.status(201).json({ success: true, inserted: rows[0] })
 	} catch (error) {
