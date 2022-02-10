@@ -1,11 +1,12 @@
-export interface Product {
+export type Product = {
 	id: string
 	name: string
 	price: number
 	description: string
+	stock_available: number
 }
 
-export interface User {
+export type User = {
 	id: string
 	name: string
 	adress: string

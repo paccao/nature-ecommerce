@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react'
-import HomePage from '../HomePage'
-import ProductPage from '../ProductPage'
-import ErrorPage404 from '../ErrorPage404'
+import Products from '../Products'
+import Details from '../Details'
+import Error404 from '../Error404'
 
 describe('tests for the different pages', () => {
-	it('renders HomePage without crashing', () => {
-		render(<HomePage />)
+	it('renders Products page without crashing', () => {
+		render(<Products />)
 	})
-	it('renders HomePage without crashing', () => {
-		render(<ProductPage />)
+	it('renders Details page without crashing', () => {
+		render(<Details />)
 	})
-	it('renders HomePage without crashing', () => {
-		render(<ErrorPage404 />)
+	it('renders Error404 page without crashing', () => {
+		render(<Error404 />)
 	})
 })

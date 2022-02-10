@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Page404() {
+export default function Error404() {
 	return (
 		<Page404Container>
 			<h1> 404</h1>
