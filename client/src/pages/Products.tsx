@@ -8,6 +8,6 @@ export default function Products() {
 		'products',
 		fetchProducts,
 	)
-	console.log(data)
+
 	return <PageWrapper>Products page🐳</PageWrapper>
 }

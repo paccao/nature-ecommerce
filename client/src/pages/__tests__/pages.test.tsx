@@ -3,14 +3,20 @@ import Products from '../Products'
 import Details from '../Details'
 import Error404 from '../Error404'
 
-describe('tests for the different pages', () => {
-	it('renders Products page without crashing', () => {
+describe('Products page component', () => {
+	it('renders without crashing', () => {
 		render(<Products />)
 	})
-	it('renders Details page without crashing', () => {
+})
+
+describe('Details page component', () => {
+	it('renders without crashing', () => {
 		render(<Details />)
 	})
-	it('renders Error404 page without crashing', () => {
+})
+
+describe('Error404 page component', () => {
+	it('renders without crashing', () => {
 		render(<Error404 />)
 	})
 })
