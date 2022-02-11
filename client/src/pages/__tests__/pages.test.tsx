@@ -4,6 +4,12 @@ import Details from '../Details'
 import Error404 from '../Error404'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+global.fetch = jest.fn(() =>
+	Promise.resolve({
+		json: () => Promise.resolve({}),
+	}),
+) as jest.Mock
+
 const renderQueryClientWrapper = () => {
 	const queryClient = new QueryClient()
 	render(
