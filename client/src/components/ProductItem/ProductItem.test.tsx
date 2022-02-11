@@ -3,6 +3,8 @@ import { Product } from '../../models/Product'
 import ProductItem from './ProductItem'
 import { useProduct } from '../../hooks/useProduct'
 
+const { toBeInTheDocument } = require('@testing-library/jest-dom')
+
 const mockedUseProduct = useProduct as jest.Mock<unknown>
 
 jest.mock('../../hooks/useProduct')
@@ -39,14 +41,11 @@ describe('ProductItem component', () => {
 		const productImgAlt = screen.getByAltText(
 			'Picture of Canned beans product.',
 		)
-		const screenProduct = {
-			productName,
-			productPrice,
-			productDescription,
-			productStockAvailable,
-			productImgAlt,
-		}
 
-		expect(screenProduct).toBeInTheDocument()
+		expect(productDescription).toBeInTheDocument()
+		expect(productImgAlt).toBeInTheDocument()
+		expect(productName).toBeInTheDocument()
+		expect(productPrice).toBeInTheDocument()
+		expect(productStockAvailable).toBeInTheDocument()
 	})
 })

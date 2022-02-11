@@ -4,6 +4,8 @@ import Details from '../Details'
 import Error404 from '../Error404'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+const { toBeInTheDocument } = require('@testing-library/jest-dom')
+
 global.fetch = jest.fn(() =>
 	Promise.resolve({
 		json: () => Promise.resolve({}),
