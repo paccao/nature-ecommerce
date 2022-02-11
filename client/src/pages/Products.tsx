@@ -1,13 +1,12 @@
-import { useQuery } from 'react-query'
 import { PageWrapper } from '../styles/PageWrapper.styles'
-import { Product } from '../models/Product'
-import { fetchProducts } from '../helpers/fetchProducts'
+import { useProduct } from '../hooks/useProduct'
 
 export default function Products() {
-	const { data, isLoading, error } = useQuery<Product[]>(
-		'products',
-		fetchProducts,
-	)
+	const { data, isLoading, error } = useProduct()
 
-	return <PageWrapper>Products page🐳</PageWrapper>
+	return (
+		<PageWrapper>
+			<h1>Products page🐳</h1>
+		</PageWrapper>
+	)
 }

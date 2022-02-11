@@ -1,22 +1,12 @@
-/**
- * @jest-environment jsdom
- */
-
-import { render } from '@testing-library/react'
-import { useCustomHook } from '../../hooks/reactQueryHooks'
+import { render, screen } from '@testing-library/react'
 import { Product } from '../../models/Product'
 import ProductItem from './ProductItem'
-import { renderHook } from '@testing-library/react-hooks'
-import { ReactNode } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
-const queryClient = new QueryClient()
+import { useProduct } from '../../hooks/useProduct'
 
-type Props = {
-	children: ReactNode
-}
-const wrapper = ({ children }: Props) => (
-	<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-)
+const mockedUseProduct = useProduct as jest.Mock<unknown>
+
+jest.mock('../../hooks/useProduct')
+jest.mock('react-query')
 
 const mockProduct: Product = {
 	id: '1',
@@ -28,18 +18,36 @@ const mockProduct: Product = {
 }
 
 describe('ProductItem component', () => {
+	beforeEach(() =>
+		mockedUseProduct.mockImplementation(() => ({ isLoading: true })),
+	)
+	afterEach(() => jest.clearAllMocks())
 	it('renders without crashing', () => {
 		render(<ProductItem product={mockProduct} />)
 	})
-	it('renders the relevant information about the product', async () => {
-		render(<ProductItem product={mockProduct} />)
+	it('displays the correct data', () => {
+		mockedUseProduct.mockImplementation(() => ({
+			isLoading: false,
+			data: mockProduct,
+		}))
 
-		const { result, waitFor } = renderHook(() => useCustomHook(mockProduct), {
-			wrapper,
-		})
+		const productId = screen.getByTestId('product-id')
+		const productName = screen.getByText('Canned beans')
+		const productPrice = screen.getByText('30kr')
+		const productDescription = screen.getByText('Tasty.')
+		const productStockAvailable = screen.getByText('2')
+		const productImgAlt = screen.getByAltText(
+			'Picture of Canned beans product.',
+		)
+		const screenProduct = {
+			productId,
+			productName,
+			productPrice,
+			productDescription,
+			productStockAvailable,
+			productImgAlt,
+		}
 
-		await waitFor(() => result.current.isSuccess)
-
-		expect(result.current.data).toEqual(mockProduct)
+		expect(screenProduct).toBeInTheDocument()
 	})
 })

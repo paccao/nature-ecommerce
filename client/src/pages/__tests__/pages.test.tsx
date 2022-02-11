@@ -1,15 +1,17 @@
-/**
- * @jest-environment jsdom
- */
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Products from '../Products'
 import Details from '../Details'
 import Error404 from '../Error404'
-import wrapper from '../../helpers/reactQueryMockWrapper'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 describe('Products page component', () => {
 	it('renders without crashing', () => {
-		render(<Products />)
+		const queryClient = new QueryClient()
+		render(
+			<QueryClientProvider client={queryClient}>
+				<Products />
+			</QueryClientProvider>,
+		)
 	})
 })
 
