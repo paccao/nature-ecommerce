@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query'
-import { Product } from '../models/Product'
+import { ProductResult } from '../models/Product'
 import { fetchProducts } from '../helpers/fetchProducts'
 
 export function useProduct() {
-	return useQuery<Product[], Error>('product', () => fetchProducts(), {
+	return useQuery<ProductResult, Error>('product', () => fetchProducts(), {
 		retry: false,
 	})
 }

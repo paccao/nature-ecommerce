@@ -16,4 +16,9 @@ export type User = {
 	role: RoleTypes
 }
 
+export type ProductResult = {
+	success: boolean
+	result: Product[]
+}
+
 export type RoleTypes = 'user' | 'admin'
