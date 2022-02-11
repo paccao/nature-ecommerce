@@ -10,7 +10,6 @@ export default function Products() {
 	return (
 		<PageWrapper>
 			<section>
-				<span>TEMPORARY LOGO</span>
 				<section>
 					<div>
 						<h1>Products</h1>

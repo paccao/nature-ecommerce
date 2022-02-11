@@ -10,7 +10,9 @@ function App() {
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<AppWrapper className="App">
-				<header>Nature e-commerce</header>
+				<header>
+					<a href="/">Nature e-commerce LOGO</a>
+				</header>
 
 				<main>
 					<Routes>
