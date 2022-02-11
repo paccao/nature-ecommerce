@@ -6,7 +6,15 @@ export default function Products() {
 
 	return (
 		<PageWrapper>
-			<h1>Products page🐳</h1>
+			<section>
+				<span>TEMPORARY LOGO</span>
+				<section>
+					<div>
+						<h1>Products</h1>
+						<input type="text" placeholder="Filter by name.." />
+					</div>
+				</section>
+			</section>
 		</PageWrapper>
 	)
 }
