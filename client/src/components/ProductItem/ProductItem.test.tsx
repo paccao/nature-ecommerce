@@ -26,12 +26,12 @@ describe('ProductItem component', () => {
 		render(<ProductItem product={mockProduct} />)
 	})
 	it('displays the correct data', () => {
+		render(<ProductItem product={mockProduct} />)
 		mockedUseProduct.mockImplementation(() => ({
 			isLoading: false,
 			data: mockProduct,
 		}))
 
-		const productId = screen.getByTestId('product-id')
 		const productName = screen.getByText('Canned beans')
 		const productPrice = screen.getByText('30kr')
 		const productDescription = screen.getByText('Tasty.')
@@ -40,7 +40,6 @@ describe('ProductItem component', () => {
 			'Picture of Canned beans product.',
 		)
 		const screenProduct = {
-			productId,
 			productName,
 			productPrice,
 			productDescription,
