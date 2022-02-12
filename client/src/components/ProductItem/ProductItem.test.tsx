@@ -20,10 +20,6 @@ const mockProduct: Product = {
 }
 
 describe('ProductItem component', () => {
-	beforeEach(() =>
-		mockedUseProduct.mockImplementation(() => ({ isLoading: true })),
-	)
-	afterEach(() => jest.clearAllMocks())
 	it('renders without crashing', () => {
 		render(<ProductItem product={mockProduct} />)
 	})

@@ -13,7 +13,9 @@ export default function Products() {
 				<section>
 					<div>
 						<h1>Products</h1>
-						<input type="text" placeholder="Filter by name.." />
+						<form role="search">
+							<input type="text" placeholder="Filter by name.." />
+						</form>
 					</div>
 					<ul>
 						{data?.result &&

@@ -6,7 +6,7 @@ type Props = {
 
 export default function ProductItem({ product }: Props) {
 	return (
-		<article>
+		<article data-testid="product-item">
 			<div>
 				<p>{product.stock_available}</p>
 				<img
