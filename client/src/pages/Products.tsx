@@ -1,11 +1,12 @@
 import { PageWrapper } from '../styles/PageWrapper.styles'
 import { useProduct } from '../hooks/useProduct'
 import ProductItem from '../components/ProductItem/ProductItem'
+import { FormEventHandler } from 'react'
 
 export default function Products() {
 	const { data, isLoading, error } = useProduct()
 
-	console.log(data)
+	function formSubmitHandler(): void {}
 
 	return (
 		<PageWrapper>
@@ -13,7 +14,7 @@ export default function Products() {
 				<section>
 					<div>
 						<h1>Products</h1>
-						<form role="search">
+						<form role="search" onSubmit={formSubmitHandler}>
 							<input type="text" placeholder="Filter by name.." />
 						</form>
 					</div>

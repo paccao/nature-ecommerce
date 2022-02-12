@@ -1,5 +1,11 @@
 import { render, screen, within } from '@testing-library/react'
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
+import {
+	queryAllByText,
+	queryByText,
+	waitFor,
+	waitForElementToBeRemoved,
+} from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
@@ -11,20 +17,30 @@ import { Product } from '../../models/Product'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useProduct } from '../../hooks/useProduct'
 
-const mockProduct: Product = {
-	id: '1',
-	name: 'Canned beans',
-	price: 30,
-	description: 'Tasty.',
-	stock_available: 2,
-	img_url: 'Beans',
-}
+const mockProducts: Product[] = [
+	{
+		id: '1',
+		name: 'Canned beans',
+		price: 30,
+		description: 'Tasty.',
+		stock_available: 2,
+		img_url: 'placeholder beany img',
+	},
+	{
+		id: '2',
+		name: 'Fresh beans',
+		price: 40,
+		description: 'Mmm, tasty.',
+		stock_available: 1,
+		img_url: 'placeholder beany img',
+	},
+]
 
 jest.mock('../../hooks/useProduct.tsx')
 const mockedUseProduct = useProduct as jest.Mock<any>
 mockedUseProduct.mockImplementation(() => ({
 	isLoading: false,
-	data: mockProduct,
+	data: mockProducts,
 }))
 
 global.fetch = jest.fn(() =>
@@ -53,40 +69,15 @@ describe('Products page component', () => {
 		expect(screen.getByRole('search')).toBeInTheDocument()
 	})
 
-	it('should query the database when input has been submitted in the search field', () => {
-		/** TODO:
-		 * render query client wrapper
-		 * render all mock products
-		 * search for something
-		 * check that only products with text that matches the search result is rendered
-		 */
+	it('calls fetches database when input is submitted', () => {
 		renderQueryClientWrapper()
 
-		// const mockedUseProduct = useProduct as jest.Mock<unknown>
-		// jest.mock('../../hooks/useProduct.tsx')
+		const searchFilter = /beans/
 
-		//TODO: Try get a list of all products, then filter, then get list of all products again => Compare them in the expect
+		userEvent.type(screen.getByRole('textbox'), searchFilter.toString())
 
-		///
-		// const searchFilter = /beans/
-
-		// userEvent.type(screen.getByRole('textbox'), searchFilter.toString())
-		// render(<ProductItem product={mockProduct} />)
-
-		// const currentProducts = screen.getAllByText(searchFilter)
-		// currentProducts.forEach((product) => {
-		// 	expect(product).toBeInTheDocument()
-		// })
-		///
-
-		// const currentProducts = screen.getAllByTestId('product-item')
-		// currentProducts.forEach((product) => {
-		// 	expect(within(product).getByText(searchFilter).nodeValue).toBe(
-		// 		searchFilter,
-		// 	)
-		// })
+		expect(screen.getByRole('textbox')).toHaveAttribute('onSubmit')
 	})
-
 	it('renders the list container for the products', () => {
 		renderQueryClientWrapper()
 
@@ -105,22 +96,3 @@ describe('Error404 page component', () => {
 		render(<Error404 />)
 	})
 })
-
-// 	const mockedUseProduct = useProduct as jest.Mock<unknown>
-// 	jest.mock('../../hooks/useProduct')
-// 	jest.mock('react-query')
-// 	const mockProduct: Product = {
-// 		id: '1',
-// 		name: 'Canned beans',
-// 		price: 30,
-// 		description: 'Tasty.',
-// 		stock_available: 2,
-// 		img_url: 'Beans',
-// 	}
-
-// 	render(<ProductItem product={mockProduct} />)
-
-// 	mockedUseProduct.mockImplementation(() => ({
-// 		isLoading: false,
-// 		data: mockProduct,
-// 	}))
