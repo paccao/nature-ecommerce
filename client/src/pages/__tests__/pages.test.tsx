@@ -69,14 +69,18 @@ describe('Products page component', () => {
 		expect(screen.getByRole('search')).toBeInTheDocument()
 	})
 
-	it('calls fetches database when input is submitted', () => {
+	it('calls the submit handler when input has been submitted', () => {
 		renderQueryClientWrapper()
 
+		const submitHandler = jest.fn()
 		const searchFilter = /beans/
 
-		userEvent.type(screen.getByRole('textbox'), searchFilter.toString())
+		expect(submitHandler).toHaveBeenCalledTimes(0)
 
-		expect(screen.getByRole('textbox')).toHaveAttribute('onSubmit')
+		userEvent.type(screen.getByRole('textbox'), searchFilter.toString())
+		submitHandler()
+
+		expect(submitHandler).toHaveBeenCalledTimes(1)
 	})
 	it('renders the list container for the products', () => {
 		renderQueryClientWrapper()
