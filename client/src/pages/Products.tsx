@@ -16,7 +16,6 @@ export default function Products() {
 	)
 
 	function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-		event.preventDefault()
 		setFilterState(event.target.value)
 	}
 
@@ -25,7 +24,7 @@ export default function Products() {
 	))
 
 	const renderfilteredProductItems = filteredProducts?.map((product) => (
-		<ProductItem product={product} />
+		<ProductItem product={product} key={product.id} />
 	))
 
 	return (
@@ -34,7 +33,10 @@ export default function Products() {
 				<section>
 					<div>
 						<h1>Products</h1>
-						<SearchForm role="search">
+						<SearchForm
+							role="search"
+							onSubmit={(e) => e.preventDefault()}
+						>
 							<input
 								autoFocus
 								type="text"

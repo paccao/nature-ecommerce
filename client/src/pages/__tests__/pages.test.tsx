@@ -1,11 +1,5 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
-import {
-	queryAllByText,
-	queryByText,
-	waitFor,
-	waitForElementToBeRemoved,
-} from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
@@ -16,6 +10,7 @@ import Error404 from '../Error404'
 import { Product } from '../../models/Product'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useProduct } from '../../hooks/useProduct'
+import { RecoilRoot } from 'recoil'
 
 const mockProducts: Product[] = [
 	{
@@ -49,28 +44,30 @@ global.fetch = jest.fn(() =>
 	}),
 ) as jest.Mock
 
-const renderQueryClientWrapper = () => {
+const renderMockDependenciesWrapper = () => {
 	const queryClient = new QueryClient()
 	render(
-		<QueryClientProvider client={queryClient}>
-			<Products />
-		</QueryClientProvider>,
+		<RecoilRoot>
+			<QueryClientProvider client={queryClient}>
+				<Products />
+			</QueryClientProvider>
+		</RecoilRoot>,
 	)
 }
 
 describe('Products page component', () => {
 	it('renders without crashing', () => {
-		renderQueryClientWrapper()
+		renderMockDependenciesWrapper()
 	})
 
 	it('renders the search field', () => {
-		renderQueryClientWrapper()
+		renderMockDependenciesWrapper()
 
 		expect(screen.getByRole('search')).toBeInTheDocument()
 	})
 
 	it('calls the submit handler when input has been submitted', () => {
-		renderQueryClientWrapper()
+		renderMockDependenciesWrapper()
 
 		const submitHandler = jest.fn()
 		const searchFilter = /beans/
@@ -83,7 +80,7 @@ describe('Products page component', () => {
 		expect(submitHandler).toHaveBeenCalledTimes(1)
 	})
 	it('Makes sure only elements matching the search input gets rendered', () => {
-		renderQueryClientWrapper()
+		renderMockDependenciesWrapper()
 
 		const searchFilter = /beans/
 
@@ -107,7 +104,7 @@ describe('Products page component', () => {
 		expect(unFilteredHeading).not.toBeInTheDocument()
 	})
 	it('renders the list container for the products', () => {
-		renderQueryClientWrapper()
+		renderMockDependenciesWrapper()
 
 		expect(screen.getByRole('list')).toBeInTheDocument()
 	})
