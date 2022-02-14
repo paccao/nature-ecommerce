@@ -28,11 +28,11 @@ const mockProducts: Product[] = [
 	},
 	{
 		id: '2',
-		name: 'Fresh beans',
-		price: 40,
-		description: 'Mmm, tasty.',
-		stock_available: 1,
-		img_url: 'placeholder beany img',
+		name: 'Worn jeans',
+		price: 100,
+		description: 'Well worn but still holds up.',
+		stock_available: 2,
+		img_url: 'placeholder jeans picture',
 	},
 ]
 
@@ -81,6 +81,30 @@ describe('Products page component', () => {
 		submitHandler()
 
 		expect(submitHandler).toHaveBeenCalledTimes(1)
+	})
+	it('Makes sure only elements matching the search input gets rendered', () => {
+		renderQueryClientWrapper()
+
+		const searchFilter = /beans/
+
+		userEvent.type(screen.getByRole('textbox'), searchFilter.toString())
+		// Mock hook of calling the database, return all products (mockProducts)
+		mockedUseProduct.mockImplementation(() => ({
+			isLoading: false,
+			data: mockProducts,
+		}))
+
+		render(<ProductItem product={mockProducts[0]} />)
+
+		const filteredHeading = screen.getByRole('heading', {
+			name: searchFilter,
+		})
+		const unFilteredHeading = screen.queryByRole('heading', {
+			name: mockProducts[1].name,
+		})
+
+		expect(filteredHeading).toBeInTheDocument()
+		expect(unFilteredHeading).not.toBeInTheDocument()
 	})
 	it('renders the list container for the products', () => {
 		renderQueryClientWrapper()
