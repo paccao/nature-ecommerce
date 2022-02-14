@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 import Products from './pages/Products'
 import Details from './pages/Details'
@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 function App() {
 	return (
 		<ThemeProvider theme={lightTheme}>
+			<GlobalStyle />
 			<AppWrapper className="App">
 				<header>
 					<a href="/">Nature e-commerce LOGO</a>
@@ -25,18 +26,20 @@ function App() {
 		</ThemeProvider>
 	)
 }
+const GlobalStyle = createGlobalStyle`
+		html,body {
+			background-color: ${lightTheme.bgColor};
+		}
+	`
 
 const AppWrapper = styled.div`
-	background-color: ${(props) => props.theme.bgColor};
 	max-width: 980px;
-	margin: 0 auto;
-
 	min-height: 100vh;
+	margin: 0 auto;
 
 	main {
 		padding: 1rem;
 		width: 100%;
-		background-color: ${(props) => props.theme.bgColor};
 	}
 `
 
