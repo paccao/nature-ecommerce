@@ -30,7 +30,7 @@ export default function Products() {
 	return (
 		<PageWrapper>
 			<ProductsSection>
-				<div>
+				<div className="top">
 					<h1>Products</h1>
 					<SearchForm role="search" onSubmit={(e) => e.preventDefault()}>
 						<input
@@ -52,15 +52,23 @@ export default function Products() {
 }
 
 const ProductsSection = styled.section`
+	.top {
+		display: flex;
+		align-items: baseline;
+	}
+
 	ul {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-auto-rows: auto;
+		display: flex;
+		justify-content: center;
 		width: 100%;
+		margin-top: 1rem;
 	}
 
 	@media screen and (min-width: 500px) {
 		ul {
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-auto-rows: auto;
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}

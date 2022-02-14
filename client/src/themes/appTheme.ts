@@ -2,6 +2,7 @@ export const lightTheme = {
 	bgColor: '#E4E4E4',
 	__bgColorLargePageWidth: '#ffffff',
 	textColor: '#161409',
+	accentColor: '#009432',
 
 	textHighEmph: '87%',
 	textMediumEmph: '60%',

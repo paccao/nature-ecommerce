@@ -12,7 +12,7 @@ function App() {
 			<GlobalStyle />
 			<AppWrapper className="App">
 				<header>
-					<a href="/">Nature e-commerce LOGO</a>
+					<a href="/">Nature e-commerce</a>
 				</header>
 
 				<main>
@@ -36,6 +36,12 @@ const AppWrapper = styled.div`
 	max-width: 980px;
 	min-height: 100vh;
 	margin: 0 auto;
+
+	header {
+		text-align: center;
+		color: ${(props) => props.theme.accentColor};
+		font-size: 1.4em;
+	}
 
 	main {
 		padding: 1rem;
