@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import Products from './pages/Products'
 import Details from './pages/Details'
 import Error404 from './pages/Error404'
+import CartAside from './components/CartAside/CartAside'
 import { lightTheme } from './themes/appTheme'
 import { Routes, Route } from 'react-router-dom'
 
@@ -16,6 +17,7 @@ function App() {
 				</header>
 
 				<main>
+					<CartAside />
 					<Routes>
 						<Route path="/" element={<Products />} />
 						<Route path="/product/:id" element={<Details />} />
@@ -33,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
 	`
 
 const AppWrapper = styled.div`
-	max-width: 980px;
+	max-width: 1368px;
 	min-height: 100vh;
 	margin: 0 auto;
 
@@ -46,6 +48,8 @@ const AppWrapper = styled.div`
 	main {
 		padding: 1rem;
 		width: 100%;
+		display: grid;
+		grid-template-columns: 2fr 7fr 1fr;
 	}
 `
 
