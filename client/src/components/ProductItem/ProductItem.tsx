@@ -34,7 +34,6 @@ export default function ProductItem({ product }: Props) {
 const ProductCard = styled.section`
 	min-width: 200px;
 	max-width: 280px;
-	cursor: pointer;
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;

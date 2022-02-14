@@ -13,7 +13,7 @@ export default GenericButton
 
 const Button = styled.button`
 	all: unset;
-
+	cursor: pointer;
 	padding: 0.3rem 0.8rem;
 	background-color: ${(props) => props.theme.textColor};
 	color: ${(props) => props.theme.__bgColorLargePageWidth};
