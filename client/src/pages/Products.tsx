@@ -67,6 +67,8 @@ const ProductsSection = styled.section`
 	@media screen and (min-width: 500px) {
 		ul {
 			display: grid;
+			justify-content: unset;
+			justify-items: center;
 			grid-template-columns: 1fr;
 			grid-auto-rows: auto;
 			grid-template-columns: repeat(2, 1fr);

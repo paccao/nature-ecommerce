@@ -45,9 +45,8 @@ const Information = styled.article`
 	margin: 0.5rem 1rem 0rem 1rem;
 
 	.top {
-		display: grid;
-		grid-template-columns: 5fr 2fr;
-		gap: auto;
+		display: flex;
+		justify-content: space-between;
 	}
 	.bottom {
 		display: flex;
