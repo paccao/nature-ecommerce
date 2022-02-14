@@ -29,32 +29,47 @@ export default function Products() {
 
 	return (
 		<PageWrapper>
-			<section>
-				<section>
-					<div>
-						<h1>Products</h1>
-						<SearchForm
-							role="search"
-							onSubmit={(e) => e.preventDefault()}
-						>
-							<input
-								autoFocus
-								type="text"
-								placeholder="Filter by name.."
-								onChange={(e) => onChangeHandler(e)}
-							/>
-						</SearchForm>
-					</div>
-					<ul>
-						{filterState === ''
-							? renderAllProductItems
-							: renderfilteredProductItems}
-					</ul>
-				</section>
-			</section>
+			<ProductsSection>
+				<div>
+					<h1>Products</h1>
+					<SearchForm role="search" onSubmit={(e) => e.preventDefault()}>
+						<input
+							autoFocus
+							type="text"
+							placeholder="Filter by name.."
+							onChange={(e) => onChangeHandler(e)}
+						/>
+					</SearchForm>
+				</div>
+				<ul>
+					{filterState === ''
+						? renderAllProductItems
+						: renderfilteredProductItems}
+				</ul>
+			</ProductsSection>
 		</PageWrapper>
 	)
 }
+
+const ProductsSection = styled.section`
+	ul {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-auto-rows: auto;
+		width: 100%;
+	}
+
+	@media screen and (min-width: 500px) {
+		ul {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media screen and (min-width: 780px) {
+		ul {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+`
 
 const SearchForm = styled.form`
 	display: flex;

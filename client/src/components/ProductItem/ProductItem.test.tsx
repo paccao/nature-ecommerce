@@ -33,7 +33,7 @@ describe('ProductItem component', () => {
 		const productName = screen.getByText('Canned beans')
 		const productPrice = screen.getByText('30kr')
 		const productDescription = screen.getByText('Tasty.')
-		const productStockAvailable = screen.getByText('2')
+		const productStockAvailable = screen.getByText(/In stock: 2/)
 		const productImgAlt = screen.getByAltText(
 			'Picture of Canned beans product.',
 		)
