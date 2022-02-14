@@ -8,7 +8,7 @@ export default function ProductItem({ product }: Props) {
 	return (
 		<article data-testid="product-item">
 			<div>
-				<p>{product.stock_available}</p>
+				<p>{`In stock: ${product.stock_available}`}</p>
 				<img
 					src={product.img_url}
 					alt={`Picture of ${product.name} product.`}
