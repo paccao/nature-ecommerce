@@ -1,22 +1,28 @@
-import { useState } from 'react'
-import { Product } from '../../models/Product'
+import { SyntheticEvent, useState } from 'react'
+import { Product, ProductToAdd } from '../../models/Product'
 import GenericButton from '../global/GenericButton'
 import styled from 'styled-components'
+import { useAddToCart } from '../../hooks/useAddToCart'
 
 type Props = {
 	product: Product
 }
 
 function ProductItemBottom({ product }: Props) {
-	let [count, setCount] = useState<number>(1)
+	let [amountToAdd, setAmountToAdd] = useState<number>(1)
+
+	function addProductItemToCart(event: SyntheticEvent): void {
+		useAddToCart({ amount: amountToAdd, body: product })
+	}
+
 	return (
 		<Wrapper>
 			<b>{`${product.price}kr`}</b>
-			<form className="input-group">
+			<form className="input-group" onSubmit={addProductItemToCart}>
 				<input
 					type="button"
 					onClick={(e) =>
-						setCount((prevCount) =>
+						setAmountToAdd((prevCount) =>
 							prevCount <= 1 ? (prevCount = 1) : prevCount - 1,
 						)
 					}
@@ -29,9 +35,9 @@ function ProductItemBottom({ product }: Props) {
 					step="1"
 					min="1"
 					max="99"
-					value={count}
+					value={amountToAdd}
 					onChange={(e) => {
-						setCount(Number(e.target.value))
+						setAmountToAdd(Number(e.target.value))
 					}}
 					name="quantity"
 					className="quantity-field"
@@ -39,7 +45,7 @@ function ProductItemBottom({ product }: Props) {
 				/>
 				<input
 					type="button"
-					onClick={(e) => setCount((prevCount) => prevCount + 1)}
+					onClick={(e) => setAmountToAdd((prevCount) => prevCount + 1)}
 					value="+"
 					className="button-plus cart-button"
 					data-field="quantity"
