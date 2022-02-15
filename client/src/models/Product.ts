@@ -23,7 +23,7 @@ export type ProductResult = {
 
 export type ProductToAdd = {
 	amount: number
-	product: Product
+	productId: string
 	currentUserId: string
 }
 

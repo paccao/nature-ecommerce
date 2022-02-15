@@ -19,7 +19,7 @@ function ProductItemBottom({ product }: Props) {
 		console.log('Submitted!')
 		const itemAdded = await pushToCart({
 			amount: amountToAdd,
-			product,
+			productId: product.id,
 			currentUserId: temporaryUser,
 		})
 		console.log(itemAdded)
