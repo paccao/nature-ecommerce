@@ -1,5 +1,6 @@
 import express, { Express } from 'express'
-import routes from './routes/products'
+import productRoutes from './routes/products'
+import cartRoutes from './routes/cartRoutes'
 import 'dotenv/config'
 
 import { corsMiddleware } from './helpers/corsMiddleware'
@@ -12,7 +13,8 @@ const PORT: any = process.env.PORT ?? 8080
 app.use(corsMiddleware)
 app.use(express.json())
 app.use(express.static('public'))
-app.use('/', routes)
+app.use('/', productRoutes)
+app.use('/', cartRoutes)
 
 // Error handling
 app.use((req, res) => {
