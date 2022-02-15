@@ -10,11 +10,13 @@ type Props = {
 }
 
 function ProductItemBottom({ product }: Props) {
+	// TODO: Refactor useState into an atom
+	// move AddToCart POST req to GenericButton
 	let [amountToAdd, setAmountToAdd] = useState<number>(1)
 
 	async function addProductItemToCart(event: SyntheticEvent) {
-		const itemAdded = await pushToCart({ amount: amountToAdd, body: product })
-		console.log(itemAdded)
+		// const itemAdded = await pushToCart({ amount: amountToAdd, body: product })
+		// console.log(itemAdded)
 	}
 
 	return (

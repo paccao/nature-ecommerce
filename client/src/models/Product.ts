@@ -24,6 +24,7 @@ export type ProductResult = {
 export type ProductToAdd = {
 	amount: number
 	body: Product
+	currentUserId: string
 }
 
 export type RoleTypes = 'user' | 'admin'
