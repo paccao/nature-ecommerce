@@ -16,6 +16,12 @@ const mockProduct: Product = {
 	img_url: 'Beans',
 }
 
+global.fetch = jest.fn(() =>
+	Promise.resolve({
+		json: () => Promise.resolve({}),
+	}),
+) as jest.Mock
+
 const renderMockDependenciesWrapper = () => {
 	const queryClient = new QueryClient()
 	render(
