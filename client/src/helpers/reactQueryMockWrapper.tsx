@@ -1,8 +1,13 @@
+import { ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 const queryClient = new QueryClient()
 
-const wrapper = () => (
-	<QueryClientProvider client={queryClient}></QueryClientProvider>
+type Props = {
+	children?: ReactNode
+}
+
+const queryWrapper = ({ children }: Props) => (
+	<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 )
 
-export default wrapper
+export default queryWrapper

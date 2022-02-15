@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import ProductItemBottom from './ProductItemBottom'
-import { Product } from '../../models/Product'
-const { toBeInTheDocument } = require('@testing-library/jest-dom')
+import { Product, ProductToAdd } from '../../models/Product'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { renderHook } from '@testing-library/react-hooks'
 import { RecoilRoot } from 'recoil'
 import userEvent from '@testing-library/user-event'
 import { useAddToCart } from '../../hooks/useAddToCart'
@@ -27,9 +27,9 @@ const renderMockDependenciesWrapper = () => {
 	)
 }
 
-jest.mock('../../hooks/useCart.tsx')
-const mockedUseProduct = useAddToCart as jest.Mock<any>
-mockedUseProduct.mockImplementation(() => ({
+jest.mock('../../hooks/useAddToCart')
+const mockedUseAddToCart = useAddToCart as jest.Mock<any>
+mockedUseAddToCart.mockImplementation(() => ({
 	isLoading: false,
 	data: [mockProduct],
 }))
@@ -38,12 +38,28 @@ describe('ProductItemBottom component', () => {
 	it('renders without crashing', () => {
 		render(<ProductItemBottom product={mockProduct} />)
 	})
-	it('sends a request to add current item to database when Add button is pressed', () => {
+	it('sends a request to add current item to database when Add button is pressed', async () => {
 		renderMockDependenciesWrapper()
-		// mockPostRequest with that number
-		// Check that the mock has been called
 
 		userEvent.click(screen.getByRole('button', { name: 'Buy' }))
-		const inputValue = screen.getByTestId('input-value').getAttribute('value')
+
+		let inputValue = screen.getByTestId('input-value').getAttribute('value')
+		if (!inputValue) {
+			inputValue = '1'
+		}
+		const productToAdd: ProductToAdd = {
+			amount: Number(inputValue),
+			body: mockProduct,
+		}
+
+		mockedUseAddToCart.mockImplementation(() => ({
+			isLoading: false,
+			data: [mockProduct],
+		}))
+		const { result, waitFor } = renderHook(() => useAddToCart(productToAdd))
+		await waitFor(() => result.current.isSuccess)
+
+		expect(result.current.data).toEqual([mockProduct])
+		expect(mockedUseAddToCart).toHaveBeenCalledTimes(1)
 	})
 })
