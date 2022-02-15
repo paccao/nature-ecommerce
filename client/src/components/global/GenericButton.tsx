@@ -3,10 +3,11 @@ import styled from 'styled-components'
 
 type Props = {
 	innerText: string
+	type: 'button' | 'submit' | 'reset' | undefined
 }
 
-function GenericButton({ innerText }: Props) {
-	return <Button>{innerText}</Button>
+function GenericButton({ innerText, type }: Props) {
+	return <Button type={type}>{innerText}</Button>
 }
 
 export default GenericButton

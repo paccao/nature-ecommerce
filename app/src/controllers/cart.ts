@@ -4,6 +4,8 @@ import { isProduct } from '../helpers/productsHelpers'
 import { nanoid } from 'nanoid'
 import { dbConnection as conn } from '../server'
 
-const pushToCart = async (req: Request, res: Response) => {}
+const pushToCart = async (req: Request, res: Response) => {
+	res.status(200).json({ success: true })
+}
 
 export default { pushToCart }

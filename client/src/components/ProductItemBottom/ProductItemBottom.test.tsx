@@ -63,4 +63,5 @@ describe('ProductItemBottom component', () => {
 		expect(result.current.data).toEqual([mockProduct])
 		expect(mockedUseAddToCart).toHaveBeenCalledTimes(1)
 	})
+	it.todo('remove temporary user in ProductItemBottom')
 })

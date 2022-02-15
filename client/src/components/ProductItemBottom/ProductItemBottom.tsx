@@ -9,53 +9,63 @@ type Props = {
 	product: Product
 }
 
+const temporaryUser = '0e265459-81fd-4e26-ab88-6830452fdae6'
+
 function ProductItemBottom({ product }: Props) {
 	// TODO: Refactor useState into an atom
 	// move AddToCart POST req to GenericButton
 	let [amountToAdd, setAmountToAdd] = useState<number>(1)
 
 	async function addProductItemToCart(event: SyntheticEvent) {
-		// const itemAdded = await pushToCart({ amount: amountToAdd, body: product })
-		// console.log(itemAdded)
+		event.preventDefault()
+		console.log('Submitted!')
+		const itemAdded = await pushToCart({
+			amount: amountToAdd,
+			body: product,
+			currentUserId: temporaryUser,
+		})
+		console.log(itemAdded)
 	}
 
 	return (
 		<Wrapper>
 			<b>{`${product.price}kr`}</b>
-			<form className="input-group" onSubmit={addProductItemToCart}>
-				<input
-					type="button"
-					onClick={(e) =>
-						setAmountToAdd((prevCount) =>
-							prevCount <= 1 ? (prevCount = 1) : prevCount - 1,
-						)
-					}
-					value="-"
-					className="button-minus cart-button"
-					data-field="quantity"
-				/>
-				<input
-					type="number"
-					step="1"
-					min="1"
-					max="99"
-					value={amountToAdd}
-					onChange={(e) => {
-						setAmountToAdd(Number(e.target.value))
-					}}
-					name="quantity"
-					className="quantity-field"
-					data-testid="input-value"
-				/>
-				<input
-					type="button"
-					onClick={(e) => setAmountToAdd((prevCount) => prevCount + 1)}
-					value="+"
-					className="button-plus cart-button"
-					data-field="quantity"
-				/>
+			<form className="input-form" onSubmit={addProductItemToCart}>
+				<div className="input-group">
+					<input
+						type="button"
+						onClick={(e) =>
+							setAmountToAdd((prevCount) =>
+								prevCount <= 1 ? (prevCount = 1) : prevCount - 1,
+							)
+						}
+						value="-"
+						className="button-minus cart-button"
+						data-field="quantity"
+					/>
+					<input
+						type="number"
+						step="1"
+						min="1"
+						max="99"
+						value={amountToAdd}
+						onChange={(e) => {
+							setAmountToAdd(Number(e.target.value))
+						}}
+						name="quantity"
+						className="quantity-field"
+						data-testid="input-value"
+					/>
+					<input
+						type="button"
+						onClick={(e) => setAmountToAdd((prevCount) => prevCount + 1)}
+						value="+"
+						className="button-plus cart-button"
+						data-field="quantity"
+					/>
+				</div>
+				<GenericButton innerText="Buy" type="submit" />
 			</form>
-			<GenericButton innerText="Buy" />
 		</Wrapper>
 	)
 }
@@ -74,6 +84,12 @@ const Wrapper = styled.div`
 		cursor: default;
 	}
 
+	.input-form {
+		display: flex;
+		margin-left: auto;
+		justify-content: space-around;
+		gap: 0.3rem;
+	}
 	.input-group input {
 		all: unset;
 	}
@@ -88,10 +104,8 @@ const Wrapper = styled.div`
 		-webkit-appearance: none;
 	}
 	.input-group {
-		margin-left: auto;
 		display: flex;
 		max-width: 4rem;
-		justify-content: space-around;
 		border-radius: ${(props) => props.theme.borderRadius};
 		border: 1px solid #dcd3d3;
 		/* padding: 0rem 0.2rem; */
