@@ -2,7 +2,8 @@ import { SyntheticEvent, useState } from 'react'
 import { Product, ProductToAdd } from '../../models/Product'
 import GenericButton from '../global/GenericButton'
 import styled from 'styled-components'
-import { useAddToCart } from '../../hooks/useAddToCart'
+import useAddToCart from '../../hooks/useAddToCart'
+import { pushToCart } from '../../helpers/pushToCart'
 
 type Props = {
 	product: Product
@@ -11,8 +12,9 @@ type Props = {
 function ProductItemBottom({ product }: Props) {
 	let [amountToAdd, setAmountToAdd] = useState<number>(1)
 
-	function addProductItemToCart(event: SyntheticEvent): void {
-		useAddToCart({ amount: amountToAdd, body: product })
+	async function addProductItemToCart(event: SyntheticEvent) {
+		const itemAdded = await pushToCart({ amount: amountToAdd, body: product })
+		console.log(itemAdded)
 	}
 
 	return (

@@ -9,7 +9,7 @@ import Error404 from '../Error404'
 
 import { Product } from '../../models/Product'
 import ProductItem from '../../components/ProductItem/ProductItem'
-import { useProduct } from '../../hooks/useProduct'
+import useProduct from '../../hooks/useProduct'
 import { RecoilRoot } from 'recoil'
 
 const mockProducts: Product[] = [
@@ -31,7 +31,7 @@ const mockProducts: Product[] = [
 	},
 ]
 
-jest.mock('../../hooks/useProduct.tsx')
+jest.mock('../../hooks/useProduct.ts')
 const mockedUseProduct = useProduct as jest.Mock<any>
 mockedUseProduct.mockImplementation(() => ({
 	isLoading: false,

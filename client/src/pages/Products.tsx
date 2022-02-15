@@ -1,5 +1,5 @@
 import { PageWrapper } from '../styles/PageWrapper.styles'
-import { useProduct } from '../hooks/useProduct'
+import useProduct from '../hooks/useProduct'
 import ProductItem from '../components/ProductItem/ProductItem'
 import { ChangeEvent } from 'react'
 import styled from 'styled-components'

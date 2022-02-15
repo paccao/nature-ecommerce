@@ -3,7 +3,7 @@ import { CartResult } from '../models/Cart'
 import { pushToCart } from '../helpers/pushToCart'
 import { ProductToAdd } from '../models/Product'
 
-export function useAddToCart(productToAdd: ProductToAdd) {
+export default function useAddToCart(productToAdd: ProductToAdd) {
 	return useMutation<CartResult, Error>(
 		'Push to cart',
 		() => pushToCart(productToAdd),

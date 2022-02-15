@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Product } from '../../models/Product'
 import ProductItem from './ProductItem'
-import { useProduct } from '../../hooks/useProduct'
+import useProduct from '../../hooks/useProduct'
 
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
 

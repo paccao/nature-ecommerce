@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { renderHook } from '@testing-library/react-hooks'
 import { RecoilRoot } from 'recoil'
 import userEvent from '@testing-library/user-event'
-import { useAddToCart } from '../../hooks/useAddToCart'
+import useAddToCart from '../../hooks/useAddToCart'
 
 const mockProduct: Product = {
 	id: '1',
