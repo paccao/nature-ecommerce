@@ -12,8 +12,6 @@ type Props = {
 const temporaryUser = '0e265459-81fd-4e26-ab88-6830452fdae6'
 
 function ProductItemBottom({ product }: Props) {
-	// TODO: Refactor useState into an atom
-	// move AddToCart POST req to GenericButton
 	let [amountToAdd, setAmountToAdd] = useState<number>(1)
 
 	async function addProductItemToCart(event: SyntheticEvent) {
@@ -21,7 +19,7 @@ function ProductItemBottom({ product }: Props) {
 		console.log('Submitted!')
 		const itemAdded = await pushToCart({
 			amount: amountToAdd,
-			body: product,
+			product,
 			currentUserId: temporaryUser,
 		})
 		console.log(itemAdded)
@@ -108,7 +106,6 @@ const Wrapper = styled.div`
 		max-width: 4rem;
 		border-radius: ${(props) => props.theme.borderRadius};
 		border: 1px solid #dcd3d3;
-		/* padding: 0rem 0.2rem; */
 		line-height: 100%;
 
 		.quantity-field {
