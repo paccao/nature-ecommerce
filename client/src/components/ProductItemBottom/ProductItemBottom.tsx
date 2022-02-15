@@ -25,6 +25,7 @@ function ProductItemBottom({ product }: Props) {
 					value="1"
 					name="quantity"
 					className="quantity-field"
+					data-testid="input-value"
 				/>
 				<input
 					type="button"
