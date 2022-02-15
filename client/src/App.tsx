@@ -49,7 +49,13 @@ const AppWrapper = styled.div`
 		padding: 1rem;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 2fr 7fr 1fr;
+		grid-template-columns: 2fr 8fr;
+	}
+
+	@media screen and (max-width: 780px) {
+		main {
+			grid-template-columns: 3fr 7fr;
+		}
 	}
 `
 

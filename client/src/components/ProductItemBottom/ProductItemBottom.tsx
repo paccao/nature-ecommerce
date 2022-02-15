@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { Product } from '../../models/Product'
 import GenericButton from '../global/GenericButton'
 import styled from 'styled-components'
