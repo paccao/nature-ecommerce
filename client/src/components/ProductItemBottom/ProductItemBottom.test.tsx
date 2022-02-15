@@ -38,7 +38,7 @@ describe('ProductItemBottom component', () => {
 	it('renders without crashing', () => {
 		render(<ProductItemBottom product={mockProduct} />)
 	})
-	it('sends a request to add current item to database when Add button is pressed', async () => {
+	it('sends a request to add current item to database when the "Add" button is pressed', async () => {
 		renderMockDependenciesWrapper()
 
 		userEvent.click(screen.getByRole('button', { name: 'Buy' }))
