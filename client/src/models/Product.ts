@@ -21,4 +21,9 @@ export type ProductResult = {
 	result: Product[]
 }
 
+export type ProductToAdd = {
+	amount: number
+	body: Product
+}
+
 export type RoleTypes = 'user' | 'admin'
