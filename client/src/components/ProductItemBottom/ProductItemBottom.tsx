@@ -8,12 +8,18 @@ type Props = {
 }
 
 function ProductItemBottom({ product }: Props) {
+	let [count, setCount] = useState<number>(1)
 	return (
 		<Wrapper>
 			<b>{`${product.price}kr`}</b>
-			<div className="input-group">
+			<form className="input-group">
 				<input
 					type="button"
+					onClick={(e) =>
+						setCount((prevCount) =>
+							prevCount <= 1 ? (prevCount = 1) : prevCount - 1,
+						)
+					}
 					value="-"
 					className="button-minus cart-button"
 					data-field="quantity"
@@ -21,19 +27,24 @@ function ProductItemBottom({ product }: Props) {
 				<input
 					type="number"
 					step="1"
+					min="1"
 					max="99"
-					value="1"
+					value={count}
+					onChange={(e) => {
+						setCount(Number(e.target.value))
+					}}
 					name="quantity"
 					className="quantity-field"
 					data-testid="input-value"
 				/>
 				<input
 					type="button"
+					onClick={(e) => setCount((prevCount) => prevCount + 1)}
 					value="+"
 					className="button-plus cart-button"
 					data-field="quantity"
 				/>
-			</div>
+			</form>
 			<GenericButton innerText="Buy" />
 		</Wrapper>
 	)
