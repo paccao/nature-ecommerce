@@ -3,7 +3,9 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
 import { Cart } from '../../models/Cart'
 import CartAside from '../CartAside/CartAside'
+import CartItem from '../CartAside/CartItem'
 import useCart from '../../hooks/useCart'
+import { Product } from '../../models/Product'
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
 
 global.fetch = jest.fn(() =>
@@ -23,13 +25,19 @@ const renderMockDependenciesWrapper = () => {
 	)
 }
 
-const mockCart: Cart = [{}]
+const mockProduct: Product = {
+	id: '2',
+	name: 'Worn boots',
+	price: 300,
+	description: 'Looks rugged.',
+	stock_available: 5,
+	img_url: 'Boots',
+}
+
+const mockCart: Cart = [mockProduct]
 
 jest.mock('../../hooks/useCart')
 const mockedUseCart = useCart as jest.Mock<any>
-mockedUseCart.mockImplementation(() => ({
-	data: mockCart,
-}))
 
 describe('CartAside component', () => {
 	it('renders without crashing', () => {
@@ -37,6 +45,7 @@ describe('CartAside component', () => {
 	})
 	it.todo('should display: account name/signup/login')
 	it.todo('should display account information')
+	it.todo('sums up the total cost of all items in the cart')
 	it('should display the cart', () => {
 		render(<CartAside />)
 
@@ -50,5 +59,14 @@ describe('CartAside component', () => {
 	})
 	it('renders the cart items', () => {
 		renderMockDependenciesWrapper()
+		mockedUseCart.mockImplementation(() => ({
+			data: mockCart,
+		}))
+
+		render(<CartItem product={mockProduct} />)
+
+		expect(screen.getByTestId('cart-total-cost')).toHaveTextContent(
+			`Total cost: ${mockProduct.price}kr.`,
+		)
 	})
 })
