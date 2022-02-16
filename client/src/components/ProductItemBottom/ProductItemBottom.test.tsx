@@ -63,7 +63,7 @@ describe('ProductItemBottom component', () => {
 			isLoading: false,
 			data: [mockProduct],
 		}))
-		const { result, waitFor } = renderHook(() => useAddToCart(productToAdd))
+		const { result, waitFor } = renderHook(() => useAddToCart())
 		await waitFor(() => result.current.isSuccess)
 
 		expect(result.current.data).toEqual([mockProduct])
