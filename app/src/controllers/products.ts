@@ -16,8 +16,15 @@ const getProducts = async (req: Request, res: Response) => {
 	}
 }
 
-const getProduct = async (req: Request, res: Response) => {
+const getSpecificProduct = async (req: Request, res: Response) => {
 	const id = req.params.id
+	if (!id)
+		return res
+			.status(400)
+			.json({
+				success: false,
+				message: "The id didn't come in the proper format.",
+			})
 
 	// const result = query database
 	// const product: Product = result.data
@@ -45,4 +52,4 @@ const createUser = async (req: Request, res: Response) => {
 	const userToCreate: User = req.body
 }
 
-export default { getProducts, getProduct, createProduct, createUser }
+export default { getProducts, getSpecificProduct, createProduct, createUser }
