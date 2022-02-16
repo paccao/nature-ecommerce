@@ -34,7 +34,7 @@ function ProductItemBottom({ product }: Props) {
 						type="button"
 						onClick={(e) =>
 							setAmountToAdd((prevCount) =>
-								prevCount <= 1 ? (prevCount = 1) : prevCount - 1,
+								prevCount <= 1 ? (prevCount = 99) : prevCount - 1,
 							)
 						}
 						value="-"
@@ -61,7 +61,7 @@ function ProductItemBottom({ product }: Props) {
 						type="button"
 						onClick={(e) =>
 							setAmountToAdd((prevCount) =>
-								amountToAdd >= 99 ? (prevCount = 99) : prevCount + 1,
+								amountToAdd >= 99 ? (prevCount = 1) : prevCount + 1,
 							)
 						}
 						value="+"
