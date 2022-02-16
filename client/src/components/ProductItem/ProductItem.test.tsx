@@ -27,7 +27,7 @@ describe('ProductItem component', () => {
 		render(<ProductItem product={mockProduct} />)
 		mockedUseProduct.mockImplementation(() => ({
 			isLoading: false,
-			data: mockProduct,
+			data: [mockProduct],
 		}))
 
 		const productName = screen.getByText('Canned beans')
