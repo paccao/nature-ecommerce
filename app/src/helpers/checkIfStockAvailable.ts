@@ -19,7 +19,7 @@ export default async function checkIfStockAvailable(
 	try {
 		const { rows } = await conn.query(queryString, [productId])
 		const actualStockAvailable: number = rows[0].stock_available
-		if (actualStockAvailable >= 1) {
+		if (amountToAdd <= actualStockAvailable) {
 			result = {
 				success: true,
 				status: 200,
