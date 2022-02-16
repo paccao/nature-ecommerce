@@ -22,7 +22,7 @@ const pushToCart = async (req: Request, res: Response) => {
 
 	/// Find if cart row already exist
 	const findExistingProductInCartQuery = `
-		SELECT id FROM cart WHERE user_id = $1 AND product_id = $2;
+		SELECT id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
 	`
 
 	try {
@@ -40,18 +40,18 @@ const pushToCart = async (req: Request, res: Response) => {
 		})
 	}
 
-	if (existingCartRows) {
+	if (existingCartRows.length > 0) {
 		/// Push to existing cart
 
 		const pushToExistingCartQuery = `
 		UPDATE cart SET amount = $1 WHERE id = $2;
 		`
-		const updatedItemAmountInCart = result.stockAvailable + amountToAdd
+		const updatedItemAmountInCart = existingCartRows[0].amount + amountToAdd
 
 		try {
 			const { rows } = await conn.query(pushToExistingCartQuery, [
 				updatedItemAmountInCart,
-				existingCartRows[0],
+				existingCartRows[0].id,
 			])
 			updatedExistingCartRows = rows
 		} catch (error) {
