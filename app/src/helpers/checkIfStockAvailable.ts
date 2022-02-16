@@ -5,9 +5,7 @@ export default async function checkIfStockAvailable(
 	productId: string,
 ) {
 	if (amountToAdd <= 0) return false
-
-	const queryString =
-		'SELECT id, stock_available FROM products(id) VALUES($1) WHERE id IN $1 RETURNING stock_available;'
+	const queryString = 'SELECT stock_available FROM products WHERE id = $1;'
 
 	try {
 		const { rows } = await conn.query(queryString, [productId])
