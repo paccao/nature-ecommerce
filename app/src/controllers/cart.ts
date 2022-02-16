@@ -16,14 +16,21 @@ const pushToCart = async (req: Request, res: Response) => {
 			error: result.error,
 		})
 
-	const pushToCartQuery = `
-	INSERT INTO cart(user_id, product_id)
-	VALUES ($1, $2) RETURNING *;`
-
 	let cartRows
+	let existingCartRows
+	let updatedExistingCartRows
+
+	/// Find if cart row already exist
+	const findExistingProductInCartQuery = `
+		SELECT id FROM cart WHERE user_id = $1 AND product_id = $2;
+	`
+
 	try {
-		const { rows } = await conn.query(pushToCartQuery, [userId, productToAdd])
-		cartRows = rows
+		const { rows } = await conn.query(findExistingProductInCartQuery, [
+			userId,
+			productToAdd,
+		])
+		existingCartRows = rows
 	} catch (error) {
 		return res.status(400).json({
 			success: false,
@@ -33,6 +40,52 @@ const pushToCart = async (req: Request, res: Response) => {
 		})
 	}
 
+	if (existingCartRows) {
+		/// Push to existing cart
+
+		const pushToExistingCartQuery = `
+		UPDATE cart SET amount = $1 WHERE id = $2;
+		`
+		const updatedItemAmountInCart = result.stockAvailable + amountToAdd
+
+		try {
+			const { rows } = await conn.query(pushToExistingCartQuery, [
+				updatedItemAmountInCart,
+				existingCartRows[0],
+			])
+			updatedExistingCartRows = rows
+		} catch (error) {
+			return res.status(400).json({
+				success: false,
+				message:
+					'The server could not understand the request due to invalid syntax.',
+				error,
+			})
+		}
+	} else {
+		/// Push to new cart
+
+		const pushToNewCartQuery = `
+		INSERT INTO cart(user_id, product_id)
+		VALUES ($1, $2) RETURNING *;`
+
+		try {
+			const { rows } = await conn.query(pushToNewCartQuery, [
+				userId,
+				productToAdd,
+			])
+			cartRows = rows
+		} catch (error) {
+			return res.status(400).json({
+				success: false,
+				message:
+					'The server could not understand the request due to invalid syntax.',
+				error,
+			})
+		}
+	}
+
+	/// Update stock availability accordingly
 	const changeStockAvailableQuery = `
 	UPDATE products SET stock_available = $1 WHERE id = $2;
 	`
@@ -46,9 +99,10 @@ const pushToCart = async (req: Request, res: Response) => {
 			productToAdd,
 		])
 
-		return res
-			.status(200)
-			.json({ success: true, updated: { cartRows, updateStockResult } })
+		return res.status(200).json({
+			success: true,
+			updated: { cartRows, existingCartRows, updateStockResult },
+		})
 	} catch (error) {
 		return res.status(400).json({
 			success: false,
