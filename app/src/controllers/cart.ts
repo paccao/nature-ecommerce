@@ -1,7 +1,4 @@
-import { query, Request, Response } from 'express'
-import { Product, User } from '../../../client/src/models/Product'
-import { isProduct } from '../helpers/productsHelpers'
-import { nanoid } from 'nanoid'
+import { Request, Response } from 'express'
 import { dbConnection as conn } from '../server'
 
 const pushToCart = async (req: Request, res: Response) => {
@@ -9,20 +6,22 @@ const pushToCart = async (req: Request, res: Response) => {
 	const productToAdd = req.body.productId
 	const userId = req.body.currentUserId
 
-	//TODO: Check that amountToAdd is not falsy or exceeds the amount that actually exist
-	// To do this, FETCH the specific product by its productId
-
-	const query = `INSERT INTO cart(user_id, product_id)
-	VALUES ($userId, $productToAdd)
+	const queryString = `INSERT INTO cart(user_id, product_id)
+	VALUES ($1, $2)
 	RETURNING *;`
 
-	const reqBody = {
-		amountToAdd,
-		productToAdd,
-		userId,
-	}
+	try {
+		const { rows } = await conn.query(queryString, [userId, productToAdd])
 
-	return res.status(200).json({ success: true, reqBody })
+		return res.status(201).json({ success: true, inserted: rows })
+	} catch (error) {
+		return res.status(400).json({
+			success: false,
+			message:
+				'The server could not understand the request due to invalid syntax.',
+			error,
+		})
+	}
 }
 
 export default { pushToCart }
