@@ -48,7 +48,10 @@ function ProductItemBottom({ product }: Props) {
 						max="99"
 						value={amountToAdd}
 						onChange={(e) => {
-							setAmountToAdd(Number(e.target.value))
+							if (e.target.value.length <= 2) {
+								setAmountToAdd(Number(e.target.value))
+								e.target.value = Number(e.target.value).toString()
+							}
 						}}
 						name="quantity"
 						className="quantity-field"
@@ -56,7 +59,11 @@ function ProductItemBottom({ product }: Props) {
 					/>
 					<input
 						type="button"
-						onClick={(e) => setAmountToAdd((prevCount) => prevCount + 1)}
+						onClick={(e) =>
+							setAmountToAdd((prevCount) =>
+								amountToAdd >= 99 ? (prevCount = 99) : prevCount + 1,
+							)
+						}
 						value="+"
 						className="button-plus cart-button"
 						data-field="quantity"
