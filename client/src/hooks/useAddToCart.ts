@@ -1,14 +1,12 @@
 import { useMutation } from 'react-query'
-import { CartResult } from '../models/Cart'
 import { pushToCart } from '../helpers/pushToCart'
-import { ProductToAdd } from '../models/Product'
+import { queryClient } from '../index'
 
-export default function useAddToCart(productToAdd: ProductToAdd) {
-	return useMutation<CartResult, Error>(
-		'Push to cart',
-		() => pushToCart(productToAdd),
-		{
-			retry: false,
+export default function useAddToCart() {
+	return useMutation(pushToCart, {
+		onSuccess: () => {
+			queryClient.invalidateQueries(['product'])
 		},
-	)
+		retry: false,
+	})
 }
