@@ -4,7 +4,7 @@ import CartItem from './CartItem'
 
 function CartAside() {
 	const { data } = useCart()
-	if (data) console.log(data)
+	console.log(data)
 	return (
 		<aside>
 			<section>

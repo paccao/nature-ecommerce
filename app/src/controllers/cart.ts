@@ -114,16 +114,17 @@ const pushToCart = async (req: Request, res: Response) => {
 }
 
 const getCart = async (req: Request, res: Response) => {
+	// TODO: Replace temp user with JWT
+	const temporaryUserId = '0e265459-81fd-4e26-ab88-6830452fdae6'
 	const getCartQuery = `
-	SELECT * FROM cart;
+	SELECT product_id, amount FROM cart WHERE user_id = $1;
 	`
 
+	let currentCart
 	try {
-		const { rows } = await conn.query(getCartQuery)
-
-		const result: responseObject = { success: true, result: rows }
-
-		return res.status(200).json(result)
+		const { rows } = await conn.query(getCartQuery, [temporaryUserId])
+		currentCart = rows
+		// const result: responseObject = { success: true, result: rows }
 	} catch (error) {
 		const result: responseObject = {
 			success: false,
@@ -132,6 +133,8 @@ const getCart = async (req: Request, res: Response) => {
 		}
 		return res.status(500).json(result)
 	}
+	return res.status(200).json(currentCart)
+	//
 }
 
 export default { pushToCart, getCart }
