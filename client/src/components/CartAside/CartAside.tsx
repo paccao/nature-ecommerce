@@ -40,7 +40,7 @@ function CartAside() {
 					))}
 				</ul>
 				<div data-testid="order-info">
-					<p>Total cost: </p>
+					<p data-tesid="cart-total-cost">Total cost: </p>
 				</div>
 			</section>
 		</aside>

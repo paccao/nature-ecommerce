@@ -138,7 +138,6 @@ const getCart = async (req: Request, res: Response) => {
 	SELECT * FROM products WHERE id = ANY($1::uuid[]);`
 
 	const listOfProductIds = currentCart.map((entry) => entry.product_id)
-	console.log('CURRENT CART :', currentCart)
 
 	try {
 		const { rows } = await conn.query(getProductsInCartQuery, [
