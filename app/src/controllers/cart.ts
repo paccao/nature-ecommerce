@@ -113,9 +113,25 @@ const pushToCart = async (req: Request, res: Response) => {
 	}
 }
 
-const getCart = (req: Request, res: Response) => {
-	const resJsonObj: responseObject = { success: true, result: [] }
-	res.status(200).json(resJsonObj)
+const getCart = async (req: Request, res: Response) => {
+	const getCartQuery = `
+	SELECT * FROM cart;
+	`
+
+	try {
+		const { rows } = await conn.query(getCartQuery)
+
+		const result: responseObject = { success: true, result: rows }
+
+		return res.status(200).json(result)
+	} catch (error) {
+		const result: responseObject = {
+			success: false,
+			message: 'Something went wrong while fetching the cart data.',
+			error,
+		}
+		return res.status(500).json(result)
+	}
 }
 
 export default { pushToCart, getCart }

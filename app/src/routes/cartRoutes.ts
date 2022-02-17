@@ -3,7 +3,7 @@ import controller from '../controllers/cart'
 
 const router = express.Router()
 
-router.post('/api/cart', controller.pushToCart)
 router.get('/api/cart', controller.getCart)
+router.post('/api/cart', controller.pushToCart)
 
 export default router
