@@ -7,6 +7,11 @@ export type Product = {
 	img_url: string
 }
 
+export type ProductWithCartAmount = {
+	product: Product
+	amount: number
+}
+
 export type User = {
 	id: string
 	name: string

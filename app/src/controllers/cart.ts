@@ -133,8 +133,34 @@ const getCart = async (req: Request, res: Response) => {
 		}
 		return res.status(500).json(result)
 	}
-	return res.status(200).json(currentCart)
-	//
+
+	const getProductsInCartQuery = `
+	SELECT * FROM products WHERE id = ANY($1::uuid[]);`
+
+	const listOfProductIds = currentCart.map((entry) => entry.product_id)
+	console.log('CURRENT CART :', currentCart)
+
+	try {
+		const { rows } = await conn.query(getProductsInCartQuery, [
+			listOfProductIds,
+		])
+		const result: responseObject = {
+			success: true,
+			resultObj: {
+				productArr: rows,
+				currentCart,
+			},
+		}
+		res.status(200).json(result)
+	} catch (error) {
+		const result: responseObject = {
+			success: false,
+			message:
+				'Something went wrong while fetching the product data in cart.',
+			error,
+		}
+		return res.status(500).json(result)
+	}
 }
 
 export default { pushToCart, getCart }

@@ -1,18 +1,42 @@
-import React from 'react'
 import useCart from '../../hooks/useCart'
+import { ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
 
 function CartAside() {
-	const { data } = useCart()
+	const { data, isSuccess } = useCart()
 	console.log(data)
+	let productsToMap: ProductWithCartAmount[] = []
+
+	const getProductsToMap = () => {
+		const currentCart = data?.resultObj?.currentCart
+		const productArr = data?.resultObj?.productArr
+		if (!currentCart || !productArr) return null
+
+		let currentIndexValueCart: { product_id: string; amount: number }
+		for (let i = 0; i < currentCart?.length; i++) {
+			currentIndexValueCart = currentCart[i]
+			const productFound: any = productArr.find(
+				(product) => product.id === currentIndexValueCart?.product_id,
+			)
+			if (!productFound) return null
+			productsToMap = [
+				{ ...productFound, amount: currentIndexValueCart.amount },
+			]
+			console.log('here: ', productsToMap)
+		}
+	}
+	if (isSuccess) {
+		getProductsToMap()
+	}
+
 	return (
 		<aside>
 			<section>
 				<h2>Cart</h2>
 				<ul>
-					{data?.result?.map((cartProduct) => (
+					{/* {data?.result?.map((cartProduct) => (
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
-					))}
+					))} */}
 				</ul>
 				<div data-testid="order-info">
 					<p>Total cost: </p>
