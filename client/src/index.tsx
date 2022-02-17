@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
 // Jest complains about exporting from non-react environment
-export const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
 ReactDOM.render(
 	<React.StrictMode>

@@ -1,8 +1,8 @@
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { pushToCart } from '../helpers/pushToCart'
-import { queryClient } from '../index'
 
 export default function useAddToCart() {
+	const queryClient = useQueryClient()
 	return useMutation(pushToCart, {
 		onSuccess: () => {
 			queryClient.invalidateQueries(['product'])
