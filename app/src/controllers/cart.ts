@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import responseObject from '../models/responseObject'
 import checkIfStockAvailable from '../helpers/checkIfStockAvailable'
 import { dbConnection as conn } from '../server'
 
@@ -112,4 +113,9 @@ const pushToCart = async (req: Request, res: Response) => {
 	}
 }
 
-export default { pushToCart }
+const getCart = (req: Request, res: Response) => {
+	const resJsonObj: responseObject = { success: true, result: [] }
+	res.status(200).json(resJsonObj)
+}
+
+export default { pushToCart, getCart }
