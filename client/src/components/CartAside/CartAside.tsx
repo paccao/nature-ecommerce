@@ -7,7 +7,10 @@ function CartAside() {
 	console.log(data)
 	let productsToMap: ProductWithCartAmount[] = []
 
-	const getProductsToMap = () => {
+	if (isSuccess) {
+		getProductsToMap()
+	}
+	function getProductsToMap() {
 		const currentCart = data?.resultObj?.currentCart
 		const productArr = data?.resultObj?.productArr
 		if (!currentCart || !productArr) return null
@@ -15,18 +18,16 @@ function CartAside() {
 		let currentIndexValueCart: { product_id: string; amount: number }
 		for (let i = 0; i < currentCart?.length; i++) {
 			currentIndexValueCart = currentCart[i]
+
 			const productFound: any = productArr.find(
 				(product) => product.id === currentIndexValueCart?.product_id,
 			)
+
 			if (!productFound) return null
 			productsToMap = [
 				{ ...productFound, amount: currentIndexValueCart.amount },
 			]
-			console.log('here: ', productsToMap)
 		}
-	}
-	if (isSuccess) {
-		getProductsToMap()
 	}
 
 	return (
@@ -34,9 +35,9 @@ function CartAside() {
 			<section>
 				<h2>Cart</h2>
 				<ul>
-					{/* {data?.result?.map((cartProduct) => (
+					{productsToMap.map((cartProduct) => (
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
-					))} */}
+					))}
 				</ul>
 				<div data-testid="order-info">
 					<p>Total cost: </p>
