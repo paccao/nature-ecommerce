@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
-import { Cart } from '../../models/Cart'
 import CartAside from '../CartAside/CartAside'
 import CartItem from '../CartAside/CartItem'
 import useCart from '../../hooks/useCart'
@@ -34,7 +33,7 @@ const mockProduct: Product = {
 	img_url: 'Boots',
 }
 
-const mockCart: Cart = [mockProduct]
+const mockCart: Product[] = [mockProduct]
 
 jest.mock('../../hooks/useCart')
 const mockedUseCart = useCart as jest.Mock<any>
@@ -63,7 +62,7 @@ describe('CartAside component', () => {
 			data: mockCart,
 		}))
 
-		render(<CartItem product={mockProduct} />)
+		render(<CartItem cartProduct={mockProduct} />)
 
 		expect(screen.getByTestId('cart-total-cost')).toHaveTextContent(
 			`Total cost: ${mockProduct.price}kr.`,

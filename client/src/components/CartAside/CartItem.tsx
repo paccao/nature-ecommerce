@@ -1,12 +1,7 @@
 import React from 'react'
-import { Cart } from '../../models/Cart'
 import { Product } from '../../models/Product'
 
-type Props = {
-	cartProduct: Cart
-}
-
-function CartItem({ cartProduct }: Props) {
+function CartItem({ cartProduct }: { cartProduct: Product }) {
 	return <li>CartItem</li>
 }
 

@@ -4,13 +4,14 @@ import CartItem from './CartItem'
 
 function CartAside() {
 	const { data } = useCart()
+	if (data) console.log(data)
 	return (
 		<aside>
 			<section>
 				<h2>Cart</h2>
 				<ul>
 					{data?.result?.map((cartProduct) => (
-						<CartItem cartProduct={cartProduct} />
+						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
 					))}
 				</ul>
 				<div data-testid="order-info">
