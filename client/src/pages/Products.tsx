@@ -62,6 +62,7 @@ const ProductsSection = styled.section`
 		justify-content: center;
 		width: 100%;
 		margin-top: 1rem;
+		gap: 1rem;
 	}
 
 	@media screen and (min-width: 500px) {
