@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
 import { ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
@@ -31,7 +32,7 @@ function CartAside() {
 	}
 
 	return (
-		<aside>
+		<AsideWrapper>
 			<section>
 				<h2>Cart</h2>
 				<ul>
@@ -43,8 +44,19 @@ function CartAside() {
 					<p data-tesid="cart-total-cost">Total cost: </p>
 				</div>
 			</section>
-		</aside>
+		</AsideWrapper>
 	)
 }
 
 export default CartAside
+
+const AsideWrapper = styled.aside`
+	background-color: #fff;
+	min-height: 100vh;
+	border-radius: ${(props) => props.theme.borderRadius};
+	border-bottom-right-radius: ${(props) => props.theme.borderRadius};
+	border-top-right-radius: ${(props) => props.theme.borderRadius};
+	border: 2px solid #dcd3d3;
+	padding: 0.2rem 0.3rem 0.3rem 0.8rem;
+	margin-right: 1rem;
+`
