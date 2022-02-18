@@ -33,6 +33,7 @@ const ProductCard = styled.section`
 	max-width: 280px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-around;
 	background-color: #fff;
 	border-radius: ${(props) => props.theme.borderRadius};
 `
