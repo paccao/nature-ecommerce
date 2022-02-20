@@ -6,7 +6,6 @@ import currentTotalCost from '../../helpers/currentTotalCost'
 
 function CartAside() {
 	const { data, isSuccess } = useCart()
-	console.log(data)
 	let productsToMap: ProductWithCartAmount[] = []
 
 	if (isSuccess) {
