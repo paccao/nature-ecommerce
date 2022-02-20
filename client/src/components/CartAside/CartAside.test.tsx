@@ -41,17 +41,23 @@ describe('CartAside component', () => {
 	mockedUseCart.mockImplementation(() => ({
 		data: mockCart,
 	}))
+
 	it('renders without crashing', () => {
 		renderMockDependenciesWrapper()
 	})
 	it.todo('should display: account name/signup/login')
 	it.todo('should display account information')
-	it.todo('sums up the total cost of all items in the cart')
+	it('sums up the total cost of all items currently rendered', () => {
+		renderMockDependenciesWrapper()
+		expect(screen.getByTestId('cart-total-cost')).toHaveTextContent(
+			`Total cost: 0kr.`,
+		)
+	})
 	it('should display the cart', () => {
 		renderMockDependenciesWrapper()
 
 		const heading = screen.getByText('Cart')
-		const totalCostElem = screen.getByTestId('order-info')
+		const totalCostElem = screen.getByTestId('cart-total-cost')
 		const cartList = screen.getByRole('list')
 
 		expect(heading).toBeInTheDocument()
@@ -62,9 +68,6 @@ describe('CartAside component', () => {
 		renderMockDependenciesWrapper()
 
 		render(<CartItem cartProduct={mockProduct} />)
-
-		expect(screen.getByTestId('cart-total-cost')).toHaveTextContent(
-			`Total cost: ${mockProduct.price}kr.`,
-		)
+		expect(screen.getByRole('listitem')).toBeInTheDocument()
 	})
 })

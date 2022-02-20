@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
 import { ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
+import currentTotalCost from '../../helpers/currentTotalCost'
 
 function CartAside() {
 	const { data, isSuccess } = useCart()
@@ -40,8 +41,10 @@ function CartAside() {
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
 					))}
 				</ul>
-				<div data-testid="order-info">
-					<p data-tesid="cart-total-cost">Total cost: </p>
+				<div>
+					<p data-testid="cart-total-cost">
+						Total cost: {currentTotalCost(productsToMap)}kr.
+					</p>
 				</div>
 			</section>
 		</AsideWrapper>
