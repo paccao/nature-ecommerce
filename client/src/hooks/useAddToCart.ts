@@ -5,7 +5,7 @@ export default function useAddToCart() {
 	const queryClient = useQueryClient()
 	return useMutation(pushToCart, {
 		onSuccess: () => {
-			queryClient.invalidateQueries(['product'])
+			queryClient.invalidateQueries(['product', 'cart'])
 		},
 		retry: false,
 	})
