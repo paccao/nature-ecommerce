@@ -43,10 +43,12 @@ const AppWrapper = styled.div`
 		text-align: center;
 		color: ${(props) => props.theme.accentColor};
 		font-size: 1.4em;
+		min-height: 10vh;
+		padding: 1rem 0rem;
 	}
 
 	main {
-		padding: 1rem;
+		padding: 0rem 1rem 1rem 1rem;
 		width: 100%;
 		display: grid;
 		grid-template-columns: 2fr 8fr;
