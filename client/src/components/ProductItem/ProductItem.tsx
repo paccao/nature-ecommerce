@@ -9,13 +9,15 @@ type Props = {
 export default function ProductItem({ product }: Props) {
 	return (
 		<ProductCard data-testid="product-item">
-			<ImageWrapper>
-				<img
-					src={product.img_url}
-					alt={`Picture of ${product.name} product.`}
-					onError={() => 'via.placeholder.com/150'}
-				/>
-			</ImageWrapper>
+			<div className="image-root">
+				<ImageWrapper>
+					<img
+						src={product.img_url}
+						alt={`Picture of ${product.name} product.`}
+						onError={() => 'via.placeholder.com/150'}
+					/>
+				</ImageWrapper>
+			</div>
 			<Information>
 				<article className="top">
 					<h4>{product.name}</h4>
@@ -33,17 +35,20 @@ const ProductCard = styled.section`
 	max-width: 280px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
 	background-color: #fff;
 	border-radius: ${(props) => props.theme.borderRadius};
+
+	.image-root {
+		display: flex;
+		flex-grow: 1;
+	}
 `
 
 const ImageWrapper = styled.div`
 	position: relative;
-	max-width: 250px;
 	padding: 1rem 1rem 0.5rem 1rem;
 	width: 100%;
-	height: auto;
+	height: fill;
 	align-self: center;
 
 	img {
