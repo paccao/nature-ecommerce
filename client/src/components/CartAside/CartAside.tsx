@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
-import { ProductWithCartAmount } from '../../models/Product'
+import { Product, ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
 import currentTotalCost from '../../helpers/currentTotalCost'
 
@@ -20,13 +20,17 @@ function CartAside() {
 		for (let i = 0; i < currentCart?.length; i++) {
 			currentIndexValueCart = currentCart[i]
 
-			const productFound: any = productArr.find(
+			const productFound: Product | undefined = productArr.find(
 				(product) => product.id === currentIndexValueCart?.product_id,
 			)
 
 			if (!productFound) return null
 			productsToMap = [
-				{ ...productFound, amount: currentIndexValueCart.amount },
+				...productsToMap,
+				{
+					...productFound,
+					amount: currentIndexValueCart.amount,
+				},
 			]
 		}
 	}
