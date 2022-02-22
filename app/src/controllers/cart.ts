@@ -162,4 +162,8 @@ const getCart = async (req: Request, res: Response) => {
 	}
 }
 
-export default { pushToCart, getCart }
+const removeFromCart = (req: Request, res: Response) => {
+	res.status(200).json({ success: true })
+}
+
+export default { pushToCart, getCart, removeFromCart }

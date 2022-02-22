@@ -8,7 +8,7 @@ const removeFromCart = async ({
 	userId: string
 }): Promise<RemoveFromCartResult> =>
 	await (
-		await fetch('http://localhost:8080/api/cart', {
+		await fetch('http://localhost:8080/api/cart/remove', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
