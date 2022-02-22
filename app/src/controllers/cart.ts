@@ -170,11 +170,11 @@ const removeFromCart = async (req: Request, res: Response) => {
 		})
 	}
 
-	// Get the cart ROW where the request id's fits
+	// Get more information about the selected cart item
 	const getCartQuery = `
-	SELECT product_id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
+	SELECT id,product_id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
 	`
-	let cartQueryResult: { product_id: string; amount: number }
+	let cartQueryResult: { id: string; product_id: string; amount: number }
 	try {
 		const { rows } = await conn.query(getCartQuery, [
 			userId,
@@ -192,24 +192,21 @@ const removeFromCart = async (req: Request, res: Response) => {
 		return res.status(500).json(result)
 	}
 
-	// Remove that row
+	// Remove selected cart item
 	const removeCartRowQuery = `
-	SELECT product_id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
+	DELETE FROM cart WHERE id = $1;
 	`
-	let cartRowRemoveResult: { product_id: string; amount: number }
 	try {
-		const { rows } = await conn.query(removeCartRowQuery, [userId, '123'])
-
-		cartRowRemoveResult = rows[0]
+		await conn.query(removeCartRowQuery, [cartQueryResult.id])
 	} catch (error) {
 		result = {
 			success: false,
-			message:
-				'The server failed to handle the request. Try passing other data',
+			message: 'The server failed to remove the selected cart item.',
 		}
 
 		return res.status(500).json(result)
 	}
+
 	// Update stock available in shop
 
 	res.status(200).json({ success: true })
