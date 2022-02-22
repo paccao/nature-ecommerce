@@ -5,7 +5,8 @@ export default function useRemoveFromCart() {
 	const queryClient = useQueryClient()
 	return useMutation(removeFromCart, {
 		onSuccess: () => {
-			queryClient.invalidateQueries(['product', 'cart'])
+			queryClient.invalidateQueries('product')
+			queryClient.invalidateQueries('cart')
 		},
 		retry: false,
 	})

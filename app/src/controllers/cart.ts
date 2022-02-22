@@ -220,8 +220,6 @@ const removeFromCart = async (req: Request, res: Response) => {
 			cartQueryResult.product_id,
 		])
 
-		console.log('bug hunting: ', rows)
-
 		if (!rows[0].stock_available || rows[0].stock_available < 1) {
 			currentStockAvailable = 0
 		} else {
