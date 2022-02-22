@@ -52,6 +52,7 @@ const ImageWrapper = styled.div`
 		width: 100%;
 		height: auto;
 		object-fit: cover;
+		border-radius: 5px;
 	}
 `
 
