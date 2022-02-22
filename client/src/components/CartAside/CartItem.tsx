@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import styled from 'styled-components'
 import { Product } from '../../models/Product'
+import useRemoveFromCart from '../../hooks/useRemoveFromCart'
+import temporaryUser from '../../helpers/temporaryUser'
 
 function CartItem({ cartProduct }: { cartProduct: Product }) {
+	const { mutate: removeFromCart } = useRemoveFromCart()
+
+	function removeProductFromCart(event: SyntheticEvent) {
+		event.preventDefault()
+		removeFromCart({
+			productIdToRemove: cartProduct.id,
+			userId: temporaryUser,
+		})
+	}
+
 	return (
 		<CartItemWrapper>
 			<ImageWrapper>
@@ -14,7 +26,7 @@ function CartItem({ cartProduct }: { cartProduct: Product }) {
 			<div>
 				<NameWrapper>
 					<h3>{cartProduct.name}</h3>
-					<button>X</button>
+					<button onClick={removeProductFromCart}>X</button>
 				</NameWrapper>
 				ProductItemBottom (reuse)
 			</div>

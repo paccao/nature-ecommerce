@@ -3,12 +3,11 @@ import { Product } from '../../models/Product'
 import GenericButton from '../global/GenericButton'
 import styled from 'styled-components'
 import useAddToCart from '../../hooks/useAddToCart'
+import temporaryUser from '../../helpers/temporaryUser'
 
 type Props = {
 	product: Product
 }
-
-const temporaryUser = '0e265459-81fd-4e26-ab88-6830452fdae6'
 
 function ProductItemBottom({ product }: Props) {
 	let [amountToAdd, setAmountToAdd] = useState<number>(1)
