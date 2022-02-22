@@ -176,7 +176,10 @@ const removeFromCart = async (req: Request, res: Response) => {
 	`
 	let cartQueryResult: { product_id: string; amount: number }
 	try {
-		const { rows } = await conn.query(getCartQuery, [userId, '123'])
+		const { rows } = await conn.query(getCartQuery, [
+			userId,
+			productIdToRemove,
+		])
 
 		cartQueryResult = rows[0]
 	} catch (error) {
@@ -190,6 +193,23 @@ const removeFromCart = async (req: Request, res: Response) => {
 	}
 
 	// Remove that row
+	const removeCartRowQuery = `
+	SELECT product_id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
+	`
+	let cartRowRemoveResult: { product_id: string; amount: number }
+	try {
+		const { rows } = await conn.query(removeCartRowQuery, [userId, '123'])
+
+		cartRowRemoveResult = rows[0]
+	} catch (error) {
+		result = {
+			success: false,
+			message:
+				'The server failed to handle the request. Try passing other data',
+		}
+
+		return res.status(500).json(result)
+	}
 	// Update stock available in shop
 
 	res.status(200).json({ success: true })
