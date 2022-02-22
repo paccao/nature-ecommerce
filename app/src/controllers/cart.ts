@@ -172,7 +172,7 @@ const removeFromCart = async (req: Request, res: Response) => {
 
 	// Get more information about the selected cart item
 	const getCartQuery = `
-	SELECT id,product_id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
+	SELECT id, product_id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
 	`
 	let cartQueryResult: { id: string; product_id: string; amount: number }
 	try {
@@ -180,6 +180,8 @@ const removeFromCart = async (req: Request, res: Response) => {
 			userId,
 			productIdToRemove,
 		])
+
+		// TODO: if rows.length > 1 Something is wrong in the database
 
 		cartQueryResult = rows[0]
 	} catch (error) {
@@ -207,9 +209,58 @@ const removeFromCart = async (req: Request, res: Response) => {
 		return res.status(500).json(result)
 	}
 
-	// Update stock available in shop
+	// Get current stock available of the selected product
+	const getCurrentAmountOfProductQuery = `
+	SELECT stock_available FROM products WHERE id = $1;
+	`
+	let currentStockAvailable: number
 
-	res.status(200).json({ success: true })
+	try {
+		const { rows } = await conn.query(getCurrentAmountOfProductQuery, [
+			cartQueryResult.product_id,
+		])
+
+		console.log('bug hunting: ', rows)
+
+		if (!rows[0].stock_available || rows[0].stock_available < 1) {
+			currentStockAvailable = 0
+		} else {
+			currentStockAvailable = rows[0].stock_available
+		}
+	} catch (error) {
+		result = {
+			success: false,
+			message: 'Failed to get internal data, try again later.',
+		}
+		res.status(500).json(result)
+	}
+
+	// Update stock available in shop
+	const changeStockAvailableQuery = `
+	UPDATE products SET stock_available = $1 WHERE id = $2;
+	`
+
+	let updatedStockAvailable = currentStockAvailable + cartQueryResult.amount
+	if (!updatedStockAvailable) {
+		updatedStockAvailable = currentStockAvailable
+	}
+
+	try {
+		await conn.query(changeStockAvailableQuery, [
+			updatedStockAvailable,
+			cartQueryResult.product_id,
+		])
+
+		return res.status(201).json({
+			success: true,
+		})
+	} catch (error) {
+		// TODO: Add item back to cart
+		return res.status(500).json({
+			success: false,
+			message: 'Failed to update amount in stock.',
+		})
+	}
 }
 
 export default { pushToCart, getCart, removeFromCart }
