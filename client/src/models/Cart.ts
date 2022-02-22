@@ -5,3 +5,7 @@ export type CartResult = {
 	success: boolean
 	resultObj: resultObject
 }
+
+export type RemoveFromCartResult = {
+	success: boolean
+}
