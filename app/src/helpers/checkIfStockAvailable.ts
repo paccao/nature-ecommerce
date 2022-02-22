@@ -40,7 +40,6 @@ export default async function checkIfStockAvailable(
 			success: false,
 			status: 500,
 			message: 'Internal server error, try again later.',
-			error,
 		}
 		return result
 	}

@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import responseObject from '../models/responseObject'
 import checkIfStockAvailable from '../helpers/checkIfStockAvailable'
 import { dbConnection as conn } from '../server'
+import RemoveFromCartResult from '../models/removeFromCartResult'
 
 const pushToCart = async (req: Request, res: Response) => {
 	const amountToAdd: number = req.body.amount
@@ -37,7 +38,6 @@ const pushToCart = async (req: Request, res: Response) => {
 			success: false,
 			message:
 				'The server could not understand the request due to invalid syntax.',
-			error,
 		})
 	}
 
@@ -60,7 +60,6 @@ const pushToCart = async (req: Request, res: Response) => {
 				success: false,
 				message:
 					'The server could not understand the request due to invalid syntax.',
-				error,
 			})
 		}
 	} else {
@@ -81,7 +80,6 @@ const pushToCart = async (req: Request, res: Response) => {
 				success: false,
 				message:
 					'The server could not understand the request due to invalid syntax.',
-				error,
 			})
 		}
 	}
@@ -108,7 +106,6 @@ const pushToCart = async (req: Request, res: Response) => {
 		return res.status(400).json({
 			success: false,
 			message: 'Failed to update amount in stock.',
-			error,
 		})
 	}
 }
@@ -129,7 +126,6 @@ const getCart = async (req: Request, res: Response) => {
 		const result: responseObject = {
 			success: false,
 			message: 'Something went wrong while fetching the cart data.',
-			error,
 		}
 		return res.status(500).json(result)
 	}
@@ -156,13 +152,46 @@ const getCart = async (req: Request, res: Response) => {
 			success: false,
 			message:
 				'Something went wrong while fetching the product data in cart.',
-			error,
 		}
 		return res.status(500).json(result)
 	}
 }
 
-const removeFromCart = (req: Request, res: Response) => {
+const removeFromCart = async (req: Request, res: Response) => {
+	const userId = req.body.userId
+	const productIdToRemove = req.body.productIdToRemove
+	let result: RemoveFromCartResult = { success: false }
+
+	if (!userId || !productIdToRemove) {
+		return res.status(400).json({
+			...result,
+			message:
+				'The information in the request was not in the proper format.',
+		})
+	}
+
+	// Get the cart ROW where the request id's fits
+	const getCartQuery = `
+	SELECT product_id, amount FROM cart WHERE user_id = $1 AND product_id = $2;
+	`
+	let cartQueryResult: { product_id: string; amount: number }
+	try {
+		const { rows } = await conn.query(getCartQuery, [userId, '123'])
+
+		cartQueryResult = rows[0]
+	} catch (error) {
+		result = {
+			success: false,
+			message:
+				'The server failed to handle the request. Try passing other data',
+		}
+
+		return res.status(500).json(result)
+	}
+
+	// Remove that row
+	// Update stock available in shop
+
 	res.status(200).json({ success: true })
 }
 

@@ -15,7 +15,6 @@ type responseObject = {
 	result?: Product[]
 	resultObj?: resultObject
 	message?: string
-	error?: any
 }
 
 export default responseObject

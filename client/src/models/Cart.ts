@@ -8,4 +8,5 @@ export type CartResult = {
 
 export type RemoveFromCartResult = {
 	success: boolean
+	message?: string
 }
