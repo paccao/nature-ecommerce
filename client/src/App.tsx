@@ -6,8 +6,12 @@ import Error404 from './pages/Error404'
 import CartAside from './components/CartAside/CartAside'
 import { lightTheme } from './themes/appTheme'
 import { Routes, Route } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import isConfirmDeleteOpen from './atoms/confirmDeleteCartitemModalState'
 
 function App() {
+	const [confirmDeleteOpenState, setConfirmDeleteOpenState] =
+		useRecoilState(isConfirmDeleteOpen)
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStyle />
@@ -17,6 +21,12 @@ function App() {
 				</header>
 
 				<main>
+					{confirmDeleteOpenState ? (
+						<article>
+							<h2>Delete cart item?</h2>
+							<p>Removes all of the selected products.</p>
+						</article>
+					) : null}
 					<CartAside />
 					<Routes>
 						<Route path="/" element={<Products />} />
@@ -52,6 +62,7 @@ const AppWrapper = styled.div`
 		width: 100%;
 		display: grid;
 		grid-template-columns: 2fr 8fr;
+		position: relative;
 	}
 
 	@media screen and (max-width: 780px) {
