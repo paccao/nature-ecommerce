@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
-import { Product } from '../../models/Product'
+import { Product, ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
@@ -13,12 +13,13 @@ global.fetch = jest.fn(() =>
 	}),
 ) as jest.Mock
 
-const mockProduct: Product = {
+const mockProduct: ProductWithCartAmount = {
 	id: '2',
 	name: 'Worn boots',
 	price: 300,
 	description: 'Looks rugged.',
 	stock_available: 5,
+	amount: 2,
 	img_url: 'Boots',
 }
 

@@ -1,12 +1,12 @@
 import React, { SyntheticEvent } from 'react'
 import styled from 'styled-components'
-import { Product } from '../../models/Product'
+import { ProductWithCartAmount } from '../../models/Product'
 import useRemoveFromCart from '../../hooks/useRemoveFromCart'
 import temporaryUser from '../../helpers/temporaryUser'
 import { useRecoilState } from 'recoil'
 import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
 
-function CartItem({ cartProduct }: { cartProduct: Product }) {
+function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
 	const [confirmDeleteOpenState, setConfirmDeleteOpenState] =
 		useRecoilState(isConfirmDeleteOpen)
@@ -14,11 +14,11 @@ function CartItem({ cartProduct }: { cartProduct: Product }) {
 	function removeProductFromCart(event: SyntheticEvent) {
 		event.preventDefault()
 
-		setConfirmDeleteOpenState(true)
-		// removeFromCart({
-		// 	productIdToRemove: cartProduct.id,
-		// 	userId: temporaryUser,
-		// })
+		// setConfirmDeleteOpenState(true)
+		removeFromCart({
+			productIdToRemove: cartProduct.id,
+			userId: temporaryUser,
+		})
 	}
 
 	return (
@@ -29,12 +29,12 @@ function CartItem({ cartProduct }: { cartProduct: Product }) {
 					alt={`${cartProduct.name} product in cart.`}
 				/>
 			</ImageWrapper>
+			<p>{cartProduct.amount}</p>
 			<div>
 				<NameWrapper>
 					<h3>{cartProduct.name}</h3>
 					<button onClick={removeProductFromCart}>X</button>
 				</NameWrapper>
-				ProductItemBottom (reuse)
 			</div>
 		</CartItemWrapper>
 	)

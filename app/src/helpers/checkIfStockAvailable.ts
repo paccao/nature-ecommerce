@@ -9,7 +9,7 @@ export default async function checkIfStockAvailable(
 	if (amountToAdd <= 0) {
 		result = {
 			success: false,
-			message: 'The amount requested to being added was not accepted.',
+			message: 'Invalid amount to add selected.',
 			status: 400,
 		}
 		return result

@@ -4,7 +4,7 @@ import { RecoilRoot } from 'recoil'
 import CartAside from '../CartAside/CartAside'
 import CartItem from '../CartAside/CartItem'
 import useCart from '../../hooks/useCart'
-import { Product } from '../../models/Product'
+import { Product, ProductWithCartAmount } from '../../models/Product'
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
 
 global.fetch = jest.fn(() =>
@@ -29,6 +29,15 @@ const mockProduct: Product = {
 	price: 300,
 	description: 'Looks rugged.',
 	stock_available: 5,
+	img_url: 'Boots',
+}
+const mockProductWithAmount: ProductWithCartAmount = {
+	id: '2',
+	name: 'Worn boots',
+	price: 300,
+	description: 'Looks rugged.',
+	stock_available: 5,
+	amount: 2,
 	img_url: 'Boots',
 }
 
@@ -67,7 +76,7 @@ describe('CartAside component', () => {
 	it('renders the cart items', () => {
 		renderMockDependenciesWrapper()
 
-		render(<CartItem cartProduct={mockProduct} />)
+		render(<CartItem cartProduct={mockProductWithAmount} />)
 		expect(screen.getByRole('listitem')).toBeInTheDocument()
 	})
 })
