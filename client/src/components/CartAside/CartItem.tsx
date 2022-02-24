@@ -1,10 +1,10 @@
 import React, { SyntheticEvent } from 'react'
 import styled from 'styled-components'
-import { Product } from '../../models/Product'
+import { ProductWithCartAmount } from '../../models/Product'
 import useRemoveFromCart from '../../hooks/useRemoveFromCart'
 import temporaryUser from '../../helpers/temporaryUser'
 
-function CartItem({ cartProduct }: { cartProduct: Product }) {
+function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
 
 	function removeProductFromCart(event: SyntheticEvent) {
@@ -23,6 +23,7 @@ function CartItem({ cartProduct }: { cartProduct: Product }) {
 					alt={`${cartProduct.name} product in cart.`}
 				/>
 			</ImageWrapper>
+			<p>{cartProduct.amount}</p>
 			<div>
 				<NameWrapper>
 					<h3>{cartProduct.name}</h3>

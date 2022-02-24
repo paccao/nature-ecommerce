@@ -66,13 +66,13 @@ const pushToCart = async (req: Request, res: Response) => {
 		/// Push to new cart
 
 		const pushToNewCartQuery = `
-		INSERT INTO cart(user_id, product_id)
-		VALUES ($1, $2) RETURNING *;`
-
+		INSERT INTO cart(user_id, product_id, amount)
+		VALUES ($1, $2, $3) RETURNING *;`
 		try {
 			const { rows } = await conn.query(pushToNewCartQuery, [
 				userId,
 				productToAdd,
+				amountToAdd,
 			])
 			cartRows = rows
 		} catch (error) {
