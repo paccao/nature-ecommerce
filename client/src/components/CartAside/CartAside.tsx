@@ -3,9 +3,13 @@ import useCart from '../../hooks/useCart'
 import { Product, ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
 import currentTotalCost from '../../helpers/currentTotalCost'
+import { useRecoilState } from 'recoil'
+import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
 
 function CartAside() {
 	const { data, isSuccess } = useCart()
+	const [confirmDeleteState, useConfirmDeleteState] =
+		useRecoilState(isConfirmDeleteOpen)
 	let productsToMap: ProductWithCartAmount[] = []
 
 	if (isSuccess) {
