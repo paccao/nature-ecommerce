@@ -3,9 +3,13 @@ import styled from 'styled-components'
 import { Product } from '../../models/Product'
 import useRemoveFromCart from '../../hooks/useRemoveFromCart'
 import temporaryUser from '../../helpers/temporaryUser'
+import { useRecoilState } from 'recoil'
+import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
 
 function CartItem({ cartProduct }: { cartProduct: Product }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
+	const [confirmDeleteState, useConfirmDeleteState] =
+		useRecoilState(isConfirmDeleteOpen)
 
 	function removeProductFromCart(event: SyntheticEvent) {
 		event.preventDefault()
