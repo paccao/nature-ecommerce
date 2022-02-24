@@ -8,15 +8,17 @@ import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
 
 function CartItem({ cartProduct }: { cartProduct: Product }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
-	const [confirmDeleteState, useConfirmDeleteState] =
+	const [confirmDeleteOpenState, setConfirmDeleteOpenState] =
 		useRecoilState(isConfirmDeleteOpen)
 
 	function removeProductFromCart(event: SyntheticEvent) {
 		event.preventDefault()
-		removeFromCart({
-			productIdToRemove: cartProduct.id,
-			userId: temporaryUser,
-		})
+
+		setConfirmDeleteOpenState(true)
+		// removeFromCart({
+		// 	productIdToRemove: cartProduct.id,
+		// 	userId: temporaryUser,
+		// })
 	}
 
 	return (
