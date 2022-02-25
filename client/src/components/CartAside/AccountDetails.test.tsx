@@ -24,9 +24,6 @@ const mockAccount: Account = {
 const queryClient = new QueryClient()
 
 describe('AccountDetails component', () => {
-	mockedUseAccountDetails.mockImplementation(() => ({
-		data: mockAccount,
-	}))
 	it('renders without crashing', () => {
 		render(<AccountDetails />)
 	})
@@ -37,6 +34,10 @@ describe('AccountDetails component', () => {
 				<AccountDetails />
 			</QueryClientProvider>,
 		)
+		mockedUseAccountDetails.mockImplementation(() => ({
+			success: true,
+			account: mockAccount,
+		}))
 
 		const name = screen.getByText(mockAccount.name)
 		const adress = screen.getByText(mockAccount.adress)

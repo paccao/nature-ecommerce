@@ -7,8 +7,8 @@ function AccountDetails({}: Props) {
 	const { data } = useAccountDetails()
 	return (
 		<article>
-			<h2>{data?.account.name}</h2>
-			<p>{data?.account.adress}</p>
+			<h2>{data?.account?.name}</h2>
+			<p>{data?.account?.adress}</p>
 		</article>
 	)
 }
