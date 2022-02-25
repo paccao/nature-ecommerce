@@ -5,6 +5,7 @@ import CartItem from './CartItem'
 import currentTotalCost from '../../helpers/currentTotalCost'
 import { useRecoilState } from 'recoil'
 import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
+import AccountDetails from './AccountDetails'
 
 function CartAside() {
 	const { data, isSuccess } = useCart()
@@ -43,6 +44,7 @@ function CartAside() {
 		<AsideWrapper>
 			<section>
 				<h2>Cart</h2>
+				<AccountDetails />
 				<ul>
 					{productsToMap.map((cartProduct) => (
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />

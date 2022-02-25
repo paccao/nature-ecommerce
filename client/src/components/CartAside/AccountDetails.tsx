@@ -5,6 +5,7 @@ type Props = {}
 
 function AccountDetails({}: Props) {
 	const { data } = useAccountDetails()
+	console.log('account data: ', data)
 	return (
 		<article>
 			<h2>{data?.account?.name}</h2>
