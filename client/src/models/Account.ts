@@ -6,4 +6,10 @@ export type Account = {
 	role: RoleTypes
 }
 
+export type AccountResult = {
+	success: boolean
+	account: Account
+	message?: string
+}
+
 export type RoleTypes = 'user' | 'admin'
