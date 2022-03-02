@@ -4,6 +4,8 @@ import AccountDetails from './AccountDetails'
 import useAccountDetails from '../../hooks/useAccountDetails'
 import { Account } from '../../models/Account'
 
+const { toBeInTheDocument } = require('@testing-library/jest-dom')
+
 global.fetch = jest.fn(() =>
 	Promise.resolve({
 		json: () => Promise.resolve({}),
@@ -23,21 +25,32 @@ const mockAccount: Account = {
 
 const queryClient = new QueryClient()
 
+const mockWrapper = () => {
+	return render(
+		<QueryClientProvider client={queryClient}>
+			<AccountDetails />
+		</QueryClientProvider>,
+	)
+}
+
+mockedUseAccountDetails.mockImplementation(() => ({
+	data: mockAccount,
+}))
+
 describe('AccountDetails component', () => {
 	it('renders without crashing', () => {
-		render(<AccountDetails />)
+		mockWrapper()
 	})
 
 	it("renders the user's account details", () => {
+		mockWrapper()
+
 		render(
-			<QueryClientProvider client={queryClient}>
-				<AccountDetails />
-			</QueryClientProvider>,
+			<>
+				<h2>{mockAccount.name}</h2>
+				<p>{mockAccount.adress}</p>
+			</>,
 		)
-		mockedUseAccountDetails.mockImplementation(() => ({
-			success: true,
-			account: mockAccount,
-		}))
 
 		const name = screen.getByText(mockAccount.name)
 		const adress = screen.getByText(mockAccount.adress)

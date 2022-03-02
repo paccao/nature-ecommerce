@@ -76,7 +76,13 @@ describe('CartAside component', () => {
 	it('renders the cart items', () => {
 		renderMockDependenciesWrapper()
 
-		render(<CartItem cartProduct={mockProductWithAmount} />)
+		render(
+			<RecoilRoot>
+				<QueryClientProvider client={queryClient}>
+					<CartItem cartProduct={mockProductWithAmount}></CartItem>
+				</QueryClientProvider>
+			</RecoilRoot>,
+		)
 		expect(screen.getByRole('listitem')).toBeInTheDocument()
 	})
 })

@@ -4,12 +4,16 @@ import useAccountDetails from '../../hooks/useAccountDetails'
 type Props = {}
 
 function AccountDetails({}: Props) {
-	const { data } = useAccountDetails()
+	const { data, isSuccess } = useAccountDetails()
 	console.log('account data: ', data)
 	return (
 		<article>
-			<h2>{data?.account?.name}</h2>
-			<p>{data?.account?.adress}</p>
+			{isSuccess ? (
+				<>
+					<h2>{data?.account?.name}</h2>
+					<p>{data?.account?.adress}</p>
+				</>
+			) : null}
 		</article>
 	)
 }
