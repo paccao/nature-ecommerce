@@ -34,14 +34,24 @@ const renderMockDependenciesWrapper = () => {
 	)
 }
 
+const mockCartItem = () => {
+	render(
+		<RecoilRoot>
+			<QueryClientProvider client={queryClient}>
+				<CartItem cartProduct={mockProduct}></CartItem>
+			</QueryClientProvider>
+		</RecoilRoot>,
+	)
+}
+
 describe('CartItem component', () => {
 	it('renders without crashing', () => {
-		render(<CartItem cartProduct={mockProduct} />)
+		mockCartItem()
 	})
 
 	it('removes a selected product from cart when the corresponding "X" button is pressed.', () => {
 		renderMockDependenciesWrapper()
-		render(<CartItem cartProduct={mockProduct} />)
+		mockCartItem()
 
 		const removeButtonElement = screen.getByRole('button', { name: /x/i })
 		userEvent.click(removeButtonElement)
