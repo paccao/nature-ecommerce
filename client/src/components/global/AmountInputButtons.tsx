@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 function AmountInputButtons({
 	submitHandler,
-	amountToAddState: amountToAdd,
-	setAmountToAddState: setAmountToAdd,
+	amountToAddState,
+	setAmountToAddState,
 	buttonInnerText: buttonText,
 }: AmountInputButtonsProps) {
 	return (
@@ -14,7 +14,7 @@ function AmountInputButtons({
 				<input
 					type="button"
 					onClick={(e) =>
-						setAmountToAdd((prevCount) =>
+						setAmountToAddState((prevCount) =>
 							prevCount <= 1 ? (prevCount = 99) : prevCount - 1,
 						)
 					}
@@ -27,10 +27,10 @@ function AmountInputButtons({
 					step="1"
 					min="1"
 					max="99"
-					value={amountToAdd}
+					value={amountToAddState}
 					onChange={(e) => {
 						if (e.target.value.length <= 2) {
-							setAmountToAdd(Number(e.target.value))
+							setAmountToAddState(Number(e.target.value))
 							e.target.value = Number(e.target.value).toString()
 						}
 					}}
@@ -41,8 +41,8 @@ function AmountInputButtons({
 				<input
 					type="button"
 					onClick={(e) =>
-						setAmountToAdd((prevCount) =>
-							amountToAdd >= 99 ? (prevCount = 1) : prevCount + 1,
+						setAmountToAddState((prevCount) =>
+							amountToAddState >= 99 ? (prevCount = 1) : prevCount + 1,
 						)
 					}
 					value="+"
