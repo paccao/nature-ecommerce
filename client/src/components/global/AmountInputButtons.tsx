@@ -58,12 +58,11 @@ function AmountInputButtons({
 export default AmountInputButtons
 
 const Form = styled.form`
-	.input-form {
-		display: flex;
-		margin-left: auto;
-		justify-content: space-around;
-		gap: 0.3rem;
-	}
+	display: flex;
+	margin-left: auto;
+	justify-content: space-around;
+	gap: 0.3rem;
+
 	.input-group input {
 		all: unset;
 	}
