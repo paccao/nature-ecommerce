@@ -11,7 +11,7 @@ type Props = {
 }
 
 function ProductItemBottom({ product }: Props) {
-	let [amountToAdd, setAmountToAdd] = useState<number>(1)
+	const [amountToAdd, setAmountToAdd] = useState<number>(1)
 	const pushToCartArgs = {
 		amount: amountToAdd,
 		productId: product.id,
@@ -20,7 +20,7 @@ function ProductItemBottom({ product }: Props) {
 
 	const { mutate: pushToCart } = useAddToCart()
 
-	async function addProductItemToCart(event: SyntheticEvent) {
+	function addProductItemToCart(event: SyntheticEvent) {
 		event.preventDefault()
 		pushToCart(pushToCartArgs)
 	}
