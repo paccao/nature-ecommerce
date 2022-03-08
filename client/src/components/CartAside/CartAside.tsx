@@ -69,6 +69,6 @@ const AsideWrapper = styled.aside`
 	border-bottom-right-radius: ${(props) => props.theme.borderRadius};
 	border-top-right-radius: ${(props) => props.theme.borderRadius};
 	border: 2px solid #dcd3d3;
-	padding: 0.2rem 0.3rem 0.3rem 0.8rem;
+	padding: 0.2rem 0.8rem 0.3rem 0.8rem;
 	margin-right: 1rem;
 `
