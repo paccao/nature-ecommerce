@@ -1,15 +1,17 @@
-import React, { SyntheticEvent } from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 import styled from 'styled-components'
 import { ProductWithCartAmount } from '../../models/Product'
 import useRemoveFromCart from '../../hooks/useRemoveFromCart'
 import temporaryUser from '../../helpers/temporaryUser'
 import { useRecoilState } from 'recoil'
 import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
+import AmountInputButtons from '../global/AmountInputButtons'
 
 function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
 	const [confirmDeleteOpenState, setConfirmDeleteOpenState] =
 		useRecoilState(isConfirmDeleteOpen)
+	const [amountToAdd, setAmountToAdd] = useState<number>(1)
 
 	function removeProductFromCart(event: SyntheticEvent) {
 		event.preventDefault()
@@ -19,6 +21,17 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 			productIdToRemove: cartProduct.id,
 			userId: temporaryUser,
 		})
+	}
+
+	function handleChangeAmountSubmit(event: SyntheticEvent): void {
+		event.preventDefault()
+	}
+
+	const inputButtonsProps = {
+		submitHandler: handleChangeAmountSubmit,
+		amountToAddState: amountToAdd,
+		setAmountToAddState: setAmountToAdd,
+		buttonInnerText: 'Remove',
 	}
 
 	return (
@@ -35,6 +48,7 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 					<button onClick={removeProductFromCart}>X</button>
 				</section>
 				<p>Amount in stock: {cartProduct.amount}</p>
+				<AmountInputButtons {...inputButtonsProps} />
 			</InfoWrapper>
 		</CartItemWrapper>
 	)
