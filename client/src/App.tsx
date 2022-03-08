@@ -53,6 +53,7 @@ const AppWrapper = styled.div`
 		text-align: center;
 		color: ${(props) => props.theme.accentColor};
 		font-size: 1.4em;
+		font-weight: 600;
 		min-height: 10vh;
 		padding: 1rem 0rem;
 	}
@@ -61,7 +62,7 @@ const AppWrapper = styled.div`
 		padding: 0rem 1rem 1rem 1rem;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 2fr 8fr;
+		grid-template-columns: 3fr 9fr;
 		position: relative;
 	}
 
