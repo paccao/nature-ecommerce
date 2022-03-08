@@ -54,8 +54,6 @@ describe('CartAside component', () => {
 	it('renders without crashing', () => {
 		renderMockDependenciesWrapper()
 	})
-	it.todo('should display: account name/signup/login')
-	it.todo('should display account information')
 	it('sums up the total cost of all items currently rendered', () => {
 		renderMockDependenciesWrapper()
 		expect(screen.getByTestId('cart-total-cost')).toHaveTextContent(
