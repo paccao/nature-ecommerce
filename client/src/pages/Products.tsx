@@ -1,4 +1,3 @@
-import { PageWrapper } from '../styles/PageWrapper.styles'
 import useProduct from '../hooks/useProduct'
 import ProductItem from '../components/ProductItem/ProductItem'
 import { ChangeEvent } from 'react'
@@ -28,26 +27,24 @@ export default function Products() {
 	))
 
 	return (
-		<PageWrapper>
-			<ProductsSection>
-				<div className="top">
-					<h1>Products</h1>
-					<SearchForm role="search" onSubmit={(e) => e.preventDefault()}>
-						<input
-							autoFocus
-							type="text"
-							placeholder="Filter by name.."
-							onChange={(e) => onChangeHandler(e)}
-						/>
-					</SearchForm>
-				</div>
-				<ul>
-					{filterState === ''
-						? renderAllProductItems
-						: renderfilteredProductItems}
-				</ul>
-			</ProductsSection>
-		</PageWrapper>
+		<ProductsSection>
+			<div className="top">
+				<h1>Products</h1>
+				<SearchForm role="search" onSubmit={(e) => e.preventDefault()}>
+					<input
+						autoFocus
+						type="text"
+						placeholder="Filter by name.."
+						onChange={(e) => onChangeHandler(e)}
+					/>
+				</SearchForm>
+			</div>
+			<ul>
+				{filterState === ''
+					? renderAllProductItems
+					: renderfilteredProductItems}
+			</ul>
+		</ProductsSection>
 	)
 }
 
