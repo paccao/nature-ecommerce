@@ -71,4 +71,12 @@ const AsideWrapper = styled.aside`
 	border: 2px solid #dcd3d3;
 	padding: 0.2rem 0.8rem 0.3rem 0.8rem;
 	margin-right: 1rem;
+
+	section {
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
 `

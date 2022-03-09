@@ -59,6 +59,7 @@ export default CartItem
 const CartItemWrapper = styled.li`
 	display: grid;
 	grid-template-columns: 2fr 3fr;
+	min-height: 8rem;
 	border: 1px solid #9e9e9ef6;
 	border-radius: ${(props) => props.theme.borderRadius};
 	padding: 0.5rem;
@@ -75,6 +76,7 @@ const ImageWrapper = styled.div`
 	img {
 		width: 100%;
 		height: auto;
+		max-height: 120px;
 		object-fit: cover;
 		border-radius: 5px;
 	}

@@ -5,7 +5,6 @@ type Props = {}
 
 function AccountDetails({}: Props) {
 	const { data, isSuccess } = useAccountDetails()
-	console.log('account data: ', data)
 	return (
 		<article>
 			{isSuccess ? (
