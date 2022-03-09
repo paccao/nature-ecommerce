@@ -62,13 +62,13 @@ const AppWrapper = styled.div`
 		padding: 0rem 1rem 1rem 1rem;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 3fr 9fr;
+		grid-template-columns: minmax(300px, 3fr) 7fr;
 		position: relative;
 	}
 
 	@media screen and (max-width: 780px) {
 		main {
-			grid-template-columns: 3fr 7fr;
+			grid-template-columns: minmax(300px, 3fr) 7fr;
 		}
 	}
 `

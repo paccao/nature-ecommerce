@@ -72,10 +72,15 @@ const ProductsSection = styled.section`
 			justify-items: center;
 			grid-template-columns: 1fr;
 			grid-auto-rows: auto;
-			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	@media screen and (min-width: 780px) {
+		ul {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media screen and (min-width: 1150px) {
 		ul {
 			grid-template-columns: repeat(3, 1fr);
 		}

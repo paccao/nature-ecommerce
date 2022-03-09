@@ -63,7 +63,7 @@ const CartItemWrapper = styled.li`
 	border: 1px solid #9e9e9ef6;
 	border-radius: ${(props) => props.theme.borderRadius};
 	padding: 0.5rem;
-	gap: 0.3rem;
+	gap: 0.5rem;
 `
 
 const ImageWrapper = styled.div`
@@ -72,6 +72,7 @@ const ImageWrapper = styled.div`
 	width: 100%;
 	height: auto;
 	align-self: center;
+	display: flex;
 
 	img {
 		width: 100%;
@@ -91,7 +92,6 @@ const InfoWrapper = styled.div`
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
-		margin: 0rem 0.2rem;
 
 		button {
 			all: unset;
