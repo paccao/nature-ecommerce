@@ -30,7 +30,7 @@ function App() {
 					<CartAside />
 					<Routes>
 						<Route path="/" element={<Products />} />
-						<Route path="/product/:id" element={<Signup />} />
+						<Route path="/signup" element={<Signup />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 				</main>
