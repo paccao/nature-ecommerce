@@ -24,7 +24,7 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	}
 
 	function handleChangeAmountSubmit(event: SyntheticEvent): void {
-		console.log('Made weird submit!')
+		console.log('Made change in cart item!')
 	}
 
 	const inputButtonsProps = {
