@@ -25,13 +25,14 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 
 	function handleChangeAmountSubmit(event: SyntheticEvent): void {
 		event.preventDefault()
+		console.log('Made weird submit!')
 	}
 
 	const inputButtonsProps = {
 		submitHandler: handleChangeAmountSubmit,
 		amountToAddState: amountToAdd,
 		setAmountToAddState: setAmountToAdd,
-		buttonInnerText: 'Remove',
+		useSpecialSubmit: true,
 	}
 
 	return (
@@ -47,8 +48,10 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 					<h3>{cartProduct.name}</h3>
 					<button onClick={removeProductFromCart}>X</button>
 				</section>
-				<p>Amount in stock: {cartProduct.amount}</p>
-				<AmountInputButtons {...inputButtonsProps} />
+				<div>
+					<p>Amount in cart: </p>
+					<AmountInputButtons {...inputButtonsProps} />
+				</div>
 			</InfoWrapper>
 		</CartItemWrapper>
 	)
@@ -104,5 +107,8 @@ const InfoWrapper = styled.div`
 			text-align: center;
 			border-radius: 5px;
 		}
+	}
+	div {
+		display: flex;
 	}
 `

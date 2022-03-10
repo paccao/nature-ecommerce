@@ -1,19 +1,55 @@
 import GenericButton from './GenericButton'
+// import { AmountInputButtonsProps, useDebounce } from '../../models/Global'
 import { AmountInputButtonsProps } from '../../models/Global'
 import styled from 'styled-components'
+import {
+	SyntheticEvent,
+	useCallback,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+} from 'react'
+// import useDebounce from '../../hooks/useDebounce'
 
 function AmountInputButtons({
 	submitHandler,
 	amountToAddState,
 	setAmountToAddState,
 	buttonInnerText: buttonText,
+	useSpecialSubmit,
 }: AmountInputButtonsProps) {
+	let specialSubmitTimer = 2000 // time in ms to submit
+	let timeoutId: any
+	const formRef = useRef<HTMLFormElement>(null)
+	function handleSpecialSubmit(): void {
+		console.log('special submit!')
+		clearTimeout(timeoutId)
+		timeoutId = setTimeout(() => {
+			// formSubmitHandler()
+			console.log('special submit finished!')
+		}, specialSubmitTimer)
+	}
+
+	function formSubmitHandler(event: SyntheticEvent): void {
+		submitHandler(event)
+	}
+
+	// useCallback(() => {
+	// 	handleSpecialSubmit()
+	// }, [amountToAddState])
+
+	// useLayoutEffect(() => {
+	// 	handleSpecialSubmit()
+	// }, [amountToAddState])
+
+	// useDebounce({formSubmitHandler, 2000, [amountToAddState]})
+
 	return (
-		<Form className="input-form" onSubmit={submitHandler}>
+		<Form className="input-form" ref={formRef} onSubmit={formSubmitHandler}>
 			<div className="input-group">
 				<input
 					type="button"
-					onClick={(e) =>
+					onClick={(_) =>
 						setAmountToAddState((prevCount) =>
 							prevCount <= 1 ? (prevCount = 99) : prevCount - 1,
 						)
@@ -40,7 +76,7 @@ function AmountInputButtons({
 				/>
 				<input
 					type="button"
-					onClick={(e) =>
+					onClick={(_) =>
 						setAmountToAddState((prevCount) =>
 							amountToAddState >= 99 ? (prevCount = 1) : prevCount + 1,
 						)
@@ -50,7 +86,7 @@ function AmountInputButtons({
 					data-field="quantity"
 				/>
 			</div>
-			<GenericButton innerText={buttonText} type="submit" />
+			{buttonText && <GenericButton innerText={buttonText} type="submit" />}
 		</Form>
 	)
 }
@@ -62,6 +98,7 @@ const Form = styled.form`
 	margin-left: auto;
 	justify-content: space-around;
 	gap: 0.3rem;
+	min-width: 50px;
 
 	.input-group input {
 		all: unset;

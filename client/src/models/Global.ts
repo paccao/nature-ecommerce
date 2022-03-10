@@ -4,5 +4,12 @@ export type AmountInputButtonsProps = {
 	submitHandler: (event: SyntheticEvent<Element, Event>) => void
 	amountToAddState: number
 	setAmountToAddState: Dispatch<SetStateAction<number>>
-	buttonInnerText: string
+	buttonInnerText?: string
+	useSpecialSubmit?: boolean
+}
+
+export type debounceProps = {
+	callback: any
+	delay: number
+	dependencies: number[]
 }
