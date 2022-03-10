@@ -9,7 +9,7 @@ export type AmountInputButtonsProps = {
 }
 
 export type debounceProps = {
-	callback: any
+	callback: (event: SyntheticEvent<Element, Event>) => void
 	delay: number
 	dependencies: number[]
 }

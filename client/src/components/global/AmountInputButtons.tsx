@@ -1,51 +1,28 @@
 import GenericButton from './GenericButton'
-// import { AmountInputButtonsProps, useDebounce } from '../../models/Global'
-import { AmountInputButtonsProps } from '../../models/Global'
+import { AmountInputButtonsProps, debounceProps } from '../../models/Global'
 import styled from 'styled-components'
-import {
-	SyntheticEvent,
-	useCallback,
-	useEffect,
-	useLayoutEffect,
-	useRef,
-} from 'react'
-// import useDebounce from '../../hooks/useDebounce'
+import { SyntheticEvent } from 'react'
+import useDebounce from '../../hooks/useDebounce'
 
 function AmountInputButtons({
 	submitHandler,
 	amountToAddState,
 	setAmountToAddState,
 	buttonInnerText: buttonText,
-	useSpecialSubmit,
 }: AmountInputButtonsProps) {
-	let specialSubmitTimer = 2000 // time in ms to submit
-	let timeoutId: any
-	const formRef = useRef<HTMLFormElement>(null)
-	function handleSpecialSubmit(): void {
-		console.log('special submit!')
-		clearTimeout(timeoutId)
-		timeoutId = setTimeout(() => {
-			// formSubmitHandler()
-			console.log('special submit finished!')
-		}, specialSubmitTimer)
-	}
-
 	function formSubmitHandler(event: SyntheticEvent): void {
 		submitHandler(event)
 	}
+	const useDebounceProps: debounceProps = {
+		callback: submitHandler,
+		delay: 1000,
+		dependencies: [amountToAddState],
+	}
 
-	// useCallback(() => {
-	// 	handleSpecialSubmit()
-	// }, [amountToAddState])
-
-	// useLayoutEffect(() => {
-	// 	handleSpecialSubmit()
-	// }, [amountToAddState])
-
-	// useDebounce({formSubmitHandler, 2000, [amountToAddState]})
+	useDebounce(useDebounceProps)
 
 	return (
-		<Form className="input-form" ref={formRef} onSubmit={formSubmitHandler}>
+		<Form className="input-form" onSubmit={formSubmitHandler}>
 			<div className="input-group">
 				<input
 					type="button"

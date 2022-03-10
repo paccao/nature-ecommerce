@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react'
+import { SyntheticEvent, useState } from 'react'
 import styled from 'styled-components'
 import { ProductWithCartAmount } from '../../models/Product'
 import useRemoveFromCart from '../../hooks/useRemoveFromCart'
@@ -24,7 +24,6 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	}
 
 	function handleChangeAmountSubmit(event: SyntheticEvent): void {
-		event.preventDefault()
 		console.log('Made weird submit!')
 	}
 
