@@ -121,11 +121,11 @@ describe('Signup page component', () => {
 	})
 })
 
-describe('Login page component', () => {
-	it.todo('renders without crashing', () => {
-		// render(<Login />)
-	})
-})
+// describe('Login page component', () => {
+// 	it.todo('renders without crashing', () => {
+// render(<Login />)
+// 	})
+// })
 
 describe('Error404 page component', () => {
 	it('renders without crashing', () => {
