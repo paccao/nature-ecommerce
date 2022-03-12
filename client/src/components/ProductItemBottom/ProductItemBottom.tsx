@@ -4,7 +4,7 @@ import GenericButton from '../global/GenericButton'
 import styled from 'styled-components'
 import useAddToCart from '../../hooks/useAddToCart'
 import temporaryUser from '../../helpers/temporaryUser'
-import AmountInputButtons from '../global/AmountInputButtons'
+import AmountInputButtons from '../CartAside/CartItemInputButtons'
 
 type Props = {
 	product: Product

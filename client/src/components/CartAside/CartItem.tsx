@@ -5,7 +5,7 @@ import useRemoveFromCart from '../../hooks/useRemoveFromCart'
 import temporaryUser from '../../helpers/temporaryUser'
 import { useRecoilState } from 'recoil'
 import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
-import AmountInputButtons from '../global/AmountInputButtons'
+import AmountInputButtons from './CartItemInputButtons'
 
 function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()

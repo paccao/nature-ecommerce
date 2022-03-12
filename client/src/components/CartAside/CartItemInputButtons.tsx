@@ -1,4 +1,4 @@
-import GenericButton from './GenericButton'
+import GenericButton from '../global/GenericButton'
 import { AmountInputButtonsProps, debounceProps } from '../../models/Global'
 import styled from 'styled-components'
 import { SyntheticEvent } from 'react'
