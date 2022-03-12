@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { SyntheticEvent } from 'react'
 import useDebounce from '../../hooks/useDebounce'
 
-function AmountInputButtons({
+function CartItemInputButtons({
 	submitHandler,
 	amountToAddState,
 	setAmountToAddState,
@@ -68,7 +68,7 @@ function AmountInputButtons({
 	)
 }
 
-export default AmountInputButtons
+export default CartItemInputButtons
 
 const Form = styled.form`
 	display: flex;

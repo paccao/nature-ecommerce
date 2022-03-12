@@ -4,7 +4,7 @@ import GenericButton from '../global/GenericButton'
 import styled from 'styled-components'
 import useAddToCart from '../../hooks/useAddToCart'
 import temporaryUser from '../../helpers/temporaryUser'
-import AmountInputButtons from '../CartAside/CartItemInputButtons'
+import ProductItemInputButtons from '../ProductItem/ProductItemInputButtons'
 
 type Props = {
 	product: Product
@@ -35,7 +35,7 @@ function ProductItemBottom({ product }: Props) {
 	return (
 		<Wrapper>
 			<b>{`${product.price}kr`}</b>
-			<AmountInputButtons {...inputButtonsProps} />
+			<ProductItemInputButtons {...inputButtonsProps} />
 		</Wrapper>
 	)
 }

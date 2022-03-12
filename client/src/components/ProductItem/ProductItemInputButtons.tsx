@@ -1,32 +1,19 @@
 import GenericButton from '../global/GenericButton'
-import { AmountInputButtonsProps, debounceProps } from '../../models/Global'
+import { AmountInputButtonsProps } from '../../models/Global'
 import styled from 'styled-components'
-import { SyntheticEvent } from 'react'
-import useDebounce from '../../hooks/useDebounce'
 
-function AmountInputButtons({
+function ProductItemInputButtons({
 	submitHandler,
 	amountToAddState,
 	setAmountToAddState,
 	buttonInnerText: buttonText,
 }: AmountInputButtonsProps) {
-	function formSubmitHandler(event: SyntheticEvent): void {
-		submitHandler(event)
-	}
-	const useDebounceProps: debounceProps = {
-		callback: submitHandler,
-		delay: 1000,
-		dependencies: [amountToAddState],
-	}
-
-	useDebounce(useDebounceProps)
-
 	return (
-		<Form className="input-form" onSubmit={formSubmitHandler}>
+		<Form className="input-form" onSubmit={submitHandler}>
 			<div className="input-group">
 				<input
 					type="button"
-					onClick={(_) =>
+					onClick={(e) =>
 						setAmountToAddState((prevCount) =>
 							prevCount <= 1 ? (prevCount = 99) : prevCount - 1,
 						)
@@ -53,7 +40,7 @@ function AmountInputButtons({
 				/>
 				<input
 					type="button"
-					onClick={(_) =>
+					onClick={(e) =>
 						setAmountToAddState((prevCount) =>
 							amountToAddState >= 99 ? (prevCount = 1) : prevCount + 1,
 						)
@@ -68,7 +55,7 @@ function AmountInputButtons({
 	)
 }
 
-export default AmountInputButtons
+export default ProductItemInputButtons
 
 const Form = styled.form`
 	display: flex;
