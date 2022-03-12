@@ -1,17 +1,21 @@
-import { SyntheticEvent, useState } from 'react'
+import { SyntheticEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { ProductWithCartAmount } from '../../models/Product'
 import useRemoveFromCart from '../../hooks/useRemoveFromCart'
 import temporaryUser from '../../helpers/temporaryUser'
 import { useRecoilState } from 'recoil'
 import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
-import AmountInputButtons from './CartItemInputButtons'
+import CartItemInputButtons from './CartItemInputButtons'
 
 function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
 	const [confirmDeleteOpenState, setConfirmDeleteOpenState] =
 		useRecoilState(isConfirmDeleteOpen)
 	const [amountToAdd, setAmountToAdd] = useState<number>(1)
+
+	useEffect(() => {
+		setAmountToAdd(() => cartProduct.amount)
+	}, [cartProduct])
 
 	function removeProductFromCart(event: SyntheticEvent) {
 		event.preventDefault()
@@ -49,7 +53,7 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 				</section>
 				<div>
 					<p>Amount in cart: </p>
-					<AmountInputButtons {...inputButtonsProps} />
+					<CartItemInputButtons {...inputButtonsProps} />
 				</div>
 			</InfoWrapper>
 		</CartItemWrapper>
