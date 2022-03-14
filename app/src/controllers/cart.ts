@@ -3,6 +3,7 @@ import responseObject from '../models/responseObject'
 import checkIfStockAvailable from '../helpers/checkIfStockAvailable'
 import { dbConnection as conn } from '../server'
 import RemoveFromCartResult from '../models/removeFromCartResult'
+import GeneralCartResult from '../models/GenericCartResult'
 
 const pushToCart = async (req: Request, res: Response) => {
 	const amountToAdd: number = req.body.amount
@@ -261,4 +262,12 @@ const removeFromCart = async (req: Request, res: Response) => {
 	}
 }
 
-export default { pushToCart, getCart, removeFromCart }
+const updateAmount = async (req: Request, res: Response) => {
+	const result: GeneralCartResult = {
+		success: true,
+		message: 'fetched update amount route!',
+	}
+	res.status(200).json(result)
+}
+
+export default { pushToCart, getCart, removeFromCart, updateAmount }
