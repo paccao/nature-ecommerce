@@ -263,6 +263,13 @@ const removeFromCart = async (req: Request, res: Response) => {
 }
 
 const updateAmount = async (req: Request, res: Response) => {
+	const cartIdToUpdate = req.body.cartIdToUpdate
+	const userId = req.body.userId
+
+	const updateAmountQuery = `
+	UPDATE 
+	`
+
 	const result: GeneralCartResult = {
 		success: true,
 		message: 'fetched update amount route!',
