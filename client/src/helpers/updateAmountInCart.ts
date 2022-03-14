@@ -9,7 +9,7 @@ const updateAmountInCart = async ({
 }): Promise<GeneralCartResult> =>
 	await (
 		await fetch('http://localhost:8080/api/cart/updateAmount', {
-			method: 'PUT',
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
