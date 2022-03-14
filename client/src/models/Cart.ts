@@ -6,7 +6,7 @@ export type CartResult = {
 	resultObj: resultObject
 }
 
-export type RemoveFromCartResult = {
+export type GeneralCartResult = {
 	success: boolean
 	message?: string
 }

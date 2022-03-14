@@ -1,4 +1,4 @@
-import { RemoveFromCartResult } from '../models/Cart'
+import { GeneralCartResult } from '../models/Cart'
 
 const removeFromCart = async ({
 	productIdToRemove,
@@ -6,7 +6,7 @@ const removeFromCart = async ({
 }: {
 	productIdToRemove: string
 	userId: string
-}): Promise<RemoveFromCartResult> =>
+}): Promise<GeneralCartResult> =>
 	await (
 		await fetch('http://localhost:8080/api/cart/remove', {
 			method: 'POST',
