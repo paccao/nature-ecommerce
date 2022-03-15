@@ -10,13 +10,10 @@ import useUpdateAmount from '../../hooks/useUpdateAmount'
 
 function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
-	const {
-		data: updateAmountResult,
-		mutate: updateAmount,
-		isSuccess: isUpdateAmountSuccess,
-	} = useUpdateAmount()
+	const { mutate: updateAmount } = useUpdateAmount()
 	const [confirmDeleteOpenState, setConfirmDeleteOpenState] =
 		useRecoilState(isConfirmDeleteOpen)
+
 	const [amountToAdd, setAmountToAdd] = useState<number>(1)
 
 	useEffect(() => {
@@ -34,10 +31,11 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	}
 
 	function handleChangeAmountSubmit() {
-		updateAmount({ cartIdToUpdate: cartProduct.id, userId: temporaryUser })
-
-		if (isUpdateAmountSuccess)
-			console.log('update amount data result: ', updateAmountResult)
+		updateAmount({
+			productIdToUpdate: cartProduct.id,
+			userId: temporaryUser,
+			newAmount: amountToAdd,
+		})
 	}
 
 	const inputButtonsProps = {

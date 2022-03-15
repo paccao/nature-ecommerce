@@ -263,18 +263,30 @@ const removeFromCart = async (req: Request, res: Response) => {
 }
 
 const updateAmount = async (req: Request, res: Response) => {
-	const cartIdToUpdate = req.body.cartIdToUpdate
+	const productIdToUpdate = req.body.productIdToUpdate
 	const userId = req.body.userId
+	const newAmount = req.body.newAmount
 
 	const updateAmountQuery = `
-	UPDATE 
+	UPDATE cart SET amount = $3 WHERE user_id = $1 AND product_id = $2;
 	`
 
-	const result: GeneralCartResult = {
-		success: true,
-		message: 'fetched update amount route!',
+	try {
+		await conn.query(updateAmountQuery, [
+			userId,
+			productIdToUpdate,
+			newAmount,
+		])
+
+		return res.status(201).json({
+			success: true,
+		})
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: 'Failed to update amount in cart.',
+		})
 	}
-	res.status(200).json(result)
 }
 
 export default { pushToCart, getCart, removeFromCart, updateAmount }
