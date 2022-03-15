@@ -9,36 +9,9 @@ import AccountDetails from './AccountDetails'
 
 function CartAside() {
 	const { data, isSuccess: isFetchCartSuccess } = useCart()
+	console.log('useCart: ', data)
 	const [confirmDeleteState, useConfirmDeleteState] =
 		useRecoilState(isConfirmDeleteOpen)
-	let productsToMap: ProductWithCartAmount[] = []
-
-	if (isFetchCartSuccess) {
-		getProductsToMap()
-	}
-	function getProductsToMap() {
-		const currentCart = data?.resultObj?.currentCart
-		const productArr = data?.resultObj?.productArr
-		if (!currentCart || !productArr) return null
-
-		let currentIndexValueCart: { product_id: string; amount: number }
-		for (let i = 0; i < currentCart?.length; i++) {
-			currentIndexValueCart = currentCart[i]
-
-			const productFound: Product | undefined = productArr.find(
-				(product) => product.id === currentIndexValueCart?.product_id,
-			)
-
-			if (!productFound) return null
-			productsToMap = [
-				...productsToMap,
-				{
-					...productFound,
-					amount: currentIndexValueCart.amount,
-				},
-			]
-		}
-	}
 
 	return (
 		<AsideWrapper>
@@ -46,13 +19,13 @@ function CartAside() {
 				<h2>Cart</h2>
 				<AccountDetails />
 				<ul>
-					{productsToMap.map((cartProduct) => (
+					{data?.productsToMap.map((cartProduct) => (
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
 					))}
 				</ul>
 				<div>
 					<p data-testid="cart-total-cost">
-						Total cost: {currentTotalCost(productsToMap)}kr.
+						Total cost: {data && currentTotalCost(data?.productsToMap)}kr.
 					</p>
 				</div>
 			</section>

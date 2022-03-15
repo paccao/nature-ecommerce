@@ -4,6 +4,7 @@ import checkIfStockAvailable from '../helpers/checkIfStockAvailable'
 import { dbConnection as conn } from '../server'
 import RemoveFromCartResult from '../models/removeFromCartResult'
 import GeneralCartResult from '../models/GenericCartResult'
+import { Product, ProductWithCartAmount } from '../models/Product'
 
 const pushToCart = async (req: Request, res: Response) => {
 	const amountToAdd: number = req.body.amount
@@ -135,17 +136,35 @@ const getCart = async (req: Request, res: Response) => {
 	SELECT * FROM products WHERE id = ANY($1::uuid[]);`
 
 	const listOfProductIds = currentCart.map((entry) => entry.product_id)
-
 	try {
 		const { rows } = await conn.query(getProductsInCartQuery, [
 			listOfProductIds,
 		])
+
+		/// Format array of products found after query to database
+
+		let productsToMap: ProductWithCartAmount[] = []
+		let currentIndexValueCart: { product_id: string; amount: number }
+		for (let i = 0; i < currentCart?.length; i++) {
+			currentIndexValueCart = currentCart[i]
+
+			const productFound: Product | undefined = rows.find(
+				(product) => product.id === currentIndexValueCart?.product_id,
+			)
+
+			if (!productFound) return null
+			productsToMap = [
+				...productsToMap,
+				{
+					...productFound,
+					amount: currentIndexValueCart.amount,
+				},
+			]
+		}
+
 		const result: responseObject = {
 			success: true,
-			resultObj: {
-				productArr: rows,
-				currentCart,
-			},
+			productsToMap,
 		}
 		res.status(200).json(result)
 	} catch (error) {

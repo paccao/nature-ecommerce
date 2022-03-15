@@ -1,4 +1,4 @@
-import { Product } from '../../../client/src/models/Product'
+import { Product, ProductWithCartAmount } from './Product'
 
 type CurrentCart = {
 	product_id: string
@@ -15,6 +15,7 @@ type responseObject = {
 	result?: Product[]
 	resultObj?: resultObject
 	message?: string
+	productsToMap?: ProductWithCartAmount[]
 }
 
 export default responseObject

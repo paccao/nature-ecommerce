@@ -1,9 +1,8 @@
-import { Product } from './Product'
-import { resultObject } from '../../../app/src/models/responseObject'
+import { ProductWithCartAmount } from './Product'
 
 export type CartResult = {
 	success: boolean
-	resultObj: resultObject
+	productsToMap: ProductWithCartAmount[]
 }
 
 export type GeneralCartResult = {
