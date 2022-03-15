@@ -1,9 +1,8 @@
 import { Request, Response } from 'express'
-import responseObject from '../models/responseObject'
+import responseObject, { CostResult } from '../models/responseObject'
 import checkIfStockAvailable from '../helpers/checkIfStockAvailable'
 import { dbConnection as conn } from '../server'
 import RemoveFromCartResult from '../models/removeFromCartResult'
-import GeneralCartResult from '../models/GenericCartResult'
 import { Product, ProductWithCartAmount } from '../models/Product'
 
 const pushToCart = async (req: Request, res: Response) => {
@@ -162,11 +161,11 @@ const getCart = async (req: Request, res: Response) => {
 				},
 			]
 		}
-
 		const result: responseObject = {
 			success: true,
 			productsToMap,
 		}
+
 		res.status(200).json(result)
 	} catch (error) {
 		const result: responseObject = {
@@ -309,4 +308,66 @@ const updateAmount = async (req: Request, res: Response) => {
 	}
 }
 
-export default { pushToCart, getCart, removeFromCart, updateAmount }
+const getTotalCost = async (req: Request, res: Response) => {
+	// TODO: Replace temp user with JWT
+	const temporaryUserId = '0e265459-81fd-4e26-ab88-6830452fdae6'
+	const cartInfoQuery = `
+	SELECT product_id, amount FROM cart WHERE user_id = $1;
+	`
+
+	let arrOfCartInfo: [{ product_id: string; amount: number }] | any[]
+
+	try {
+		const { rows } = await conn.query(cartInfoQuery, [temporaryUserId])
+		arrOfCartInfo = rows
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: 'Failed to get sum of products in cart',
+		})
+	}
+
+	const idArrToQuery = arrOfCartInfo.map((product) => product.product_id)
+	const pricesOfProductsInCartQuery = `
+	SELECT id, price FROM products WHERE id = ANY($1::uuid[]);
+	`
+
+	try {
+		const { rows } = await conn.query(pricesOfProductsInCartQuery, [
+			idArrToQuery,
+		])
+
+		let currentSum: number = 0
+		arrOfCartInfo.forEach((cartInfoObj) => {
+			rows.forEach((objWithIdAndPrice) => {
+				if (objWithIdAndPrice.id === cartInfoObj.product_id) {
+					if (!cartInfoObj.amount) {
+						currentSum = currentSum + objWithIdAndPrice.price
+					} else {
+						currentSum =
+							currentSum + objWithIdAndPrice.price * cartInfoObj.amount
+					}
+				}
+			})
+		})
+
+		const result: CostResult = {
+			success: true,
+			totalCost: !currentSum ? 0 : currentSum,
+		}
+		res.status(200).json(result)
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: 'Failed to get sum of products in cart',
+		})
+	}
+}
+
+export default {
+	pushToCart,
+	getCart,
+	removeFromCart,
+	updateAmount,
+	getTotalCost,
+}

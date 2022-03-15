@@ -10,6 +10,11 @@ export type resultObject = {
 	currentCart: CurrentCart[]
 }
 
+export type CostResult = {
+	success: boolean
+	totalCost: number
+}
+
 type responseObject = {
 	success: boolean
 	result?: Product[]
