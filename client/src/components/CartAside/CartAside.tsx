@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
+import useTotalCost from '../../hooks/useTotalCost'
 import { Product, ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
 import currentTotalCost from '../../helpers/currentTotalCost'
@@ -9,6 +10,7 @@ import AccountDetails from './AccountDetails'
 
 function CartAside() {
 	const { data, isSuccess: isFetchCartSuccess } = useCart()
+	const { data: totalCostResult } = useTotalCost()
 	const [confirmDeleteState, useConfirmDeleteState] =
 		useRecoilState(isConfirmDeleteOpen)
 
@@ -24,7 +26,7 @@ function CartAside() {
 				</ul>
 				<div>
 					<p data-testid="cart-total-cost">
-						Total cost: {data ? currentTotalCost(data?.productsToMap) : 0}
+						Total cost: {totalCostResult?.totalCost}
 						kr.
 					</p>
 				</div>

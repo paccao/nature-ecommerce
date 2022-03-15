@@ -115,6 +115,7 @@ const pushToCart = async (req: Request, res: Response) => {
 const getCart = async (req: Request, res: Response) => {
 	// TODO: Replace temp user with JWT
 	const temporaryUserId = '0e265459-81fd-4e26-ab88-6830452fdae6'
+
 	const getCartQuery = `
 	SELECT product_id, amount FROM cart WHERE user_id = $1;
 	`
