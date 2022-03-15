@@ -8,12 +8,12 @@ import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
 import AccountDetails from './AccountDetails'
 
 function CartAside() {
-	const { data, isSuccess } = useCart()
+	const { data, isSuccess: isFetchCartSuccess } = useCart()
 	const [confirmDeleteState, useConfirmDeleteState] =
 		useRecoilState(isConfirmDeleteOpen)
 	let productsToMap: ProductWithCartAmount[] = []
 
-	if (isSuccess) {
+	if (isFetchCartSuccess) {
 		getProductsToMap()
 	}
 	function getProductsToMap() {
