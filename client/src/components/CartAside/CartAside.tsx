@@ -9,7 +9,6 @@ import AccountDetails from './AccountDetails'
 
 function CartAside() {
 	const { data, isSuccess: isFetchCartSuccess } = useCart()
-	console.log('useCart: ', data)
 	const [confirmDeleteState, useConfirmDeleteState] =
 		useRecoilState(isConfirmDeleteOpen)
 
@@ -25,7 +24,8 @@ function CartAside() {
 				</ul>
 				<div>
 					<p data-testid="cart-total-cost">
-						Total cost: {data && currentTotalCost(data?.productsToMap)}kr.
+						Total cost: {data ? currentTotalCost(data?.productsToMap) : 0}
+						kr.
 					</p>
 				</div>
 			</section>
