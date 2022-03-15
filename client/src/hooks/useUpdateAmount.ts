@@ -6,6 +6,7 @@ export default function useUpdateAmount() {
 	return useMutation(updateAmountInCart, {
 		onSuccess: () => {
 			queryClient.invalidateQueries('product')
+			queryClient.invalidateQueries('totalCost')
 		},
 		retry: false,
 	})
