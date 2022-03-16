@@ -11,11 +11,12 @@ function CartItemInputButtons({
 	buttonInnerText: buttonText,
 }: AmountInputButtonsProps) {
 	function formSubmitHandler(event: SyntheticEvent): void {
+		event.preventDefault()
 		submitHandler(event)
 	}
 	const useDebounceProps: debounceProps = {
 		callback: submitHandler,
-		delay: 1000,
+		delay: 300,
 		dependencies: [amountToAddState],
 	}
 
