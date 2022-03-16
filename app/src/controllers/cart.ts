@@ -282,12 +282,44 @@ const removeFromCart = async (req: Request, res: Response) => {
 }
 
 const updateAmount = async (req: Request, res: Response) => {
-	const productIdToUpdate = req.body.productIdToUpdate
-	const userId = req.body.userId
-	const newAmount = req.body.newAmount
+	const productIdToUpdate: string = req.body.productIdToUpdate
+	const userId: string = req.body.userId
+	const newAmount: number = req.body.newAmount
+
+	// Get current stock available of the selected product
+	const getCurrentAmountOfProductQuery = `
+	SELECT stock_available FROM products WHERE id = $1;
+	`
+	let currentStockAvailable: number
+
+	try {
+		const { rows } = await conn.query(getCurrentAmountOfProductQuery, [
+			productIdToUpdate,
+		])
+
+		if (!rows[0].stock_available || rows[0].stock_available < 1) {
+			currentStockAvailable = 0
+		} else {
+			currentStockAvailable = rows[0].stock_available
+		}
+	} catch (error) {
+		const result = {
+			success: false,
+			message: 'Failed to get internal data, try again later.',
+		}
+		res.status(500).json(result)
+	}
+
+	let updatedStockAvailable = currentStockAvailable - newAmount // ! This line messes things up
+	if (!updatedStockAvailable) {
+		updatedStockAvailable = currentStockAvailable
+	}
 
 	const updateAmountQuery = `
 	UPDATE cart SET amount = $3 WHERE user_id = $1 AND product_id = $2;
+	`
+	const updateStockQuery = `
+	UPDATE products SET stock_available = $1 WHERE id = $2;
 	`
 
 	try {
@@ -295,6 +327,11 @@ const updateAmount = async (req: Request, res: Response) => {
 			userId,
 			productIdToUpdate,
 			newAmount,
+		])
+
+		await conn.query(updateStockQuery, [
+			updatedStockAvailable,
+			productIdToUpdate,
 		])
 
 		return res.status(201).json({
