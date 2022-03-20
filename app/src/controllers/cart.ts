@@ -4,7 +4,6 @@ import checkIfStockAvailable from '../helpers/checkIfStockAvailable'
 import { dbConnection as conn } from '../server'
 import RemoveFromCartResult from '../models/removeFromCartResult'
 import { Product, ProductWithCartAmount } from '../models/Product'
-import { getDifference } from '../helpers/mathHelpers'
 
 const pushToCart = async (req: Request, res: Response) => {
 	const amountToAdd: number = req.body.amount
