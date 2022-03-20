@@ -1,11 +1,14 @@
 /**
  * Returns the absolute number of two numbers. The value returned is converted to a negative number if there was a 'negative difference'.
  */
-function getDifference({ a, b }: { a: number; b: number }): number {
+function getDifference({ a, b }: { a: number; b: number }): {
+	absoluteNumber: number
+	subtracted: boolean
+} {
 	if (a > b) {
-		return (a - b) * -1
+		return { absoluteNumber: a - b, subtracted: true }
 	}
-	return (b - a) * 1
+	return { absoluteNumber: b - a, subtracted: false }
 }
 
 export { getDifference }

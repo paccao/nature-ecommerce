@@ -4,6 +4,7 @@ import checkIfStockAvailable from '../helpers/checkIfStockAvailable'
 import { dbConnection as conn } from '../server'
 import RemoveFromCartResult from '../models/removeFromCartResult'
 import { Product, ProductWithCartAmount } from '../models/Product'
+import { getDifference } from '../helpers/mathHelpers'
 
 const pushToCart = async (req: Request, res: Response) => {
 	const amountToAdd: number = req.body.amount
@@ -286,13 +287,10 @@ const updateAmount = async (req: Request, res: Response) => {
 	const userId: string = req.body.userId
 	const newAmount: number = req.body.newAmount
 
-	///
-	//
-
 	let currentAmountAvailableBEFORE: number
 	let currentAmountAvailableAFTER: number
 
-	// Get current stock available of the selected product
+	// Get current amount available in the cart of the selected product
 	const getCurrentAmountOfProductQuery = `
 	SELECT amount FROM cart WHERE product_id = $1 AND user_id = $2;
 	`
@@ -307,7 +305,7 @@ const updateAmount = async (req: Request, res: Response) => {
 		if (!currentAmountInCart && currentAmountInCart !== 0) {
 			return res.status(500).json({
 				success: false,
-				message: 'Failed to get internal data, try again later.',
+				message: 'Invalid amount in cart',
 			})
 		} else if (currentAmountInCart < 0) {
 			return res.status(500).json({
@@ -325,11 +323,23 @@ const updateAmount = async (req: Request, res: Response) => {
 		return res.status(500).json(result)
 	}
 
+	const difference = getDifference({
+		a: currentAmountAvailableBEFORE,
+		b: newAmount,
+	})
+
+	// Set difference that shall be passed to the database
+	let updatedStockAvailable = difference.subtracted
+		? currentAmountAvailableBEFORE - difference.absoluteNumber
+		: currentAmountAvailableBEFORE + difference.absoluteNumber
+	if (!updatedStockAvailable) {
+		updatedStockAvailable = currentAmountAvailableBEFORE
+	}
+
+	console.log('updated diff stock: ', updatedStockAvailable)
+
 	const updateAmountQuery = `
 	UPDATE cart SET amount = $1 WHERE user_id = $2 AND product_id = $3;
-	`
-	const updateStockQuery = `
-	UPDATE products SET stock_available = $1 WHERE id = $2;
 	`
 
 	try {
@@ -355,10 +365,6 @@ const updateAmount = async (req: Request, res: Response) => {
 			currentAmountAvailableBEFORE,
 			currentAmountAvailableAFTER,
 		])
-		// let updatedStockAvailable = currentStockAvailable - newAmount // ! This line messes things up
-		// if (!updatedStockAvailable) {
-		// 	updatedStockAvailable = currentStockAvailable
-		// }
 
 		// await conn.query(updateStockQuery, [
 		// 	updatedStockAvailable,
