@@ -286,58 +286,6 @@ const updateAmount = async (req: Request, res: Response) => {
 	const productIdToUpdate: string = req.body.productIdToUpdate
 	const userId: string = req.body.userId
 	const newAmount: number = req.body.newAmount
-
-	let currentAmountAvailableBEFORE: number
-	let currentAmountAvailableAFTER: number
-
-	// Get current amount available in the cart of the selected product
-	const getCurrentAmountOfProductQuery = `
-	SELECT amount FROM cart WHERE product_id = $1 AND user_id = $2;
-	`
-
-	try {
-		const { rows } = await conn.query(getCurrentAmountOfProductQuery, [
-			productIdToUpdate,
-			userId,
-		])
-		const currentAmountInCart = rows[0].amount
-
-		if (!currentAmountInCart && currentAmountInCart !== 0) {
-			return res.status(500).json({
-				success: false,
-				message: 'Invalid amount in cart',
-			})
-		} else if (currentAmountInCart < 0) {
-			return res.status(500).json({
-				success: false,
-				message: 'Invalid amount in cart',
-			})
-		} else {
-			currentAmountAvailableBEFORE = currentAmountInCart
-		}
-	} catch (error) {
-		const result = {
-			success: false,
-			message: 'Failed to get internal data, try again later.',
-		}
-		return res.status(500).json(result)
-	}
-
-	const difference = getDifference({
-		a: currentAmountAvailableBEFORE,
-		b: newAmount,
-	})
-
-	// Set difference that shall be passed to the database
-	let updatedStockAvailable = difference.subtracted
-		? currentAmountAvailableBEFORE - difference.absoluteNumber
-		: currentAmountAvailableBEFORE + difference.absoluteNumber
-	if (!updatedStockAvailable) {
-		updatedStockAvailable = currentAmountAvailableBEFORE
-	}
-
-	console.log('updated diff stock: ', updatedStockAvailable)
-
 	const updateAmountQuery = `
 	UPDATE cart SET amount = $1 WHERE user_id = $2 AND product_id = $3;
 	`
@@ -348,29 +296,6 @@ const updateAmount = async (req: Request, res: Response) => {
 			userId,
 			productIdToUpdate,
 		])
-
-		const { rows } = await conn.query(getCurrentAmountOfProductQuery, [
-			productIdToUpdate,
-		])
-
-		console.log(rows)
-
-		if (!rows[0].stock_available || rows[0].stock_available < 1) {
-			currentAmountAvailableAFTER = 0
-		} else {
-			currentAmountAvailableAFTER = rows[0].stock_available
-		}
-
-		console.log('test function: ', [
-			currentAmountAvailableBEFORE,
-			currentAmountAvailableAFTER,
-		])
-
-		// await conn.query(updateStockQuery, [
-		// 	updatedStockAvailable,
-		// 	productIdToUpdate,
-		// ])
-
 		return res.status(201).json({
 			success: true,
 		})
