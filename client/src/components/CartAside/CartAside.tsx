@@ -57,7 +57,9 @@ const AsideWrapper = styled.aside`
 			padding: 0.7rem;
 			margin-top: auto;
 			height: 15%;
-			display: grid;
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
 
 			p {
 				font-size: 1em;
@@ -65,8 +67,8 @@ const AsideWrapper = styled.aside`
 			}
 
 			button {
+				font-size: 1em;
 				text-align: center;
-				margin: auto 0 0 auto;
 			}
 		}
 	}
