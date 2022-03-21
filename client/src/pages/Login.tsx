@@ -10,10 +10,14 @@ type Inputs = {
 function Login() {
 	const {
 		register,
+		reset,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<Inputs>()
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+	const onSubmit: SubmitHandler<Inputs> = (data) => {
+		reset()
+		console.log(data)
+	}
 
 	return (
 		<Wrapper>
