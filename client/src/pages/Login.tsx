@@ -11,7 +11,6 @@ function Login() {
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
 	} = useForm<Inputs>()
 	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
@@ -21,8 +20,26 @@ function Login() {
 			<section className="bottom">
 				<h1>Welcome Back</h1>
 				<form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-					<input {...register('username')} placeholder="username" />
-					<input {...register('password')} placeholder="password" />
+					<input
+						{...register('username', {
+							required: true,
+							minLength: 1,
+							maxLength: 20,
+							pattern: /^[A-Za-z]{1,20}$/,
+						})}
+						placeholder="username"
+					/>
+					{errors.username && <span>Invalid username</span>}
+					<input
+						{...register('password', {
+							required: true,
+							minLength: 1,
+							maxLength: 50,
+							pattern: /^[A-Za-z]{1,50}$/,
+						})}
+						placeholder="password"
+					/>
+					{errors.password && <span>Invalid password</span>}
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
 				</form>
 			</section>
