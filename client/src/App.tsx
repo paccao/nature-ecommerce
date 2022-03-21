@@ -3,7 +3,6 @@ import { ThemeProvider } from 'styled-components'
 import Products from './pages/Products'
 import Login from './pages/Login'
 import Error404 from './pages/Error404'
-import CartAside from './components/CartAside/CartAside'
 import { lightTheme } from './themes/appTheme'
 import { Routes, Route } from 'react-router-dom'
 
