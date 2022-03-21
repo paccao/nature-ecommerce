@@ -19,6 +19,7 @@ function App() {
 				<main>
 					<Routes>
 						<Route path="/" element={<Products />} />
+						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 				</main>
