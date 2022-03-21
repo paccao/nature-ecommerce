@@ -4,6 +4,7 @@ import { ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
 import searchStringState from '../atoms/searchStringState'
+import CartAside from '../components/CartAside/CartAside'
 
 export default function Products() {
 	const { data } = useProduct()
@@ -27,28 +28,42 @@ export default function Products() {
 	))
 
 	return (
-		<ProductsSection>
-			<div className="top">
-				<h1>Products</h1>
-				<SearchForm role="search" onSubmit={(e) => e.preventDefault()}>
-					<input
-						autoFocus
-						type="text"
-						placeholder="Filter by name.."
-						onChange={(e) => onChangeHandler(e)}
-					/>
-				</SearchForm>
-			</div>
-			<ul>
-				{filterState === ''
-					? renderAllProductItems
-					: renderfilteredProductItems}
-			</ul>
-		</ProductsSection>
+		<Wrapper>
+			<CartAside />
+			<ProductsSection>
+				<div className="top">
+					<h1>Products</h1>
+					<SearchForm role="search" onSubmit={(e) => e.preventDefault()}>
+						<input
+							autoFocus
+							type="text"
+							placeholder="Filter by name.."
+							onChange={(e) => onChangeHandler(e)}
+						/>
+					</SearchForm>
+				</div>
+				<ul>
+					{filterState === ''
+						? renderAllProductItems
+						: renderfilteredProductItems}
+				</ul>
+			</ProductsSection>
+		</Wrapper>
 	)
 }
 
-const ProductsSection = styled.section`
+const Wrapper = styled.section`
+	display: grid;
+	grid-template-columns: minmax(300px, 350px) 7fr;
+
+	@media screen and (max-width: 780px) {
+		main {
+			grid-template-columns: minmax(300px, 350px) 7fr;
+		}
+	}
+`
+
+const ProductsSection = styled.div`
 	.top {
 		display: flex;
 		align-items: baseline;

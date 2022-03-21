@@ -17,10 +17,8 @@ function App() {
 				</header>
 
 				<main>
-					<CartAside />
 					<Routes>
 						<Route path="/" element={<Products />} />
-						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 				</main>
@@ -51,15 +49,7 @@ const AppWrapper = styled.div`
 	main {
 		padding: 0rem 1rem 1rem 1rem;
 		width: 100%;
-		display: grid;
-		grid-template-columns: minmax(300px, 350px) 7fr;
 		position: relative;
-	}
-
-	@media screen and (max-width: 780px) {
-		main {
-			grid-template-columns: minmax(300px, 350px) 7fr;
-		}
 	}
 `
 
