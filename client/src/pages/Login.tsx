@@ -11,9 +11,9 @@ function Login({}: Props) {
 	return (
 		<Wrapper>
 			<section className="bottom">
-				<h1>Welcome back</h1>
+				<h1>Welcome Back</h1>
 				<form onSubmit={submitHandler} autoComplete="off">
-					<input type="email" name="email" placeholder="email" />
+					<input type="text" name="username" placeholder="username" />
 					<input type="password" name="password" placeholder="password" />
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
 				</form>
@@ -33,7 +33,13 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 
+	h1 {
+		width: min-content;
+		font-weight: 500;
+	}
+
 	form {
+		margin-top: 4rem;
 		width: 18rem;
 		max-height: 250px;
 		display: flex;
