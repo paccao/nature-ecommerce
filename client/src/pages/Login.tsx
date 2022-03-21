@@ -12,7 +12,7 @@ function Login({}: Props) {
 		<Wrapper>
 			<section className="bottom">
 				<h1>Welcome back</h1>
-				<form onSubmit={submitHandler}>
+				<form onSubmit={submitHandler} autoComplete="off">
 					<input type="email" name="email" placeholder="email" />
 					<input type="password" name="password" placeholder="password" />
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
@@ -25,8 +25,14 @@ function Login({}: Props) {
 export default Login
 
 const Wrapper = styled.div`
+	padding: 0rem 1rem 1rem 1rem;
+	max-width: 1368px;
+	min-height: 100vh;
+	margin: 0 auto;
+	display: flex;
+
 	form {
-		max-width: 500px;
+		width: 18rem;
 		max-height: 250px;
 		display: flex;
 		flex-direction: column;
@@ -34,7 +40,7 @@ const Wrapper = styled.div`
 		input {
 			all: unset;
 			border-bottom: 2px solid #888;
-			padding: 0.1rem 0.1rem 0.3rem 0.1rem;
+			padding: 0.1rem 0.5rem 0.3rem 0.5rem;
 		}
 
 		input:hover,
