@@ -18,6 +18,10 @@ function Login() {
 	const { mutate: login } = useLogin()
 	const onSubmit: SubmitHandler<Inputs> = (userCredentials) => {
 		reset()
+		if (!userCredentials) {
+			console.error('Login credentials missing.')
+			return
+		}
 		login(userCredentials)
 	}
 
