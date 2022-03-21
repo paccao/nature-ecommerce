@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
 import useTotalCost from '../../hooks/useTotalCost'
+import GenericButton from '../global/GenericButton'
 import CartItem from './CartItem'
 
 function CartAside() {
@@ -9,18 +10,19 @@ function CartAside() {
 
 	return (
 		<AsideWrapper>
-			<section>
+			<section className="section-wrapper">
 				<h2>Cart</h2>
-				<ul>
+				<ul className="cart-list">
 					{data?.productsToMap.map((cartProduct) => (
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
 					))}
 				</ul>
-				<div>
+				<div className="bottom">
 					<p data-testid="cart-total-cost">
 						Total cost: {totalCostResult?.totalCost}
 						kr.
 					</p>
+					<GenericButton {...{ innerText: 'Checkout', type: 'button' }} />
 				</div>
 			</section>
 		</AsideWrapper>
@@ -39,11 +41,33 @@ const AsideWrapper = styled.aside`
 	padding: 0.2rem 0.8rem 0.3rem 0.8rem;
 	margin-right: 1rem;
 
-	section {
-		ul {
+	.section-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+
+		.cart-list {
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
+		}
+
+		.bottom {
+			padding: 0.7rem;
+			margin-top: auto;
+			height: 15%;
+			display: grid;
+
+			p {
+				font-size: 1em;
+				font-weight: 400;
+			}
+
+			button {
+				text-align: center;
+				margin: auto 0 0 auto;
+			}
 		}
 	}
 `
