@@ -6,11 +6,6 @@ export type Account = {
 	role: RoleTypes
 }
 
-export type Customer = {
-	username: string
-	password: string
-}
-
 export type AccountResult = {
 	success: boolean
 	account: Account
@@ -18,3 +13,8 @@ export type AccountResult = {
 }
 
 export type RoleTypes = 'user' | 'admin'
+
+export type LoginCredentials = {
+	username: string
+	password: string
+}

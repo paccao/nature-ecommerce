@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import GenericButton from '../components/global/GenericButton'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import useLogin from '../hooks/useLogin'
 
 type Inputs = {
 	username: string
@@ -14,9 +15,10 @@ function Login() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<Inputs>()
-	const onSubmit: SubmitHandler<Inputs> = (data) => {
+	const { mutate: login } = useLogin()
+	const onSubmit: SubmitHandler<Inputs> = (userCredentials) => {
 		reset()
-		console.log(data)
+		login(userCredentials)
 	}
 
 	return (
