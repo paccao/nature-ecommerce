@@ -33,23 +33,33 @@ function Login() {
 					<input
 						{...register('username', {
 							required: true,
-							minLength: 1,
+							minLength: 3,
 							maxLength: 20,
-							pattern: /^[A-Za-z]{1,20}$/,
+							pattern: /^[A-Za-z]{3,20}$/,
 						})}
 						placeholder="username"
 					/>
-					{errors.username && <span>Invalid username (A-z 1-20)</span>}
+					{errors.username && (
+						<span>
+							The username must be between 3 and 20 non-special
+							characters.
+						</span>
+					)}
 					<input
 						{...register('password', {
 							required: true,
-							minLength: 1,
+							minLength: 4,
 							maxLength: 50,
-							pattern: /^[A-Za-z]{1,50}$/,
+							pattern: /^[A-Za-z]{4,50}$/,
 						})}
 						placeholder="password"
 					/>
-					{errors.password && <span>Invalid password (A-z 1-50)</span>}
+					{errors.password && (
+						<span>
+							The password must be between 4 and 50 non-special
+							characters.
+						</span>
+					)}
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
 				</form>
 			</section>
