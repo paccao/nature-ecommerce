@@ -2,6 +2,7 @@ import express, { Express } from 'express'
 import productRoutes from './routes/products'
 import cartRoutes from './routes/cartRoutes'
 import accountRoutes from './routes/accountRoutes'
+import authRoutes from './routes/authRoutes'
 import 'dotenv/config'
 
 import { corsMiddleware } from './helpers/corsMiddleware'
@@ -17,6 +18,7 @@ app.use(express.static('public'))
 app.use('/', productRoutes)
 app.use('/', cartRoutes)
 app.use('/', accountRoutes)
+app.use('/', authRoutes)
 
 // Error handling
 app.use((req, res) => {
