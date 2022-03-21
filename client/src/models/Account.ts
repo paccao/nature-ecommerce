@@ -6,6 +6,11 @@ export type Account = {
 	role: RoleTypes
 }
 
+export type Customer = {
+	username: string
+	password: string
+}
+
 export type AccountResult = {
 	success: boolean
 	account: Account

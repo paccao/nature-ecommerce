@@ -1,18 +1,12 @@
-import React, { SyntheticEvent } from 'react'
 import styled from 'styled-components'
 import GenericButton from '../components/global/GenericButton'
 
-type Props = {}
-
-function Login({}: Props) {
-	function submitHandler(e: SyntheticEvent) {
-		e.preventDefault()
-	}
+function Login() {
 	return (
 		<Wrapper>
 			<section className="bottom">
 				<h1>Welcome Back</h1>
-				<form onSubmit={submitHandler} autoComplete="off">
+				<form autoComplete="off">
 					<input type="text" name="username" placeholder="username" />
 					<input type="password" name="password" placeholder="password" />
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
