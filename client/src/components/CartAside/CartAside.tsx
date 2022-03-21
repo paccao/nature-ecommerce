@@ -1,3 +1,4 @@
+import { SyntheticEvent } from 'react'
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
 import useTotalCost from '../../hooks/useTotalCost'
@@ -8,6 +9,12 @@ function CartAside() {
 	const { data } = useCart()
 	const { data: totalCostResult } = useTotalCost()
 
+	function submitHandler(e: SyntheticEvent) {
+		e.preventDefault()
+
+		console.log('Items in cart purchased.')
+	}
+
 	return (
 		<AsideWrapper>
 			<section className="section-wrapper">
@@ -17,13 +24,13 @@ function CartAside() {
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
 					))}
 				</ul>
-				<div className="bottom">
+				<form className="bottom" onSubmit={submitHandler}>
 					<p data-testid="cart-total-cost">
 						Total cost: {totalCostResult?.totalCost}
 						kr.
 					</p>
-					<GenericButton {...{ innerText: 'Checkout', type: 'button' }} />
-				</div>
+					<GenericButton {...{ innerText: 'Checkout', type: 'submit' }} />
+				</form>
 			</section>
 		</AsideWrapper>
 	)
