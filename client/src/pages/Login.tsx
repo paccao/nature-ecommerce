@@ -29,7 +29,7 @@ function Login() {
 						})}
 						placeholder="username"
 					/>
-					{errors.username && <span>Invalid username</span>}
+					{errors.username && <span>Invalid username (A-z 1-20)</span>}
 					<input
 						{...register('password', {
 							required: true,
@@ -39,7 +39,7 @@ function Login() {
 						})}
 						placeholder="password"
 					/>
-					{errors.password && <span>Invalid password</span>}
+					{errors.password && <span>Invalid password (A-z 1-50)</span>}
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
 				</form>
 			</section>
