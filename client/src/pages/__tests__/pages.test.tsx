@@ -4,8 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import Products from '../Products'
-import Signup from '../Signup'
-// import Login from '../Login'
+import Login from '../Login'
 import Error404 from '../Error404'
 
 import { Product } from '../../models/Product'
@@ -115,17 +114,11 @@ describe('Products page component', () => {
 	})
 })
 
-describe('Signup page component', () => {
+describe('Login page component', () => {
 	it('renders without crashing', () => {
-		render(<Signup />)
+		render(<Login />)
 	})
 })
-
-// describe('Login page component', () => {
-// 	it.todo('renders without crashing', () => {
-// render(<Login />)
-// 	})
-// })
 
 describe('Error404 page component', () => {
 	it('renders without crashing', () => {

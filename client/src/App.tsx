@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 import Products from './pages/Products'
-import Signup from './pages/Signup'
+import Login from './pages/Login'
 import Error404 from './pages/Error404'
 import CartAside from './components/CartAside/CartAside'
 import { lightTheme } from './themes/appTheme'
@@ -30,7 +30,7 @@ function App() {
 					<CartAside />
 					<Routes>
 						<Route path="/" element={<Products />} />
-						<Route path="/signup" element={<Signup />} />
+						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 				</main>
