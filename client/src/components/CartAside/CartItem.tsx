@@ -3,16 +3,12 @@ import styled from 'styled-components'
 import { ProductWithCartAmount } from '../../models/Product'
 import useRemoveFromCart from '../../hooks/useRemoveFromCart'
 import temporaryUser from '../../helpers/temporaryUser'
-import { useRecoilState } from 'recoil'
-import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
 import CartItemInputButtons from './CartItemInputButtons'
 import useUpdateAmount from '../../hooks/useUpdateAmount'
 
 function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	const { mutate: removeFromCart } = useRemoveFromCart()
 	const { mutate: updateAmount } = useUpdateAmount()
-	const [confirmDeleteOpenState, setConfirmDeleteOpenState] =
-		useRecoilState(isConfirmDeleteOpen)
 
 	const [amountToAdd, setAmountToAdd] = useState<number>(1)
 
@@ -23,7 +19,6 @@ function CartItem({ cartProduct }: { cartProduct: ProductWithCartAmount }) {
 	function removeProductFromCart(event: SyntheticEvent) {
 		event.preventDefault()
 
-		// setConfirmDeleteOpenState(true)
 		removeFromCart({
 			productIdToRemove: cartProduct.id,
 			userId: temporaryUser,

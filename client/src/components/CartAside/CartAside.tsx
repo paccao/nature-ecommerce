@@ -1,18 +1,12 @@
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
 import useTotalCost from '../../hooks/useTotalCost'
-import { Product, ProductWithCartAmount } from '../../models/Product'
 import CartItem from './CartItem'
-import currentTotalCost from '../../helpers/currentTotalCost'
-import { useRecoilState } from 'recoil'
-import isConfirmDeleteOpen from '../../atoms/confirmDeleteCartitemModalState'
 import AccountDetails from './AccountDetails'
 
 function CartAside() {
-	const { data, isSuccess: isFetchCartSuccess } = useCart()
+	const { data } = useCart()
 	const { data: totalCostResult } = useTotalCost()
-	const [confirmDeleteState, useConfirmDeleteState] =
-		useRecoilState(isConfirmDeleteOpen)
 
 	return (
 		<AsideWrapper>
