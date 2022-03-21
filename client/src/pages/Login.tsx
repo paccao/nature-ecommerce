@@ -27,9 +27,11 @@ export default Login
 const Wrapper = styled.div`
 	padding: 0rem 1rem 1rem 1rem;
 	max-width: 1368px;
-	min-height: 100vh;
+	min-height: 85vh;
 	margin: 0 auto;
 	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	form {
 		width: 18rem;
@@ -58,7 +60,7 @@ const Wrapper = styled.div`
 			margin-top: 1rem;
 			border-radius: 7px;
 			background-color: ${(props) => props.theme.accentColor};
-			font-size: 1em;
+			font-size: 1.07em;
 			font-weight: 500;
 			text-align: center;
 		}
