@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
 import useTotalCost from '../../hooks/useTotalCost'
 import CartItem from './CartItem'
-import AccountDetails from './AccountDetails'
 
 function CartAside() {
 	const { data } = useCart()
@@ -12,7 +11,6 @@ function CartAside() {
 		<AsideWrapper>
 			<section>
 				<h2>Cart</h2>
-				<AccountDetails />
 				<ul>
 					{data?.productsToMap.map((cartProduct) => (
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
