@@ -1,14 +1,28 @@
 import styled from 'styled-components'
 import GenericButton from '../components/global/GenericButton'
+import { useForm, SubmitHandler } from 'react-hook-form'
+
+type Inputs = {
+	username: string
+	password: string
+}
 
 function Login() {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm<Inputs>()
+	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+
 	return (
 		<Wrapper>
 			<section className="bottom">
 				<h1>Welcome Back</h1>
-				<form autoComplete="off">
-					<input type="text" name="username" placeholder="username" />
-					<input type="password" name="password" placeholder="password" />
+				<form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+					<input {...register('username')} placeholder="username" />
+					<input {...register('password')} placeholder="password" />
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
 				</form>
 			</section>
