@@ -1,4 +1,5 @@
 import express, { Express } from 'express'
+import bodyParser from 'body-parser'
 import productRoutes from './routes/products'
 import cartRoutes from './routes/cartRoutes'
 import accountRoutes from './routes/accountRoutes'
@@ -11,6 +12,9 @@ export const dbConnection = pool()
 
 const app: Express = express()
 const PORT: any = process.env.PORT ?? 8080
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.use(corsMiddleware)
 app.use(express.json())
