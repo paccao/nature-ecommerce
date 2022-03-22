@@ -1,10 +1,11 @@
 import express, { Express } from 'express'
 import bodyParser from 'body-parser'
+import 'dotenv/config'
+
 import productRoutes from './routes/products'
 import cartRoutes from './routes/cartRoutes'
 import accountRoutes from './routes/accountRoutes'
 import authRoutes from './routes/authRoutes'
-import 'dotenv/config'
 
 import { corsMiddleware } from './helpers/corsMiddleware'
 import pool from './connection'
