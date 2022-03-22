@@ -7,7 +7,7 @@ import cartRoutes from './routes/cartRoutes'
 import accountRoutes from './routes/accountRoutes'
 import authRoutes from './routes/authRoutes'
 
-import { corsMiddleware } from './helpers/corsMiddleware'
+import { corsMiddleware } from './middleware/corsMiddleware'
 import pool from './connection'
 export const dbConnection = pool()
 
