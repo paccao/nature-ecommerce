@@ -3,6 +3,6 @@ import controller from '../controllers/account'
 
 const router = express.Router()
 
-router.get('/api/accounts/:id', controller.getSpecificAccount)
+router.get('/api/accounts', controller.getSpecificAccount)
 
 export default router

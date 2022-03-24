@@ -2,6 +2,7 @@ import { SyntheticEvent } from 'react'
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
 import useTotalCost from '../../hooks/useTotalCost'
+import AccountDetails from '../AccountDetails/AccountDetails'
 import GenericButton from '../global/GenericButton'
 import CartItem from './CartItem'
 
@@ -17,6 +18,7 @@ function CartAside() {
 
 	return (
 		<AsideWrapper>
+			<AccountDetails />
 			<section className="section-wrapper">
 				<h2>Cart</h2>
 				<ul className="cart-list">
