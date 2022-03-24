@@ -19,7 +19,16 @@ const loginUser = (req: Request, res: Response) => {
 	const user = { name: username }
 	const accessToken = generateAccessToken(user)
 	const refreshToken = generateRefreshToken(user)
-	return res.status(200).json({ accessToken, refreshToken })
+
+	res.status(200).cookie('accessToken', accessToken, {
+		httpOnly: true,
+		sameSite: 'strict',
+	})
+	return res.status(200).cookie('refreshToken', refreshToken, {
+		httpOnly: true,
+		sameSite: 'strict',
+	})
+	// return res.status(200).json({ accessToken, refreshToken })
 }
 
 const validateToken = (req: Request, res: Response) => {
