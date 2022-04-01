@@ -3,7 +3,7 @@ import { AccountResult } from '../models/Account'
 import { fetchAccount } from '../helpers/fetchAccount'
 
 export default function useAccountDetails() {
-	return useQuery<AccountResult, Error>('account', () => fetchAccount(), {
+	return useQuery<AccountResult, Error>('account', () => fetchAccount(''), {
 		retry: false,
 	})
 }
