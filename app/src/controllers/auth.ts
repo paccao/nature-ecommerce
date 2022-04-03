@@ -1,4 +1,4 @@
-import { application, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import { dbConnection as conn } from '../server'
 import jwt from 'jsonwebtoken'
 import {

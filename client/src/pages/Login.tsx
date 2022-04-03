@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import GenericButton from '../components/global/GenericButton'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import useLogin from '../hooks/useLogin'
 import { useState } from 'react'
 import isLoggedIn from '../atoms/loggedInState'
+import loginUser from '../helpers/loginUser'
 
 type Inputs = {
 	username: string
@@ -17,31 +17,30 @@ function Login() {
 		register,
 		reset,
 		handleSubmit,
+		setFocus,
 		formState: { errors },
 	} = useForm<Inputs>()
 	const [loginSuccess, setLoginSuccess] =
 		useState<LoginSuccessOptions>('not set')
-	const { mutate: login, data } = useLogin()
 
-	const onSubmit: SubmitHandler<Inputs> = (userCredentials) => {
+	const onSubmit: SubmitHandler<Inputs> = async (userCredentials) => {
 		reset()
+		setFocus('username')
 		if (!userCredentials) console.error('Login credentials missing.')
+		userCredentials.username.trim()
+		userCredentials.password.trim()
 
-		login(userCredentials)
+		const loginResult = await loginUser(userCredentials)
 
-		if (!data) console.log('Something went wrong with the login request')
-		else {
-			if (data?.success === true) {
-				console.log(true)
-				setLoginSuccess('true')
-				// set recoil state
-				// redirect user
-			} else if (data?.success === false) {
-				console.log(false)
-				setLoginSuccess('false')
-				// set recoil state
-				// display error with useState
-			}
+		if (loginResult.success === true) {
+			console.log(true)
+			setLoginSuccess('true')
+			// set recoil state
+			// redirect user
+		} else if (loginResult.success === false) {
+			console.log(false)
+			setLoginSuccess('false')
+			// set recoil state
 		}
 	}
 
@@ -60,10 +59,10 @@ function Login() {
 						placeholder="username"
 					/>
 					{errors.username && (
-						<Error>
+						<ErrorText>
 							The username must be between 3 and 20 non-special
 							characters.
-						</Error>
+						</ErrorText>
 					)}
 					<input
 						{...register('password', {
@@ -75,13 +74,13 @@ function Login() {
 						placeholder="password"
 					/>
 					{errors.password && (
-						<Error>
+						<ErrorText>
 							The password must be between 4 and 50 non-special
 							characters.
-						</Error>
+						</ErrorText>
 					)}
-					{loginSuccess === 'true' && (
-						<Error>Incorrect credentials, try again.</Error>
+					{loginSuccess === 'false' && (
+						<ErrorText>Incorrect credentials, try again.</ErrorText>
 					)}
 					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
 				</form>
@@ -92,7 +91,7 @@ function Login() {
 
 export default Login
 
-const Error = styled.span`
+const ErrorText = styled.span`
 	color: #ff0000b5;
 `
 
