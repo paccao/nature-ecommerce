@@ -25,27 +25,24 @@ const loginUser = async (req: Request, res: Response) => {
 		const { rows } = await conn.query(loginQuery, [username, password])
 		const foundUser = rows[0]
 		if (!foundUser) {
-			res.status(400).json({
+			return res.status(400).json({
 				success: false,
 				message: 'Incorrect credentials.',
 			})
 		}
 
-		console.log({ username, password })
-		console.log(foundUser)
-
-		if (foundUser === { username, password }) {
-			res.status(200).json({
+		if (foundUser.username === username && foundUser.password === password) {
+			return res.status(200).json({
 				success: true,
 			})
 		} else {
-			res.status(500).json({
+			return res.status(500).json({
 				success: false,
 				message: 'Something went wrong, try again later.',
 			})
 		}
 	} catch (error) {
-		res.status(400).json({
+		return res.status(400).json({
 			success: false,
 			message: 'Incorrect credentials.',
 		})
