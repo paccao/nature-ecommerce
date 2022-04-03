@@ -28,14 +28,14 @@ function Login() {
 	const navigate = useNavigate()
 
 	const onSubmit: SubmitHandler<Inputs> = async (userCredentials) => {
-		reset()
-		setFocus('username')
 		if (!userCredentials) console.error('Login credentials missing.')
 		userCredentials.username.trim()
 		userCredentials.password.trim()
 
 		const loginResult = await loginUser(userCredentials)
 
+		reset()
+		setFocus('username')
 		if (loginResult.success === true) {
 			setLoginSuccess('true')
 			setLoggedInState(true)
