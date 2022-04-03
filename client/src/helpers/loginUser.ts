@@ -2,6 +2,7 @@ import { LoginCredentials } from '../models/Account'
 
 type loginResult = {
 	success: boolean
+	message?: string
 }
 
 const loginUser = async (credentials: LoginCredentials): Promise<loginResult> =>
