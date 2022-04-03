@@ -4,13 +4,15 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
 import isLoggedIn from '../atoms/loggedInState'
 import loginUser from '../helpers/loginUser'
+import { useRecoilState } from 'recoil'
+import { useNavigate } from 'react-router-dom'
 
 type Inputs = {
 	username: string
 	password: string
 }
 
-type LoginSuccessOptions = 'true' | 'false' | 'not set' | 'failed'
+type LoginSuccessOptions = 'true' | 'false' | 'not set'
 
 function Login() {
 	const {
@@ -22,6 +24,8 @@ function Login() {
 	} = useForm<Inputs>()
 	const [loginSuccess, setLoginSuccess] =
 		useState<LoginSuccessOptions>('not set')
+	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
+	const navigate = useNavigate()
 
 	const onSubmit: SubmitHandler<Inputs> = async (userCredentials) => {
 		reset()
@@ -33,14 +37,13 @@ function Login() {
 		const loginResult = await loginUser(userCredentials)
 
 		if (loginResult.success === true) {
-			console.log(true)
 			setLoginSuccess('true')
-			// set recoil state
-			// redirect user
+			setLoggedInState(true)
+
+			navigate('/', { replace: true })
 		} else if (loginResult.success === false) {
-			console.log(false)
 			setLoginSuccess('false')
-			// set recoil state
+			setLoggedInState(false)
 		}
 	}
 
