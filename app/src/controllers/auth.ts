@@ -6,10 +6,9 @@ import {
 	generateRefreshToken,
 } from '../helpers/tokenGenerators'
 
-const loginUser = (req: Request, res: Response) => {
+const loginUser = async (req: Request, res: Response) => {
 	const username: string = req.body.username
 	const password: string = req.body.password
-	console.log([username, password])
 	if (!username || !password) {
 		return res
 			.status(400)
@@ -17,18 +16,36 @@ const loginUser = (req: Request, res: Response) => {
 	}
 
 	const user = { name: username }
-	const accessToken = generateAccessToken(user)
-	const refreshToken = generateRefreshToken(user)
 
-	res.status(200).cookie('accessToken', accessToken, {
-		httpOnly: true,
-		sameSite: 'strict',
-	})
-	return res.status(200).cookie('refreshToken', refreshToken, {
-		httpOnly: true,
-		sameSite: 'strict',
-	})
-	// return res.status(200).json({ accessToken, refreshToken })
+	const loginQuery = `
+	SELECT * FROM users
+	WHERE username = $1
+	AND password = $2;
+	`
+
+	try {
+		await conn.query(loginQuery, [username, password])
+
+		res.status(200).json({
+			success: true,
+		})
+	} catch (error) {
+		res.status(400).json({
+			success: false,
+			message: 'Incorrect credentials.',
+		})
+	}
+	// const accessToken = generateAccessToken(user)
+	// const refreshToken = generateRefreshToken(user)
+
+	// res.status(200).cookie('accessToken', accessToken, {
+	// 	httpOnly: true,
+	// 	sameSite: 'strict',
+	// })
+	// return res.status(200).cookie('refreshToken', refreshToken, {
+	// 	httpOnly: true,
+	// 	sameSite: 'strict',
+	// })
 }
 
 const validateToken = (req: Request, res: Response) => {
