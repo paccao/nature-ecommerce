@@ -15,26 +15,42 @@ const loginUser = async (req: Request, res: Response) => {
 			.json({ success: false, message: 'Missing credentials' })
 	}
 
-	const user = { name: username }
-
 	const loginQuery = `
-	SELECT * FROM users
-	WHERE username = $1
-	AND password = $2;
+	SELECT username, password FROM users
+	WHERE users.username = $1
+	AND users.password = $2;
 	`
 
 	try {
-		await conn.query(loginQuery, [username, password])
+		const { rows } = await conn.query(loginQuery, [username, password])
+		const foundUser = rows[0]
+		if (!foundUser) {
+			res.status(400).json({
+				success: false,
+				message: 'Incorrect credentials.',
+			})
+		}
 
-		res.status(200).json({
-			success: true,
-		})
+		console.log({ username, password })
+		console.log(foundUser)
+
+		if (foundUser === { username, password }) {
+			res.status(200).json({
+				success: true,
+			})
+		} else {
+			res.status(500).json({
+				success: false,
+				message: 'Something went wrong, try again later.',
+			})
+		}
 	} catch (error) {
 		res.status(400).json({
 			success: false,
 			message: 'Incorrect credentials.',
 		})
 	}
+	// const user = { name: username }
 	// const accessToken = generateAccessToken(user)
 	// const refreshToken = generateRefreshToken(user)
 
