@@ -1,6 +1,10 @@
 import { LoginCredentials } from '../models/Account'
 
-const loginUser = async (credentials: LoginCredentials): Promise<void> =>
+type loginResult = {
+	success: boolean
+}
+
+const loginUser = async (credentials: LoginCredentials): Promise<loginResult> =>
 	await (
 		await fetch('http://localhost:8080/api/auth/login', {
 			method: 'POST',

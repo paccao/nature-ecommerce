@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import GenericButton from '../components/global/GenericButton'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import useLogin from '../hooks/useLogin'
+import { useState } from 'react'
 
 type Inputs = {
 	username: string
@@ -15,14 +16,24 @@ function Login() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<Inputs>()
-	const { mutate: login } = useLogin()
+	const [loginSuccess, setLoginSuccess] = useState<boolean | null>(null)
+	const { mutate: login, data } = useLogin()
+
 	const onSubmit: SubmitHandler<Inputs> = (userCredentials) => {
 		reset()
-		if (!userCredentials) {
-			console.error('Login credentials missing.')
-			return
-		}
+		if (!userCredentials) console.error('Login credentials missing.')
+
 		login(userCredentials)
+
+		if (data?.success) {
+			console.log(true)
+			// set recoil state
+			// redirect user
+		} else {
+			console.log(false)
+			// set recoil state
+			// display error with useState
+		}
 	}
 
 	return (
