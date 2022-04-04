@@ -18,8 +18,8 @@ function CartAside() {
 
 	return (
 		<AsideWrapper>
-			<AccountDetails />
 			<section className="section-wrapper">
+				<AccountDetails />
 				<h2>Cart</h2>
 				<ul className="cart-list">
 					{data?.productsToMap.map((cartProduct) => (
@@ -42,12 +42,12 @@ export default CartAside
 
 const AsideWrapper = styled.aside`
 	background-color: #fff;
-	height: 87vh;
+	max-height: 87vh;
 	border-radius: ${(props) => props.theme.borderRadius};
 	border-bottom-right-radius: ${(props) => props.theme.borderRadius};
 	border-top-right-radius: ${(props) => props.theme.borderRadius};
 	border: 2px solid #dcd3d3;
-	padding: 0.2rem 0.8rem 0.3rem 0.8rem;
+	padding: 1rem 1.1rem 0.8rem 1.1rem;
 	margin-right: 1rem;
 
 	.section-wrapper {
@@ -63,9 +63,7 @@ const AsideWrapper = styled.aside`
 		}
 
 		.bottom {
-			padding: 0.7rem;
 			margin-top: auto;
-			height: 15%;
 			display: flex;
 			align-items: flex-end;
 			justify-content: space-between;

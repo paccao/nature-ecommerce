@@ -27,7 +27,6 @@ function AccountDetails() {
 export default AccountDetails
 
 const Wrapper = styled.div`
-	margin: 0.5rem;
 	display: flex;
 	align-items: baseline;
 
