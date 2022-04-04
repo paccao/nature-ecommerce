@@ -12,11 +12,13 @@ function AccountDetails() {
 
 	return (
 		<Wrapper>
-			<span>Welcome friend!</span>
 			{loggedInState ? (
-				<article>Welcome customer!</article>
+				<article>Welcome back!</article>
 			) : (
-				<button onClick={submitHandler}>Log in</button>
+				<>
+					<span>Welcome friend!</span>
+					<button onClick={submitHandler}>Log in</button>
+				</>
 			)}
 		</Wrapper>
 	)
@@ -25,7 +27,7 @@ function AccountDetails() {
 export default AccountDetails
 
 const Wrapper = styled.div`
-	margin: 0.5rem 0.2rem;
+	margin: 0.5rem;
 	display: flex;
 	align-items: baseline;
 
