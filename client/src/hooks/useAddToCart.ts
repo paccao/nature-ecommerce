@@ -7,6 +7,7 @@ export default function useAddToCart() {
 		onSuccess: () => {
 			queryClient.invalidateQueries('product')
 			queryClient.invalidateQueries('cart')
+			queryClient.invalidateQueries('totalCost')
 		},
 		retry: false,
 	})
