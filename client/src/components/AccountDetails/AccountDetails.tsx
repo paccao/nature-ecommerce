@@ -16,7 +16,7 @@ function AccountDetails() {
 				<article>Welcome back!</article>
 			) : (
 				<>
-					<span>Welcome friend!</span>
+					<article>Welcome friend!</article>
 					<button onClick={submitHandler}>Log in</button>
 				</>
 			)}
@@ -29,6 +29,11 @@ export default AccountDetails
 const Wrapper = styled.div`
 	display: flex;
 	align-items: baseline;
+	font-size: 1.05em;
+
+	article {
+		color: ${(props) => props.theme.accentColor};
+	}
 
 	button {
 		all: unset;
