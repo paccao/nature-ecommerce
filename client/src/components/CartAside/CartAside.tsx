@@ -42,7 +42,7 @@ export default CartAside
 
 const AsideWrapper = styled.aside`
 	background-color: #fff;
-	max-height: 87vh;
+	min-height: 87vh;
 	border-radius: ${(props) => props.theme.borderRadius};
 	border-bottom-right-radius: ${(props) => props.theme.borderRadius};
 	border-top-right-radius: ${(props) => props.theme.borderRadius};
