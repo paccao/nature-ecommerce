@@ -39,6 +39,7 @@ function Login() {
 		if (loginResult.success === true) {
 			setLoginSuccess('true')
 			setLoggedInState(true)
+			localStorage.setItem('login', 'true')
 
 			navigate('/', { replace: true })
 		} else if (loginResult.success === false) {
