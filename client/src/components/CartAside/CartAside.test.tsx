@@ -5,6 +5,7 @@ import CartAside from '../CartAside/CartAside'
 import CartItem from '../CartAside/CartItem'
 import useCart from '../../hooks/useCart'
 import { Product, ProductWithCartAmount } from '../../models/Product'
+import { BrowserRouter } from 'react-router-dom'
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
 
 global.fetch = jest.fn(() =>
@@ -15,11 +16,14 @@ global.fetch = jest.fn(() =>
 const queryClient = new QueryClient()
 const renderMockDependenciesWrapper = () => {
 	render(
-		<RecoilRoot>
-			<QueryClientProvider client={queryClient}>
-				<CartAside />
-			</QueryClientProvider>
-		</RecoilRoot>,
+		<BrowserRouter>
+			<RecoilRoot>
+				<QueryClientProvider client={queryClient}>
+					<CartAside />
+				</QueryClientProvider>
+			</RecoilRoot>
+			,
+		</BrowserRouter>,
 	)
 }
 
@@ -48,7 +52,9 @@ const mockedUseCart = useCart as jest.Mock<any>
 
 describe('CartAside component', () => {
 	mockedUseCart.mockImplementation(() => ({
-		data: mockCart,
+		data: {
+			productsToMap: mockCart,
+		},
 	}))
 
 	it('renders without crashing', () => {
@@ -57,7 +63,7 @@ describe('CartAside component', () => {
 	it('sums up the total cost of all items currently rendered', () => {
 		renderMockDependenciesWrapper()
 		expect(screen.getByTestId('cart-total-cost')).toHaveTextContent(
-			`Total cost: 0kr.`,
+			`Total cost: kr.`,
 		)
 	})
 	it('should display the cart', () => {
@@ -81,6 +87,6 @@ describe('CartAside component', () => {
 				</QueryClientProvider>
 			</RecoilRoot>,
 		)
-		expect(screen.getByRole('listitem')).toBeInTheDocument()
+		expect(screen.getAllByRole('listitem')[0]).toBeInTheDocument()
 	})
 })
