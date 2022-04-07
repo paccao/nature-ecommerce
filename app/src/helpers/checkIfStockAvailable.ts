@@ -30,7 +30,7 @@ export default async function checkIfStockAvailable(
 			result = {
 				success: false,
 				status: 400,
-				message: 'This product has no stock available.',
+				message: 'Requested more products than were available in stock.',
 				stockAvailable: 0,
 			}
 			return result
