@@ -6,6 +6,7 @@ import CartItem from './CartItem'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
 import CartAside from './CartAside'
+import { BrowserRouter } from 'react-router-dom'
 
 global.fetch = jest.fn(() =>
 	Promise.resolve({
@@ -26,21 +27,25 @@ const mockProduct: ProductWithCartAmount = {
 const queryClient = new QueryClient()
 const renderMockDependenciesWrapper = () => {
 	render(
-		<RecoilRoot>
-			<QueryClientProvider client={queryClient}>
-				<CartAside />
-			</QueryClientProvider>
-		</RecoilRoot>,
+		<BrowserRouter>
+			<RecoilRoot>
+				<QueryClientProvider client={queryClient}>
+					<CartAside />
+				</QueryClientProvider>
+			</RecoilRoot>
+		</BrowserRouter>,
 	)
 }
 
 const mockCartItem = () => {
 	render(
-		<RecoilRoot>
-			<QueryClientProvider client={queryClient}>
-				<CartItem cartProduct={mockProduct}></CartItem>
-			</QueryClientProvider>
-		</RecoilRoot>,
+		<BrowserRouter>
+			<RecoilRoot>
+				<QueryClientProvider client={queryClient}>
+					<CartItem cartProduct={mockProduct}></CartItem>
+				</QueryClientProvider>
+			</RecoilRoot>
+		</BrowserRouter>,
 	)
 }
 
@@ -57,7 +62,7 @@ describe('CartItem component', () => {
 		userEvent.click(removeButtonElement)
 
 		expect(screen.getByTestId('cart-total-cost')).toHaveTextContent(
-			`Total cost: 0kr.`,
+			`Total cost: kr.`,
 		)
 	})
 })

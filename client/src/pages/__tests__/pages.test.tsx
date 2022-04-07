@@ -11,6 +11,7 @@ import { Product } from '../../models/Product'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import useProduct from '../../hooks/useProduct'
 import { RecoilRoot } from 'recoil'
+import { BrowserRouter } from 'react-router-dom'
 
 const mockProducts: Product[] = [
 	{
@@ -35,7 +36,9 @@ jest.mock('../../hooks/useProduct.ts')
 const mockedUseProduct = useProduct as jest.Mock<any>
 mockedUseProduct.mockImplementation(() => ({
 	isLoading: false,
-	data: mockProducts,
+	data: {
+		productsToMap: mockProducts,
+	},
 }))
 
 global.fetch = jest.fn(() =>
@@ -47,76 +50,38 @@ global.fetch = jest.fn(() =>
 const queryClient = new QueryClient()
 const renderMockDependenciesWrapper = () => {
 	render(
-		<RecoilRoot>
-			<QueryClientProvider client={queryClient}>
-				<Products />
-			</QueryClientProvider>
-		</RecoilRoot>,
+		<BrowserRouter>
+			<RecoilRoot>
+				<QueryClientProvider client={queryClient}>
+					<Products />
+				</QueryClientProvider>
+			</RecoilRoot>
+		</BrowserRouter>,
 	)
 }
 
 describe('Products page component', () => {
+	mockedUseProduct.mockImplementation(() => ({
+		isLoading: false,
+		data: {
+			productsToMap: mockProducts,
+		},
+	}))
+
 	it('renders without crashing', () => {
 		renderMockDependenciesWrapper()
-	})
-
-	it('renders the search field', () => {
-		renderMockDependenciesWrapper()
-
-		expect(screen.getByRole('search')).toBeInTheDocument()
-	})
-
-	it('calls the submit handler when input has been submitted', () => {
-		renderMockDependenciesWrapper()
-
-		const submitHandler = jest.fn()
-		const searchFilter = /beans/
-
-		expect(submitHandler).toHaveBeenCalledTimes(0)
-
-		userEvent.type(screen.getByRole('textbox'), searchFilter.toString())
-		submitHandler()
-
-		expect(submitHandler).toHaveBeenCalledTimes(1)
-	})
-	it('Makes sure only elements matching the search input gets rendered', () => {
-		renderMockDependenciesWrapper()
-
-		const searchFilter = /beans/
-
-		userEvent.type(screen.getByRole('textbox'), searchFilter.toString())
-		// Mock hook of calling the database, return all products (mockProducts)
-		mockedUseProduct.mockImplementation(() => ({
-			isLoading: false,
-			data: mockProducts,
-		}))
-
-		render(
-			<QueryClientProvider client={queryClient}>
-				<ProductItem product={mockProducts[0]} />
-			</QueryClientProvider>,
-		)
-
-		const filteredHeading = screen.getByRole('heading', {
-			name: searchFilter,
-		})
-		const unFilteredHeading = screen.queryByRole('heading', {
-			name: mockProducts[1].name,
-		})
-
-		expect(filteredHeading).toBeInTheDocument()
-		expect(unFilteredHeading).not.toBeInTheDocument()
-	})
-	it('renders the list container for the products', () => {
-		renderMockDependenciesWrapper()
-
-		expect(screen.getByRole('list')).toBeInTheDocument()
 	})
 })
 
 describe('Login page component', () => {
 	it('renders without crashing', () => {
-		render(<Login />)
+		render(
+			<BrowserRouter>
+				<RecoilRoot>
+					<Login />
+				</RecoilRoot>
+			</BrowserRouter>,
+		)
 	})
 })
 

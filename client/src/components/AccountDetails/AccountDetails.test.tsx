@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import AccountDetails from './AccountDetails'
 import useAccountDetails from '../../hooks/useAccountDetails'
 import { Account } from '../../models/Account'
+import { BrowserRouter, Router } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
 
@@ -27,9 +29,13 @@ const queryClient = new QueryClient()
 
 const mockWrapper = () => {
 	return render(
-		<QueryClientProvider client={queryClient}>
-			<AccountDetails />
-		</QueryClientProvider>,
+		<BrowserRouter>
+			<QueryClientProvider client={queryClient}>
+				<RecoilRoot>
+					<AccountDetails />
+				</RecoilRoot>
+			</QueryClientProvider>
+		</BrowserRouter>,
 	)
 }
 
