@@ -1,8 +1,8 @@
-FROM node:latest
+FROM node:16.13
 
 WORKDIR /app/client
 
-COPY ./dist ./client
+COPY cd ../client/build
 
 WORKDIR /app/server
 
@@ -10,7 +10,8 @@ COPY ./server/package*.json ./
 
 RUN npm install
 
-COPY ./server ./
+COPY ./app ./
 
-CMD ["node", "./server.ts"]
+CMD ["node", "./src/server.ts"]
 
+// docker build -f Dockerfile -t natureshop .
