@@ -5,7 +5,9 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
+import apiDomain from './helpers/apiDomain'
 
+console.log(apiDomain())
 const queryClient = new QueryClient()
 
 ReactDOM.render(
