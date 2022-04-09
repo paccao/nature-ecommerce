@@ -13,11 +13,18 @@ export const dbConnection = pool()
 
 const app: Express = express()
 const PORT: any = process.env.PORT ?? 8080
+const environment = process.env.NODE_ENV
+const isDevelopment = environment === 'development'
+const isProduction = environment === 'production'
+
+console.log(environment)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(corsMiddleware)
+if (isDevelopment) {
+	app.use(corsMiddleware)
+}
 app.use(express.json())
 app.use(express.static('public'))
 app.use('/', productRoutes)
