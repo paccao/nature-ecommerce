@@ -4,14 +4,14 @@ ENV NODE_ENV=production
 
 WORKDIR /app/client
 
-COPY cd ../client/build
+COPY build /app/client/
 
 WORKDIR /app/server
 
-COPY ./server/package*.json ./
+COPY package*.json ./
+
+COPY ./ ./
 
 RUN npm install
-
-COPY ./app ./
 
 CMD ["node", "./src/server.ts"]
