@@ -23,7 +23,7 @@ if (isDevelopment) {
 	app.use(corsMiddleware)
 }
 app.use(express.json())
-app.use(express.static('public'))
+app.use(express.static('build'))
 app.use('/', productRoutes)
 app.use('/', cartRoutes)
 app.use('/', accountRoutes)
