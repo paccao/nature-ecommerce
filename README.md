@@ -1,8 +1,9 @@
 # nature-ecommerce
 
-This is proof of concept webshop made with React, Typescript, Recoiljs, react-query, styled components and Jest + testing-library.
+This is a proof of concept webshop made with React, Typescript, Recoiljs, react-query, styled components and Jest + testing-library.
 The backend was made with Node.js v.16.13 and PostgreSQL.
-The app was built into a docker image and deployed on Heroku with the Heroku container registry.
+
+The app was built into a docker image and deployed on Heroku.
 
 ## To clone this app and run it locally you need to do the following:
 
@@ -24,6 +25,7 @@ cd /client/
 npm t
 ```
 This will only open up the bare bones app as I will not share the credentials to my database. :-)
+
 To add a database you need to set up a .env file in the path /nature-ecommerce/app/ and connect to where your database is hosted appropriately.
 
 ## If you want to check out my deployed version of the app, go to: 
