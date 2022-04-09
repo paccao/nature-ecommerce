@@ -1,4 +1,4 @@
-import { Product } from '../../../client/src/models/Product'
+import { Product } from '../models/Product'
 
 export function isProduct(object: unknown): object is Product {
 	return (
