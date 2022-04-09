@@ -40,4 +40,4 @@ https://nature-ecommerce.herokuapp.com/
  - As a user I want to see an overview of my cart items to get a summary of what I'm purchasing.
  - As a user I want to be able to change the number of products I want to buy in the cart so that I can change my mind.
  - As a user I want to be able to remove products from the cart so that I can change my mind.
- - As a user I want to be able to log in to my account to purchase items in their cart.
+ - As a user I want to be able to log in to my account to purchase items in my cart.
