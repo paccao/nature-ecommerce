@@ -1,4 +1,5 @@
 import { CartResult } from '../models/Cart'
+import apiDomain from './apiDomain'
 
 export const fetchCart = async (): Promise<CartResult> =>
-	await (await fetch('http://localhost:8080/api/cart')).json()
+	await (await fetch(`${apiDomain()}/api/cart`)).json()

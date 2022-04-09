@@ -1,4 +1,5 @@
 import { AccountResult } from '../models/Account'
+import apiDomain from './apiDomain'
 
 export const fetchAccount = async (id: string): Promise<AccountResult> =>
-	await (await fetch(`http://localhost:8080/api/account/${id}`)).json()
+	await (await fetch(`${apiDomain()}/api/account/${id}`)).json()

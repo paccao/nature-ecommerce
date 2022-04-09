@@ -1,4 +1,5 @@
 import { LoginCredentials } from '../models/Account'
+import apiDomain from './apiDomain'
 
 type loginResult = {
 	success: boolean
@@ -7,7 +8,7 @@ type loginResult = {
 
 const loginUser = async (credentials: LoginCredentials): Promise<loginResult> =>
 	await (
-		await fetch('http://localhost:8080/api/auth/login', {
+		await fetch(`${apiDomain()}/api/auth/login`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

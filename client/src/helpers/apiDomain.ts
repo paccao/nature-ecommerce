@@ -1,5 +1,4 @@
-export default function apiDomain() {
-	const { origin } = window.location
+export default function apiDomain(): string {
 	const production = process.env.NODE_ENV === 'production'
-	return production ? '' : origin
+	return production ? '' : 'http://localhost:8080'
 }

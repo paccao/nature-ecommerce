@@ -1,4 +1,5 @@
 import { GeneralCartResult } from '../models/Cart'
+import apiDomain from './apiDomain'
 
 const removeFromCart = async ({
 	productIdToRemove,
@@ -8,7 +9,7 @@ const removeFromCart = async ({
 	userId: string
 }): Promise<GeneralCartResult> =>
 	await (
-		await fetch('http://localhost:8080/api/cart/remove', {
+		await fetch(`${apiDomain()}/api/cart/remove`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import { GeneralCartResult } from '../models/Cart'
+import apiDomain from './apiDomain'
 
 const updateAmountInCart = async ({
 	productIdToUpdate,
@@ -10,7 +11,7 @@ const updateAmountInCart = async ({
 	newAmount: number
 }): Promise<GeneralCartResult> =>
 	await (
-		await fetch('http://localhost:8080/api/cart/updateAmount', {
+		await fetch(`${apiDomain()}/api/cart/updateAmount`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
