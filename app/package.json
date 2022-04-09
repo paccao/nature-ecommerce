@@ -1,11 +1,11 @@
 {
   "name": "backend",
-  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node-dev src/server.ts"
+    "start": "ts-node-dev src/server.ts",
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
