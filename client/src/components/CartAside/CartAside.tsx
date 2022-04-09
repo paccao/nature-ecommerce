@@ -22,7 +22,7 @@ function CartAside() {
 				<AccountDetails />
 				<h2>Cart</h2>
 				<ul className="cart-list">
-					{data?.productsToMap.map((cartProduct) => (
+					{data?.productsToMap?.map((cartProduct) => (
 						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
 					))}
 				</ul>
