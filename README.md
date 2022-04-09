@@ -26,7 +26,8 @@ npm t
 This will only open up the bare bones app as I will not share the credentials to my database. :-)
 To add a database you need to set up a .env file in the path /nature-ecommerce/app/ and connect to where your database is hosted appropriately.
 
-## If you want to check out my deployed version of the app, go to: https://nature-ecommerce.herokuapp.com/
+## If you want to check out my deployed version of the app, go to: 
+https://nature-ecommerce.herokuapp.com/
 
 
 ## This app was made based on these user stories:
