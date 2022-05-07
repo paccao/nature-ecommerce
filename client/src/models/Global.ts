@@ -13,3 +13,7 @@ export type debounceProps = {
 	delay: number
 	dependencies: number[]
 }
+
+export enum GlobalWidths {
+	Mobile = 633
+}

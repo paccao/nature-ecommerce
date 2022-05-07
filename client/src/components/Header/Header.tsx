@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import useWidth from '../../hooks/useWidth'
+import { GlobalWidths } from '../../models/Global'
 import { lightTheme } from '../../themes/appTheme'
 import MobileMenu from '../MobileMenu/MobileMenu'
 
@@ -17,7 +18,7 @@ const Header: React.FC<Props> = (props) => {
 				<a id="products" href="/products">
 					Products
 				</a>
-				{width < 633 && <MobileMenu />}
+				{width < GlobalWidths.Mobile && <MobileMenu />}
 			</nav>
 		</HeaderWrapper>
 	)
