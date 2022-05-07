@@ -19,7 +19,7 @@ export default function ProductItem({ product }: Props) {
 				</ImageWrapper>
 			</div>
 			<Information>
-				<article className="top">
+				<article className="informationTop">
 					<h4>{product.name}</h4>
 					<p className="amount-in-stock">{`In stock: ${product.stock_available}`}</p>
 				</article>
@@ -42,12 +42,6 @@ const ProductCard = styled.section`
 		display: flex;
 		flex-grow: 1;
 	}
-
-	@media screen and (max-width: 633px) {
-		.image-root {
-			flex-grow: unset;
-		}
-	}
 `
 
 const ImageWrapper = styled.div`
@@ -67,7 +61,7 @@ const ImageWrapper = styled.div`
 const Information = styled.article`
 	margin: 0.5rem 1rem 0rem 1rem;
 
-	.top {
+	.informationTop {
 		display: flex;
 		justify-content: space-between;
 	}
