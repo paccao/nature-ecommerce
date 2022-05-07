@@ -5,10 +5,13 @@ import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
 import searchStringState from '../atoms/searchStringState'
 import CartAside from '../components/CartAside/CartAside'
+import { GlobalWidths } from '../models/Global'
+import useWidth from '../hooks/useWidth'
 
 export default function Products() {
 	const { data } = useProduct()
 	const [filterState, setFilterState] = useRecoilState(searchStringState)
+	const pageWidth = useWidth()
 
 	const filteredProducts = data?.result?.filter(
 		(product) =>
@@ -29,7 +32,7 @@ export default function Products() {
 
 	return (
 		<Wrapper>
-			<CartAside />
+			{pageWidth > GlobalWidths.Mobile && <CartAside />}
 			<ProductsSection>
 				<div className="top">
 					<h1>Products</h1>
@@ -59,6 +62,11 @@ const Wrapper = styled.section`
 	display: grid;
 	grid-template-columns: minmax(300px, 350px) 7fr;
 
+	@media screen and (max-width: 633px) {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
 	@media screen and (max-width: 780px) {
 		main {
 			grid-template-columns: minmax(300px, 350px) 7fr;
@@ -73,14 +81,17 @@ const ProductsSection = styled.div`
 	}
 
 	ul {
-		display: flex;
-		justify-content: center;
+		display: grid;
+		grid-template-columns: 1fr;
 		width: 100%;
 		margin-top: 1rem;
 		gap: 1rem;
 	}
 
-	@media screen and (min-width: 500px) {
+	@media screen and (max-width: 633px) {
+		.top {
+			justify-content: center;
+		}
 		ul {
 			display: grid;
 			justify-content: unset;

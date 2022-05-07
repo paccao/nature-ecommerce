@@ -8,7 +8,7 @@ import MobileMenu from '../MobileMenu/MobileMenu'
 type Props = {}
 
 const Header: React.FC<Props> = (props) => {
-	const width = useWidth()
+	const pageWidth = useWidth()
 	return (
 		<HeaderWrapper>
 			<nav>
@@ -18,7 +18,7 @@ const Header: React.FC<Props> = (props) => {
 				<a id="products" href="/products">
 					Products
 				</a>
-				{width < GlobalWidths.Mobile && <MobileMenu />}
+				{pageWidth < GlobalWidths.Mobile && <MobileMenu />}
 			</nav>
 		</HeaderWrapper>
 	)

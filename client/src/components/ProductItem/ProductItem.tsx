@@ -42,6 +42,12 @@ const ProductCard = styled.section`
 		display: flex;
 		flex-grow: 1;
 	}
+
+	@media screen and (max-width: 633px) {
+		.image-root {
+			flex-grow: unset;
+		}
+	}
 `
 
 const ImageWrapper = styled.div`
