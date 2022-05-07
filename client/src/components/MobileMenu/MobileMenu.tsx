@@ -1,38 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
-import menuOpenState from '../../atoms/menuOpenState'
-import menuActiveClassname from '../../atoms/menuActiveClassname'
-import { useRecoilState } from 'recoil'
-import { Menu, X } from 'react-feather'
-import { lightTheme } from '../../themes/appTheme'
+import MobileMenuButton from './MobileMenuButton'
 type Props = {}
 
 const MobileMenu: React.FC<Props> = (props) => {
-	const [isOpen, setIsOpen] = useRecoilState(menuOpenState)
-	const [activeClassname, setActiveClassname] =
-		useRecoilState(menuActiveClassname)
-
-	const toggleMenu = (): void => {
-		setIsOpen(() => !isOpen)
-		setActiveClassname(() => (isOpen ? '' : 'active'))
-	}
-
 	return (
-		<MenuButton className={`${activeClassname}`} onClick={toggleMenu}>
-			{isOpen ? (
-				<X size="1.7em" color={lightTheme.orangeColor} />
-			) : (
-				<Menu size="1.7em" color={lightTheme.orangeColor} />
-			)}
-		</MenuButton>
+		<>
+			<MobileMenuButton />
+		</>
 	)
 }
-
-const MenuButton = styled.button`
-	all: unset;
-	cursor: pointer;
-	display: flex;
-	align-self: flex-end;
-`
 
 export default MobileMenu
