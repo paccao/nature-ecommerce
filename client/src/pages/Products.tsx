@@ -1,29 +1,14 @@
 import useProduct from '../hooks/useProduct'
 import ProductItem from '../components/ProductItem/ProductItem'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
 import searchStringState from '../atoms/searchStringState'
 import CartAside from '../components/CartAside/CartAside'
-import isLoggedIn from '../atoms/loggedInState'
-import { useNavigate } from 'react-router-dom'
 
 export default function Products() {
 	const { data } = useProduct()
 	const [filterState, setFilterState] = useRecoilState(searchStringState)
-
-	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
-	const navigate = useNavigate()
-
-	const loggedIn: null | string = localStorage.getItem('login')
-
-	useEffect(() => {
-		if (loggedIn && !loggedInState) {
-			setLoggedInState(true)
-
-			// navigate('/', { replace: true })
-		}
-	}, [])
 
 	const filteredProducts = data?.result?.filter(
 		(product) =>

@@ -7,8 +7,20 @@ import Error404 from './pages/Error404'
 import { lightTheme } from './themes/appTheme'
 import { Routes, Route } from 'react-router-dom'
 import GenericButton from './components/global/GenericButton'
+import { useRecoilState } from 'recoil'
+import isLoggedIn from './atoms/loggedInState'
+import { useEffect } from 'react'
 
 function App() {
+	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
+
+	const loggedIn: null | string = localStorage.getItem('login')
+
+	useEffect(() => {
+		if (loggedIn && !loggedInState) {
+			setLoggedInState(true)
+		}
+	}, [])
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStyle />
