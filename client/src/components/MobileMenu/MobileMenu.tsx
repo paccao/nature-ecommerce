@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import menuOpenState from '../../atoms/menuOpenState'
 import menuActiveClassname from '../../atoms/menuActiveClassname'
 import { useRecoilState } from 'recoil'
+import { Menu, X } from 'react-feather'
 type Props = {}
 
 const MobileMenu: React.FC<Props> = (props) => {
@@ -17,7 +18,7 @@ const MobileMenu: React.FC<Props> = (props) => {
 
 	return (
 		<MenuButton className={`${activeClassname}`} onClick={toggleMenu}>
-			<span>{isOpen ? '✖' : '📃'}</span>
+			<span>{isOpen ? <X /> : <Menu />}</span>
 		</MenuButton>
 	)
 }
