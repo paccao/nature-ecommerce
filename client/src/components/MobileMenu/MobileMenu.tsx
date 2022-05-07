@@ -4,6 +4,7 @@ import menuOpenState from '../../atoms/menuOpenState'
 import menuActiveClassname from '../../atoms/menuActiveClassname'
 import { useRecoilState } from 'recoil'
 import { Menu, X } from 'react-feather'
+import { lightTheme } from '../../themes/appTheme'
 type Props = {}
 
 const MobileMenu: React.FC<Props> = (props) => {
@@ -18,15 +19,20 @@ const MobileMenu: React.FC<Props> = (props) => {
 
 	return (
 		<MenuButton className={`${activeClassname}`} onClick={toggleMenu}>
-			<span>{isOpen ? <X /> : <Menu />}</span>
+			{isOpen ? (
+				<X size="1.7em" color={lightTheme.orangeColor} />
+			) : (
+				<Menu size="1.7em" color={lightTheme.orangeColor} />
+			)}
 		</MenuButton>
 	)
 }
 
 const MenuButton = styled.button`
 	all: unset;
-	font-size: 1.3em;
 	cursor: pointer;
+	display: flex;
+	align-self: flex-end;
 `
 
 export default MobileMenu

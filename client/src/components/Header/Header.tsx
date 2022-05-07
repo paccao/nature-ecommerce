@@ -34,7 +34,7 @@ const HeaderWrapper = styled.header`
 	nav {
 		display: flex;
 		gap: 1rem;
-		align-items: baseline;
+		align-items: flex-end;
 		font-weight: 600;
 		#logo {
 			color: ${lightTheme.accentColor};
@@ -43,7 +43,7 @@ const HeaderWrapper = styled.header`
 		}
 
 		#products {
-			font-size: 1.2em;
+			font-size: 1.35em;
 		}
 
 		#products:hover {
