@@ -10,9 +10,14 @@ import { useRecoilState } from 'recoil'
 import isLoggedIn from './atoms/loggedInState'
 import { useEffect } from 'react'
 import Header from './components/Header/Header'
+import useWindowPositionY from './hooks/useWindowPositionY'
+import currentScrollYPosition from './atoms/scrollYPosition'
 
 function App() {
 	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
+	const [scrollYPosition, setScrollYPosition] = useRecoilState(
+		currentScrollYPosition,
+	)
 
 	const loggedIn: null | string = localStorage.getItem('login')
 
@@ -21,6 +26,12 @@ function App() {
 			setLoggedInState(true)
 		}
 	}, [])
+
+	const scrollY = useWindowPositionY()
+
+	useEffect(() => {
+		setScrollYPosition(() => scrollY)
+	}, [scrollY])
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStyle />
