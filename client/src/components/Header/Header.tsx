@@ -44,11 +44,22 @@ const HeaderWrapper = styled.header`
 
 		#products {
 			font-size: 1.35em;
+			border-bottom: 2px solid ${lightTheme.textColor};
 		}
 
 		#products:hover {
 			border-bottom-color: ${lightTheme.accentColor};
 			color: ${lightTheme.accentColor};
 		}
+	}
+
+	@media screen and (max-width: 480px) {
+		#products {
+			align-self: center;
+		}
+	}
+
+	@media screen and (max-width: 390px) {
+		margin-inline: 1rem;
 	}
 `
