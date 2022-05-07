@@ -21,7 +21,7 @@ export default function Products() {
 		if (loggedIn && !loggedInState) {
 			setLoggedInState(true)
 
-			navigate('/', { replace: true })
+			// navigate('/', { replace: true })
 		}
 	}, [])
 
@@ -48,7 +48,10 @@ export default function Products() {
 			<ProductsSection>
 				<div className="top">
 					<h1>Products</h1>
-					<SearchForm role="search" onSubmit={(e) => e.preventDefault()}>
+					<SearchForm
+						role="search"
+						onSubmit={(e) => e.preventDefault()}
+					>
 						<input
 							autoFocus
 							type="text"
