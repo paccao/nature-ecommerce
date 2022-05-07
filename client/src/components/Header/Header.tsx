@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { lightTheme } from '../../themes/appTheme'
-import GenericButton from '../global/GenericButton'
 
 type Props = {}
 
@@ -15,7 +14,6 @@ const Header: React.FC<Props> = (props) => {
 				<a id="products" href="/products">
 					Products
 				</a>
-				<GenericButton type="button" innerText="Account" />
 			</nav>
 		</HeaderWrapper>
 	)
@@ -40,16 +38,12 @@ const HeaderWrapper = styled.header`
 		}
 
 		#products {
-			font-size: 1.1em;
+			font-size: 1.2em;
 		}
 
 		#products:hover {
 			border-bottom-color: ${lightTheme.accentColor};
 			color: ${lightTheme.accentColor};
 		}
-	}
-
-	nav:last-child {
-		font-size: 1.1em;
 	}
 `
