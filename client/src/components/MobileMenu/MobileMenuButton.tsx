@@ -5,9 +5,7 @@ import menuActiveClassname from '../../atoms/menuActiveClassname'
 import { useRecoilState } from 'recoil'
 import { Menu, X } from 'react-feather'
 import { lightTheme } from '../../themes/appTheme'
-type Props = {
-	fixed?: boolean
-}
+type Props = {}
 
 const MobileMenuButton: React.FC<Props> = (props) => {
 	const [isOpen, setIsOpen] = useRecoilState(menuOpenState)
@@ -35,7 +33,8 @@ const MenuButton = styled.button<Props>`
 	display: flex;
 	align-self: flex-end;
 	transform: translateY(3px);
-	@media screen and (max-width: 480px) {
+
+	@media screen and (max-width: 491px) {
 		align-self: center;
 	}
 `

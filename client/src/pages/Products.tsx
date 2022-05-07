@@ -7,11 +7,16 @@ import searchStringState from '../atoms/searchStringState'
 import CartAside from '../components/CartAside/CartAside'
 import { GlobalWidths } from '../models/Global'
 import useWidth from '../hooks/useWidth'
+import currentScrollYPosition from '../atoms/scrollYPosition'
+import MobileMenuButton from '../components/MobileMenu/MobileMenuButton'
 
 export default function Products() {
 	const { data } = useProduct()
 	const [filterState, setFilterState] = useRecoilState(searchStringState)
 	const pageWidth = useWidth()
+	const [scrollYPosition, setScrollYPosition] = useRecoilState(
+		currentScrollYPosition,
+	)
 
 	const filteredProducts = data?.result?.filter(
 		(product) =>
@@ -31,33 +36,37 @@ export default function Products() {
 	))
 
 	return (
-		<Wrapper>
-			{pageWidth > GlobalWidths.Mobile && <CartAside />}
-			<ProductsSection>
-				<div className="top">
-					<h1>Products</h1>
-					<SearchForm
-						role="search"
-						onSubmit={(e) => e.preventDefault()}
-					>
-						<input
-							autoFocus
-							type="text"
-							placeholder="Filter by name.."
-							onChange={(e) => onChangeHandler(e)}
-						/>
-					</SearchForm>
-				</div>
-				<ul>
-					{filterState === ''
-						? renderAllProductItems
-						: renderfilteredProductItems}
-				</ul>
-			</ProductsSection>
-		</Wrapper>
+		<>
+			{pageWidth <= 633 && scrollYPosition >= 85 ? (
+				<MobileMenuButton />
+			) : null}
+			<Wrapper>
+				{pageWidth > GlobalWidths.Mobile && <CartAside />}
+				<ProductsSection>
+					<div className="top">
+						<h1>Products</h1>
+						<SearchForm
+							role="search"
+							onSubmit={(e) => e.preventDefault()}
+						>
+							<input
+								autoFocus
+								type="text"
+								placeholder="Filter by name.."
+								onChange={(e) => onChangeHandler(e)}
+							/>
+						</SearchForm>
+					</div>
+					<ul>
+						{filterState === ''
+							? renderAllProductItems
+							: renderfilteredProductItems}
+					</ul>
+				</ProductsSection>
+			</Wrapper>
+		</>
 	)
 }
-
 const Wrapper = styled.section`
 	display: grid;
 	grid-template-columns: minmax(300px, 350px) 7fr;

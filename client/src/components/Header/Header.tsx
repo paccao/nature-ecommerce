@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import useWidth from '../../hooks/useWidth'
 import { GlobalWidths } from '../../models/Global'
@@ -8,6 +9,7 @@ import MobileMenu from '../MobileMenu/MobileMenu'
 type Props = {}
 
 const Header: React.FC<Props> = (props) => {
+	const location = useLocation()
 	const pageWidth = useWidth()
 	return (
 		<HeaderWrapper>
@@ -18,7 +20,8 @@ const Header: React.FC<Props> = (props) => {
 				<a id="products" href="/products">
 					Products
 				</a>
-				{pageWidth < GlobalWidths.Mobile && <MobileMenu />}
+				{pageWidth < GlobalWidths.Mobile &&
+					location.pathname === '/products' && <MobileMenu />}
 			</nav>
 		</HeaderWrapper>
 	)
@@ -53,7 +56,7 @@ const HeaderWrapper = styled.header`
 		}
 	}
 
-	@media screen and (max-width: 480px) {
+	@media screen and (max-width: 491px) {
 		#products {
 			align-self: center;
 		}
