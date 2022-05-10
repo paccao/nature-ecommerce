@@ -23,15 +23,20 @@ function CartAside() {
 				<h2>Cart</h2>
 				<ul className="cart-list">
 					{data?.productsToMap?.map((cartProduct) => (
-						<CartItem key={cartProduct.id} cartProduct={cartProduct} />
+						<CartItem
+							key={cartProduct.id}
+							cartProduct={cartProduct}
+						/>
 					))}
 				</ul>
 				<form className="bottom" onSubmit={submitHandler}>
 					<p data-testid="cart-total-cost">
-						Total cost: {totalCostResult?.totalCost}
+						Total cost: {totalCostResult?.totalCost || '0'}
 						kr.
 					</p>
-					<GenericButton {...{ innerText: 'Checkout', type: 'submit' }} />
+					<GenericButton
+						{...{ innerText: 'Checkout', type: 'submit' }}
+					/>
 				</form>
 			</section>
 		</AsideWrapper>
