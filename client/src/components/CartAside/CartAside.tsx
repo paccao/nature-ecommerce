@@ -1,6 +1,7 @@
 import { SyntheticEvent } from 'react'
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
+import useHeight from '../../hooks/useHeight'
 import useTotalCost from '../../hooks/useTotalCost'
 import AccountDetails from '../AccountDetails/AccountDetails'
 import GenericButton from '../global/GenericButton'
@@ -9,6 +10,7 @@ import CartItem from './CartItem'
 function CartAside() {
 	const { data } = useCart()
 	const { data: totalCostResult } = useTotalCost()
+	const windowHeight = useHeight()
 
 	function submitHandler(e: SyntheticEvent) {
 		e.preventDefault()
@@ -17,7 +19,7 @@ function CartAside() {
 	}
 
 	return (
-		<AsideWrapper>
+		<AsideWrapper windowHeight={windowHeight}>
 			<section className="section-wrapper">
 				<AccountDetails />
 				<h2>Cart</h2>
@@ -45,14 +47,16 @@ function CartAside() {
 
 export default CartAside
 
-const AsideWrapper = styled.aside`
+const AsideWrapper = styled.aside<{ windowHeight: number }>`
 	background-color: #fff;
 	min-height: 87vh;
+	height: ${(props) =>
+		props.windowHeight - document.documentElement.clientHeight * 0.65}px;
 	border-radius: ${(props) => props.theme.borderRadius};
 	border-bottom-right-radius: ${(props) => props.theme.borderRadius};
 	border-top-right-radius: ${(props) => props.theme.borderRadius};
 	border: 2px solid #dcd3d3;
-	padding: 1rem 1.1rem 0.8rem 1.1rem;
+	padding: 1rem 0.2rem 0.8rem 0.2rem;
 	margin-right: 1rem;
 
 	.section-wrapper {
@@ -62,9 +66,11 @@ const AsideWrapper = styled.aside`
 		height: 100%;
 
 		.cart-list {
+			overflow-y: scroll;
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
+			padding: 1rem 0.7rem;
 		}
 
 		.bottom {
@@ -72,6 +78,8 @@ const AsideWrapper = styled.aside`
 			display: flex;
 			align-items: flex-end;
 			justify-content: space-between;
+			min-height: auto;
+			padding: 1.1rem 1.1rem 0rem 1.1rem;
 
 			p {
 				font-size: 1em;
