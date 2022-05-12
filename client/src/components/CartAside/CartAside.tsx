@@ -64,9 +64,10 @@ const AsideWrapper = styled.aside<{ windowHeight: number }>`
 		flex-direction: column;
 		justify-content: space-between;
 		height: 100%;
+		padding: 0rem 1.1rem;
 
 		.cart-list {
-			overflow-y: scroll;
+			overflow: auto;
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
@@ -79,7 +80,7 @@ const AsideWrapper = styled.aside<{ windowHeight: number }>`
 			align-items: flex-end;
 			justify-content: space-between;
 			min-height: auto;
-			padding: 1.1rem 1.1rem 0rem 1.1rem;
+			padding: 1.1rem 0rem 0rem 0rem;
 
 			p {
 				font-size: 1em;

@@ -56,7 +56,9 @@ function CartItemInputButtons({
 					type="button"
 					onClick={(_) =>
 						setAmountToAddState((prevCount) =>
-							amountToAddState >= 99 ? (prevCount = 1) : prevCount + 1,
+							amountToAddState >= 99
+								? (prevCount = 1)
+								: prevCount + 1,
 						)
 					}
 					value="+"
@@ -64,7 +66,9 @@ function CartItemInputButtons({
 					data-field="quantity"
 				/>
 			</div>
-			{buttonText && <GenericButton innerText={buttonText} type="submit" />}
+			{buttonText && (
+				<GenericButton innerText={buttonText} type="submit" />
+			)}
 		</Form>
 	)
 }
@@ -77,6 +81,8 @@ const Form = styled.form`
 	justify-content: space-around;
 	gap: 0.3rem;
 	min-width: 50px;
+	height: max-content;
+	align-self: center;
 
 	.input-group input {
 		all: unset;
@@ -85,6 +91,7 @@ const Form = styled.form`
 		-webkit-appearance: textfield !important;
 		-moz-appearance: textfield !important;
 		appearance: textfield !important;
+		text-align: center;
 	}
 
 	.input-group input[type='number']::-webkit-inner-spin-button,
@@ -97,6 +104,7 @@ const Form = styled.form`
 		border-radius: ${(props) => props.theme.borderRadius};
 		border: 1px solid #dcd3d3;
 		line-height: 100%;
+		padding: 0rem 0rem;
 
 		.quantity-field {
 			width: 60%;
@@ -108,7 +116,7 @@ const Form = styled.form`
 		}
 		.cart-button {
 			width: 20%;
-			padding: 0.2rem 0.35rem;
+			padding: 0.2rem 0.3rem;
 			text-align: center;
 			cursor: pointer;
 			transition: all 0.2s;
