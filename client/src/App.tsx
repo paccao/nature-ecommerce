@@ -15,9 +15,7 @@ import currentScrollYPosition from './atoms/scrollYPosition'
 
 function App() {
 	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
-	const [scrollYPosition, setScrollYPosition] = useRecoilState(
-		currentScrollYPosition,
-	)
+	const [_, setScrollYPosition] = useRecoilState(currentScrollYPosition)
 
 	const loggedIn: null | string = localStorage.getItem('login')
 

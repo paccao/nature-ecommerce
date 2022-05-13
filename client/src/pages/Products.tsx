@@ -14,9 +14,7 @@ export default function Products() {
 	const { data } = useProduct()
 	const [filterState, setFilterState] = useRecoilState(searchStringState)
 	const pageWidth = useWidth()
-	const [scrollYPosition, setScrollYPosition] = useRecoilState(
-		currentScrollYPosition,
-	)
+	const [scrollYPosition, _] = useRecoilState(currentScrollYPosition)
 
 	const filteredProducts = data?.result?.filter(
 		(product) =>
@@ -70,6 +68,7 @@ export default function Products() {
 const Wrapper = styled.section`
 	display: grid;
 	grid-template-columns: minmax(300px, 350px) 7fr;
+	position: relative;
 
 	@media screen and (max-width: 633px) {
 		display: grid;

@@ -58,7 +58,9 @@ const AsideWrapper = styled.aside<{ windowHeight: number }>`
 	border: 2px solid #dcd3d3;
 	padding: 1rem 0.2rem 0.8rem 0.2rem;
 	margin-right: 1rem;
-
+	position: sticky;
+	position: -webkit-sticky;
+	top: 7vh;
 	.section-wrapper {
 		display: flex;
 		flex-direction: column;
