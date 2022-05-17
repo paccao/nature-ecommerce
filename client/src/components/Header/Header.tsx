@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import useWidth from '../../hooks/useWidth'
+import useWindowPositionY from '../../hooks/useWindowPositionY'
 import { GlobalWidths } from '../../models/Global'
 import { lightTheme } from '../../themes/appTheme'
 import MobileMenu from '../MobileMenu/MobileMenu'
@@ -11,6 +12,7 @@ type Props = {}
 const Header: React.FC<Props> = (props) => {
 	const location = useLocation()
 	const pageWidth = useWidth()
+	const windowPositionY = useWindowPositionY()
 	return (
 		<HeaderWrapper>
 			<nav>
@@ -20,8 +22,12 @@ const Header: React.FC<Props> = (props) => {
 				<a id="products" href="/products">
 					Products
 				</a>
-				{pageWidth < GlobalWidths.Mobile &&
+				{windowPositionY <= 85 &&
+					pageWidth < GlobalWidths.Mobile &&
 					location.pathname === '/products' && <MobileMenu />}
+				{windowPositionY >= 85 &&
+					pageWidth < GlobalWidths.Mobile &&
+					location.pathname === '/products' && <MobileMenu fixed />}
 			</nav>
 		</HeaderWrapper>
 	)
@@ -33,6 +39,7 @@ const HeaderWrapper = styled.header`
 	min-height: 10vh;
 	padding: 1rem 0rem;
 	margin-inline: 3rem;
+	position: relative;
 
 	nav {
 		display: flex;

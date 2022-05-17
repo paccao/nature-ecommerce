@@ -60,7 +60,7 @@ const AsideWrapper = styled.aside<{ windowHeight: number }>`
 	margin-right: 1rem;
 	position: sticky;
 	position: -webkit-sticky;
-	top: 7vh;
+	top: 10vh;
 	.section-wrapper {
 		display: flex;
 		flex-direction: column;

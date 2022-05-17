@@ -35,9 +35,6 @@ export default function Products() {
 
 	return (
 		<>
-			{pageWidth <= 633 && scrollYPosition >= 85 ? (
-				<MobileMenuButton />
-			) : null}
 			<Wrapper>
 				{pageWidth > GlobalWidths.Mobile && <CartAside />}
 				<ProductsSection>
