@@ -12,6 +12,8 @@ import { useEffect } from 'react'
 import Header from './components/Header/Header'
 import useWindowPositionY from './hooks/useWindowPositionY'
 import currentScrollYPosition from './atoms/scrollYPosition'
+import GenericButton from './components/global/GenericButton'
+import { CornerLeftUp } from 'react-feather'
 
 function App() {
 	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
@@ -30,6 +32,11 @@ function App() {
 	useEffect(() => {
 		setScrollYPosition(() => scrollY)
 	}, [scrollY])
+
+	const navigateToTop = () => {
+		document.body.scrollTop = 0
+		document.documentElement.scrollTop = 0
+	}
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStyle />
@@ -43,6 +50,11 @@ function App() {
 						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
+					<GenericButton
+						type="button"
+						icon={<CornerLeftUp />}
+						clickCallback={navigateToTop}
+					/>
 				</main>
 			</AppWrapper>
 		</ThemeProvider>

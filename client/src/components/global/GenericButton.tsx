@@ -2,17 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 
 type Props = {
-	innerText: string
+	innerText?: string
 	type: 'button' | 'submit' | 'reset' | undefined
+	icon?: React.ReactNode
+	clickCallback?: () => void
 }
 
-function GenericButton({ innerText, type }: Props) {
-	return <Button type={type}>{innerText}</Button>
+function GenericButton({ innerText, type, icon, clickCallback }: Props) {
+	return (
+		<Button type={type} onClick={clickCallback}>
+			{innerText}
+			{icon}
+		</Button>
+	)
 }
 
 export default GenericButton
 
-const Button = styled.button`
+const Button = styled.button<Props>`
 	all: unset;
 	cursor: pointer;
 	padding: 0.3rem 0.7rem;

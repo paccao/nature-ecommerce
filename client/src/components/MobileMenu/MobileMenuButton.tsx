@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import menuOpenState from '../../atoms/menuOpenState'
 import menuActiveClassname from '../../atoms/menuActiveClassname'
 import { useRecoilState } from 'recoil'
-import { Menu, X } from 'react-feather'
+import { ShoppingCart, X } from 'react-feather'
 import { lightTheme } from '../../themes/appTheme'
 type Props = {
 	fixed?: boolean
@@ -23,7 +23,7 @@ const MobileMenuButton: React.FC<Props> = (props) => {
 			{isOpen ? (
 				<X size="1.7em" color={lightTheme.textColor} />
 			) : (
-				<Menu size="1.7em" color={lightTheme.textColor} />
+				<ShoppingCart size="1.7em" color={lightTheme.textColor} />
 			)}
 		</MenuButton>
 	)
