@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 const { toBeInTheDocument } = require('@testing-library/jest-dom')
 import userEvent from '@testing-library/user-event'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -8,7 +8,6 @@ import Login from '../Login'
 import Error404 from '../Error404'
 
 import { Product } from '../../models/Product'
-import ProductItem from '../../components/ProductItem/ProductItem'
 import useProduct from '../../hooks/useProduct'
 import { RecoilRoot } from 'recoil'
 import { BrowserRouter } from 'react-router-dom'

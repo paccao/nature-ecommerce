@@ -1,11 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
-import LandingPage from './pages/LandingPage'
 import Products from './pages/Products'
 import Login from './pages/Login'
 import Error404 from './pages/Error404'
 import { lightTheme } from './themes/appTheme'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import isLoggedIn from './atoms/loggedInState'
 import { useEffect } from 'react'
@@ -18,6 +17,7 @@ import { CornerLeftUp } from 'react-feather'
 function App() {
 	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
 	const [_, setScrollYPosition] = useRecoilState(currentScrollYPosition)
+	const location = useLocation()
 
 	const loggedIn: null | string = localStorage.getItem('login')
 
@@ -45,16 +45,17 @@ function App() {
 
 				<main>
 					<Routes>
-						<Route path="/" element={<LandingPage />} />
-						<Route path="/products" element={<Products />} />
+						<Route path="/" element={<Products />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
-					<GenericButton
-						type="button"
-						icon={<CornerLeftUp />}
-						clickCallback={navigateToTop}
-					/>
+					{location.pathname === '/' && (
+						<GenericButton
+							type="button"
+							icon={<CornerLeftUp />}
+							clickCallback={navigateToTop}
+						/>
+					)}
 				</main>
 			</AppWrapper>
 		</ThemeProvider>
