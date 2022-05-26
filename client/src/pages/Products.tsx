@@ -34,7 +34,7 @@ export default function Products() {
 		<>
 			<Wrapper>
 				{pageWidth > GlobalWidths.Tablet && <CartAside />}
-				<ProductsSection>
+				<div>
 					<div className="top">
 						<h1>Products</h1>
 						<SearchForm
@@ -54,7 +54,7 @@ export default function Products() {
 							? renderAllProductItems
 							: renderfilteredProductItems}
 					</ul>
-				</ProductsSection>
+				</div>
 			</Wrapper>
 		</>
 	)
@@ -63,16 +63,9 @@ const Wrapper = styled.section`
 	display: grid;
 	position: relative;
 
-	@media screen and (min-width: 1000px) {
-		grid-template-columns: minmax(300px, 350px) 7fr;
-	}
-`
-
-const ProductsSection = styled.div`
 	.top {
 		display: flex;
 		align-items: baseline;
-		margin-left: 2rem;
 	}
 
 	ul {
@@ -81,26 +74,34 @@ const ProductsSection = styled.div`
 		width: 100%;
 		margin-top: 1rem;
 		gap: 1rem;
+		justify-items: center;
 	}
 
-	@media screen and (max-width: 390px) {
+	@media screen and (min-width: 390px) {
 		.top {
-			margin-left: 0rem;
+			margin-left: 2rem;
+		}
+	}
+	@media screen and (min-width: 500px) {
+		ul {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media screen and (min-width: 700px) {
+		ul {
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 
-	@media screen and (max-width: 633px) {
-		ul {
-			justify-items: center;
-		}
-	}
-	@media screen and (min-width: 780px) {
+	@media screen and (min-width: 1000px) {
+		grid-template-columns: minmax(300px, 350px) 7fr;
+
 		ul {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
-	@media screen and (min-width: 1150px) {
+	@media screen and (min-width: 1200px) {
 		ul {
 			grid-template-columns: repeat(3, 1fr);
 		}
