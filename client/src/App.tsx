@@ -15,6 +15,13 @@ import GenericButton from './components/global/GenericButton'
 import { CornerLeftUp } from 'react-feather'
 import useWidth from './hooks/useWidth'
 import { GlobalWidths } from './models/Global'
+import menuOpenState from './atoms/menuOpenState'
+import CartModal from './components/CartModal/CartModal'
+
+const navigateToTop = () => {
+	document.body.scrollTop = 0
+	document.documentElement.scrollTop = 0
+}
 
 function App() {
 	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
@@ -23,6 +30,7 @@ function App() {
 	const windowsWidth = useWidth()
 
 	const loggedIn: null | string = localStorage.getItem('login')
+	const [isOpen, __] = useRecoilState(menuOpenState)
 
 	useEffect(() => {
 		if (loggedIn && !loggedInState) {
@@ -36,10 +44,6 @@ function App() {
 		setScrollYPosition(() => scrollY)
 	}, [scrollY])
 
-	const navigateToTop = () => {
-		document.body.scrollTop = 0
-		document.documentElement.scrollTop = 0
-	}
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStyle />
@@ -59,6 +63,7 @@ function App() {
 								clickCallback={navigateToTop}
 							/>
 						)}
+					{isOpen && <CartModal />}
 				</main>
 			</AppWrapper>
 		</ThemeProvider>

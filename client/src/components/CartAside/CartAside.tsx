@@ -1,5 +1,7 @@
 import { SyntheticEvent } from 'react'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
+import menuOpenState from '../../atoms/menuOpenState'
 import useCart from '../../hooks/useCart'
 import useHeight from '../../hooks/useHeight'
 import useTotalCost from '../../hooks/useTotalCost'
@@ -11,6 +13,7 @@ function CartAside() {
 	const { data } = useCart()
 	const { data: totalCostResult } = useTotalCost()
 	const windowHeight = useHeight()
+	const [isOpen, __] = useRecoilState(menuOpenState)
 
 	function submitHandler(e: SyntheticEvent) {
 		e.preventDefault()
@@ -19,7 +22,7 @@ function CartAside() {
 	}
 
 	return (
-		<AsideWrapper windowHeight={windowHeight}>
+		<AsideWrapper windowHeight={windowHeight} isOpen={isOpen}>
 			<section className="section-wrapper">
 				<AccountDetails />
 				<h2>Cart</h2>
@@ -47,7 +50,7 @@ function CartAside() {
 
 export default CartAside
 
-const AsideWrapper = styled.aside<{ windowHeight: number }>`
+const AsideWrapper = styled.aside<{ windowHeight: number; isOpen: boolean }>`
 	background-color: #fff;
 	min-height: 87vh;
 	height: ${(props) =>
@@ -61,6 +64,10 @@ const AsideWrapper = styled.aside<{ windowHeight: number }>`
 	position: sticky;
 	position: -webkit-sticky;
 	top: 10vh;
+
+	// TODO: This doesnt work, look up why
+	visibility: ${(props) => (props.isOpen ? 'none' : 'unset')};
+
 	.section-wrapper {
 		display: flex;
 		flex-direction: column;

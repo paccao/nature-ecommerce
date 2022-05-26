@@ -7,6 +7,7 @@ import searchStringState from '../atoms/searchStringState'
 import CartAside from '../components/CartAside/CartAside'
 import { GlobalWidths } from '../models/Global'
 import useWidth from '../hooks/useWidth'
+import menuOpenState from '../atoms/menuOpenState'
 
 export default function Products() {
 	const { data } = useProduct()

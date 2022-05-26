@@ -20,27 +20,29 @@ function CartModal() {
 
 	return (
 		<Wrapper>
-			<section className="section-wrapper">
-				<AccountDetails />
-				<h2>Cart</h2>
-				<ul className="cart-list">
-					{data?.productsToMap?.map((cartProduct) => (
-						<CartItem
-							key={cartProduct.id}
-							cartProduct={cartProduct}
+			<div className="innerWrapper">
+				<section className="section-wrapper">
+					<AccountDetails />
+					<h2>Cart</h2>
+					<ul className="cart-list">
+						{data?.productsToMap?.map((cartProduct) => (
+							<CartItem
+								key={cartProduct.id}
+								cartProduct={cartProduct}
+							/>
+						))}
+					</ul>
+					<form className="bottom" onSubmit={submitHandler}>
+						<p data-testid="cart-total-cost">
+							Total cost: {totalCostResult?.totalCost || '0'}
+							kr.
+						</p>
+						<GenericButton
+							{...{ innerText: 'Checkout', type: 'submit' }}
 						/>
-					))}
-				</ul>
-				<form className="bottom" onSubmit={submitHandler}>
-					<p data-testid="cart-total-cost">
-						Total cost: {totalCostResult?.totalCost || '0'}
-						kr.
-					</p>
-					<GenericButton
-						{...{ innerText: 'Checkout', type: 'submit' }}
-					/>
-				</form>
-			</section>
+					</form>
+				</section>
+			</div>
 		</Wrapper>
 	)
 }
@@ -48,14 +50,17 @@ function CartModal() {
 export default CartModal
 
 const Wrapper = styled.div`
-	background-color: #fff;
-	min-height: 87vh;
-	border-radius: ${(props) => props.theme.borderRadius};
-	border: 2px solid #dcd3d3;
-	padding: 1rem 0.2rem 0.8rem 0.2rem;
-	margin: 1rem;
-	position: absolute;
-	position: -webkit-absolute;
+	.innerWrapper {
+		background-color: #fff;
+		min-height: 87vh;
+		border-radius: ${(props) => props.theme.borderRadius};
+		border: 2px solid #dcd3d3;
+		padding: 1rem 0.2rem 0.8rem 0.2rem;
+		margin: 1rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 	.section-wrapper {
 		display: flex;
 		flex-direction: column;
