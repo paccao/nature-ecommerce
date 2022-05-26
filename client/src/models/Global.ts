@@ -15,5 +15,6 @@ export type debounceProps = {
 }
 
 export enum GlobalWidths {
-	Mobile = 633
+	Mobile = 633,
+	Tablet = 1000
 }

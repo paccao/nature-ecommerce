@@ -17,7 +17,7 @@ const Header: React.FC<Props> = (props) => {
 				<a id="logo" href="/">
 					Nature e-commerce
 				</a>
-				{pageWidth < GlobalWidths.Mobile &&
+				{pageWidth < GlobalWidths.Tablet &&
 					location.pathname === '/' && <MobileMenu />}
 			</nav>
 		</HeaderWrapper>
@@ -28,15 +28,18 @@ export default Header
 
 const HeaderWrapper = styled.header`
 	min-height: 10vh;
-	padding: 1rem 0rem;
-	margin-inline: 3rem;
+	padding: 1rem 3rem;
 	position: relative;
+	background-color: #fff;
+	margin-bottom: 0.5rem;
 
 	nav {
 		display: flex;
 		gap: 1rem;
-		align-items: flex-end;
+		align-items: center;
 		font-weight: 600;
+		height: 100%;
+
 		#logo {
 			color: ${lightTheme.accentColor};
 			font-size: 1.6em;
@@ -61,6 +64,6 @@ const HeaderWrapper = styled.header`
 	}
 
 	@media screen and (max-width: 390px) {
-		margin-inline: 1rem;
+		padding-inline: 1rem;
 	}
 `

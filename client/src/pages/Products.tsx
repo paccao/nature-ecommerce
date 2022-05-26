@@ -7,14 +7,11 @@ import searchStringState from '../atoms/searchStringState'
 import CartAside from '../components/CartAside/CartAside'
 import { GlobalWidths } from '../models/Global'
 import useWidth from '../hooks/useWidth'
-import currentScrollYPosition from '../atoms/scrollYPosition'
-import MobileMenuButton from '../components/MobileMenu/MobileMenuButton'
 
 export default function Products() {
 	const { data } = useProduct()
 	const [filterState, setFilterState] = useRecoilState(searchStringState)
 	const pageWidth = useWidth()
-	const [scrollYPosition, _] = useRecoilState(currentScrollYPosition)
 
 	const filteredProducts = data?.result?.filter(
 		(product) =>
@@ -36,7 +33,7 @@ export default function Products() {
 	return (
 		<>
 			<Wrapper>
-				{pageWidth > GlobalWidths.Mobile && <CartAside />}
+				{pageWidth > GlobalWidths.Tablet && <CartAside />}
 				<ProductsSection>
 					<div className="top">
 						<h1>Products</h1>
@@ -64,18 +61,10 @@ export default function Products() {
 }
 const Wrapper = styled.section`
 	display: grid;
-	grid-template-columns: minmax(300px, 350px) 7fr;
 	position: relative;
 
-	@media screen and (max-width: 633px) {
-		display: grid;
-		grid-template-columns: 1fr;
-	}
-
-	@media screen and (max-width: 780px) {
-		main {
-			grid-template-columns: minmax(300px, 350px) 7fr;
-		}
+	@media screen and (min-width: 1000px) {
+		grid-template-columns: minmax(300px, 350px) 7fr;
 	}
 `
 
@@ -83,6 +72,7 @@ const ProductsSection = styled.div`
 	.top {
 		display: flex;
 		align-items: baseline;
+		margin-left: 2rem;
 	}
 
 	ul {
@@ -93,16 +83,15 @@ const ProductsSection = styled.div`
 		gap: 1rem;
 	}
 
-	@media screen and (max-width: 633px) {
+	@media screen and (max-width: 390px) {
 		.top {
-			justify-content: center;
+			margin-left: 0rem;
 		}
+	}
+
+	@media screen and (max-width: 633px) {
 		ul {
-			display: grid;
-			justify-content: unset;
 			justify-items: center;
-			grid-template-columns: 1fr;
-			grid-auto-rows: auto;
 		}
 	}
 	@media screen and (min-width: 780px) {
