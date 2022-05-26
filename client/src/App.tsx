@@ -43,9 +43,8 @@ function App() {
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStyle />
+			<Header />
 			<AppWrapper className="App">
-				<Header />
-
 				<main>
 					<Routes>
 						<Route path="/" element={<Products />} />

@@ -17,7 +17,7 @@ const Header: React.FC<Props> = (props) => {
 				<a id="logo" href="/">
 					Nature e-commerce
 				</a>
-				{pageWidth < GlobalWidths.Tablet &&
+				{pageWidth <= GlobalWidths.Tablet &&
 					location.pathname === '/' && <MobileMenu />}
 			</nav>
 		</HeaderWrapper>
