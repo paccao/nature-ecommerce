@@ -13,11 +13,14 @@ import useWindowPositionY from './hooks/useWindowPositionY'
 import currentScrollYPosition from './atoms/scrollYPosition'
 import GenericButton from './components/global/GenericButton'
 import { CornerLeftUp } from 'react-feather'
+import useWidth from './hooks/useWidth'
+import { GlobalWidths } from './models/Global'
 
 function App() {
 	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
 	const [_, setScrollYPosition] = useRecoilState(currentScrollYPosition)
 	const location = useLocation()
+	const windowsWidth = useWidth()
 
 	const loggedIn: null | string = localStorage.getItem('login')
 
@@ -49,13 +52,14 @@ function App() {
 						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
-					{location.pathname === '/' && (
-						<GenericButton
-							type="button"
-							icon={<CornerLeftUp />}
-							clickCallback={navigateToTop}
-						/>
-					)}
+					{location.pathname === '/' &&
+						windowsWidth <= GlobalWidths.Tablet && (
+							<GenericButton
+								type="button"
+								icon={<CornerLeftUp />}
+								clickCallback={navigateToTop}
+							/>
+						)}
 				</main>
 			</AppWrapper>
 		</ThemeProvider>

@@ -72,7 +72,7 @@ const Wrapper = styled.section`
 		display: grid;
 		grid-template-columns: 1fr;
 		width: 100%;
-		margin-top: 1rem;
+		margin: 1rem 0rem;
 		gap: 1rem;
 		justify-items: center;
 	}
