@@ -65,7 +65,7 @@ const Wrapper = styled.section`
 
 	.top {
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 	}
 
 	ul {
