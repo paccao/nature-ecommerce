@@ -27,7 +27,7 @@ function App() {
 	const [loggedInState, setLoggedInState] = useRecoilState(isLoggedIn)
 	const [_, setScrollYPosition] = useRecoilState(currentScrollYPosition)
 	const location = useLocation()
-	const windowsWidth = useWidth()
+	const windowWidth = useWidth()
 
 	const loggedIn: null | string = localStorage.getItem('login')
 	const [isOpen, __] = useRecoilState(menuOpenState)
@@ -56,14 +56,16 @@ function App() {
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 					{location.pathname === '/' &&
-						windowsWidth <= GlobalWidths.Tablet && (
+						windowWidth <= GlobalWidths.Tablet && (
 							<GenericButton
 								type="button"
 								icon={<CornerLeftUp />}
 								clickCallback={navigateToTop}
 							/>
 						)}
-					{isOpen && <CartModal />}
+					{isOpen && windowWidth <= GlobalWidths.Tablet && (
+						<CartModal />
+					)}
 				</main>
 			</AppWrapper>
 		</ThemeProvider>

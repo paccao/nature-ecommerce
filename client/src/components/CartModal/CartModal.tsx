@@ -63,10 +63,6 @@ const Wrapper = styled.div`
 	width: 100%;
 
 	.section-wrapper {
-		/* display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		height: 100%; */
 		padding: 0rem 1.1rem;
 
 		> header {
