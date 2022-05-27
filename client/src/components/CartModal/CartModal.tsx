@@ -6,6 +6,7 @@ import useTotalCost from '../../hooks/useTotalCost'
 import AccountDetails from '../AccountDetails/AccountDetails'
 import GenericButton from '../global/GenericButton'
 import CartItem from '../CartAside/CartItem'
+import CloseModalButton from '../CloseModalButton/CloseModalButton'
 
 function CartModal() {
 	const { data } = useCart()
@@ -23,7 +24,10 @@ function CartModal() {
 			<div className="innerWrapper">
 				<section className="section-wrapper">
 					<AccountDetails />
-					<h2>Cart</h2>
+					<header>
+						<h2>Cart</h2>
+						<CloseModalButton />
+					</header>
 					<ul className="cart-list">
 						{data?.productsToMap?.map((cartProduct) => (
 							<CartItem
@@ -50,23 +54,27 @@ function CartModal() {
 export default CartModal
 
 const Wrapper = styled.div`
-	.innerWrapper {
-		background-color: #fff;
-		min-height: 87vh;
-		border-radius: ${(props) => props.theme.borderRadius};
-		border: 2px solid #dcd3d3;
-		padding: 1rem 0.2rem 0.8rem 0.2rem;
-		margin: 1rem;
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
+	background-color: #fff;
+	min-height: 100vh;
+	padding: 1rem 0.2rem 0.8rem 0.2rem;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+
 	.section-wrapper {
-		display: flex;
+		/* display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 100%;
+		height: 100%; */
 		padding: 0rem 1.1rem;
+
+		> header {
+			margin-top: 0.5rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 
 		.cart-list {
 			overflow: auto;

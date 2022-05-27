@@ -48,7 +48,7 @@ function App() {
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStyle />
 			<Header />
-			<AppWrapper className="App">
+			<AppWrapper className="App" isOpen={isOpen}>
 				<main>
 					<Routes>
 						<Route path="/" element={<Products />} />
@@ -75,7 +75,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	`
 
-const AppWrapper = styled.div`
+const AppWrapper = styled.div<{ isOpen: boolean }>`
 	max-width: 1368px;
 	min-height: 100vh;
 	margin: 0 auto;

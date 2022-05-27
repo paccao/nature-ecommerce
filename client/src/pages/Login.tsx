@@ -61,6 +61,7 @@ function Login() {
 							pattern: /^[A-Za-z]{3,20}$/,
 						})}
 						placeholder="username"
+						autoFocus
 					/>
 					{errors.username && (
 						<ErrorText>
@@ -86,7 +87,9 @@ function Login() {
 					{loginSuccess === 'false' && (
 						<ErrorText>Incorrect credentials, try again.</ErrorText>
 					)}
-					<GenericButton {...{ innerText: 'Log in', type: 'submit' }} />
+					<GenericButton
+						{...{ innerText: 'Log in', type: 'submit' }}
+					/>
 				</form>
 			</section>
 		</Wrapper>
