@@ -30,9 +30,12 @@ const Wrapper = styled.div`
 	display: flex;
 	align-items: baseline;
 	font-size: 1.05em;
+	width: 100%;
 
 	article {
 		color: ${(props) => props.theme.accentColor};
+		width: 100%;
+		text-align: center;
 	}
 
 	button {

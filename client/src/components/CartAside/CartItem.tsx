@@ -104,13 +104,17 @@ const InfoWrapper = styled.div`
 		button {
 			all: unset;
 			cursor: pointer;
-			border: 2px solid #dcd3d3;
-			height: 15px;
-			width: 15px;
-			font-size: 0.8em;
+			height: 20px;
+			width: 20px;
+			font-size: 1em;
 			font-weight: 700;
 			text-align: center;
-			border-radius: 5px;
+			border-radius: 50%;
+		}
+
+		button:hover,
+		button:focus {
+			outline: 2px solid ${(props) => props.theme.accentColor};
 		}
 	}
 	div {

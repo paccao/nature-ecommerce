@@ -63,10 +63,11 @@ const Wrapper = styled.div`
 	width: 100%;
 
 	.section-wrapper {
-		padding: 0rem 1.1rem;
+		padding: 0rem 0.5rem;
 
 		> header {
 			margin-top: 0.5rem;
+			margin-inline: 0.5rem;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -77,7 +78,7 @@ const Wrapper = styled.div`
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
-			padding: 1rem 0.7rem;
+			padding: 1rem 0rem;
 		}
 
 		.bottom {
@@ -86,7 +87,6 @@ const Wrapper = styled.div`
 			align-items: flex-end;
 			justify-content: space-between;
 			min-height: auto;
-			padding: 1.1rem 0rem 0rem 0rem;
 
 			p {
 				font-size: 1em;
@@ -97,6 +97,13 @@ const Wrapper = styled.div`
 				font-size: 1em;
 				text-align: center;
 			}
+		}
+	}
+
+	@media screen and (min-width: 500px) {
+		.section-wrapper {
+			width: 80%;
+			margin-inline: auto;
 		}
 	}
 `

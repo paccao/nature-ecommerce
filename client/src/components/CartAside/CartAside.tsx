@@ -59,7 +59,7 @@ const AsideWrapper = styled.aside<{ windowHeight: number; isOpen: boolean }>`
 	border-bottom-right-radius: ${(props) => props.theme.borderRadius};
 	border-top-right-radius: ${(props) => props.theme.borderRadius};
 	border: 2px solid #dcd3d3;
-	padding: 1rem 0.2rem 0.8rem 0.2rem;
+	padding: 1rem 0rem 0.8rem 0rem;
 	margin-right: 1rem;
 	position: sticky;
 	position: -webkit-sticky;
@@ -80,7 +80,7 @@ const AsideWrapper = styled.aside<{ windowHeight: number; isOpen: boolean }>`
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
-			padding: 1rem 0.7rem;
+			padding: 1rem 0rem;
 		}
 
 		.bottom {
