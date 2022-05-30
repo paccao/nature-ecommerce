@@ -1,21 +1,15 @@
 FROM --platform=linux/amd64 node:lts-alpine
 
-WORKDIR /client
-
-RUN npm install
-
-CMD ["npm", "run", "build"]
-
-COPY build /app
-
 WORKDIR /app
+
+COPY build /app/build
 
 COPY ["package.json", "package-lock.json", "./"]
 
 RUN npm install
 
-ADD . /app/
-
 CMD ["npm", "run", "build"]
+
+COPY dist /app/dist
 
 CMD ["npm", "run", "start"]
