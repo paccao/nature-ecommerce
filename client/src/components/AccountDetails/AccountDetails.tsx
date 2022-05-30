@@ -49,6 +49,7 @@ const Wrapper = styled.div`
 		color: ${(props) => props.theme.__bgColorLargePageWidth};
 		border-radius: ${(props) => props.theme.borderRadius};
 		transition: all 0.2s;
+		min-width: max-content;
 
 		:hover {
 			color: ${(props) => props.theme.accentColor};

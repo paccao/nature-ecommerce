@@ -40,7 +40,10 @@ function CartAside() {
 						kr.
 					</p>
 					<GenericButton
-						{...{ innerText: 'Checkout', type: 'submit' }}
+						{...{
+							innerText: 'Checkout',
+							type: 'submit',
+						}}
 					/>
 				</form>
 			</section>
@@ -64,9 +67,6 @@ const AsideWrapper = styled.aside<{ windowHeight: number; isOpen: boolean }>`
 	position: sticky;
 	position: -webkit-sticky;
 	top: 10vh;
-
-	// TODO: This doesnt work, look up why
-	visibility: ${(props) => (props.isOpen ? 'none' : 'unset')};
 
 	.section-wrapper {
 		display: flex;

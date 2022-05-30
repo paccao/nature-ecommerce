@@ -63,9 +63,9 @@ function App() {
 								clickCallback={navigateToTop}
 							/>
 						)}
-					{isOpen && windowWidth <= GlobalWidths.Tablet && (
-						<CartModal />
-					)}
+					{location.pathname === '/' &&
+						isOpen &&
+						windowWidth <= GlobalWidths.Tablet && <CartModal />}
 				</main>
 			</AppWrapper>
 		</ThemeProvider>

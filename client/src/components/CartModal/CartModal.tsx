@@ -1,7 +1,6 @@
 import { SyntheticEvent } from 'react'
 import styled from 'styled-components'
 import useCart from '../../hooks/useCart'
-import useHeight from '../../hooks/useHeight'
 import useTotalCost from '../../hooks/useTotalCost'
 import AccountDetails from '../AccountDetails/AccountDetails'
 import GenericButton from '../global/GenericButton'
@@ -11,12 +10,13 @@ import CloseModalButton from '../CloseModalButton/CloseModalButton'
 function CartModal() {
 	const { data } = useCart()
 	const { data: totalCostResult } = useTotalCost()
-	const windowHeight = useHeight()
 
 	function submitHandler(e: SyntheticEvent) {
 		e.preventDefault()
 
-		console.log('Items in cart purchased.')
+		alert(
+			'Items purchased. (Not really, this is a not a real web shop, sorry)',
+		)
 	}
 
 	return (
@@ -42,7 +42,10 @@ function CartModal() {
 							kr.
 						</p>
 						<GenericButton
-							{...{ innerText: 'Checkout', type: 'submit' }}
+							{...{
+								innerText: 'Checkout',
+								type: 'submit',
+							}}
 						/>
 					</form>
 				</section>
