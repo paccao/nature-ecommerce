@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc -p .",
-    "start": "node dist/server.js"
+    "start:production": "NODE_ENV=production node dist/server.js"
   },
   "repository": {
     "type": "git",

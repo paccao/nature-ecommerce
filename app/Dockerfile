@@ -12,4 +12,4 @@ CMD ["npm", "run", "build"]
 
 COPY dist /app/dist
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:production"]
